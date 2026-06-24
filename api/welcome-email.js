@@ -41,13 +41,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { email, type, debug } = req.body || {};
-
-  if (debug) {
-    const pass = process.env.ZOHO_APP_PASSWORD || "";
-    res.status(200).json({ passwordSet: pass.length > 0, passwordLength: pass.length });
-    return;
-  }
+  const { email, type } = req.body || {};
 
   if (!email || !TEMPLATES[type]) {
     res.status(400).json({ error: "Missing or invalid email/type" });
