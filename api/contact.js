@@ -17,13 +17,15 @@ export default async function handler(req, res) {
       body: JSON.stringify(req.body)
     });
 
+    const upstreamBody = await upstream.text();
+
     if (!upstream.ok) {
-      res.status(502).json({ error: "Upstream submission failed" });
+      res.status(502).json({ error: "Upstream submission failed", upstreamStatus: upstream.status, upstreamBody });
       return;
     }
 
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, upstreamBody });
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error", message: err.message });
   }
 }
