@@ -11,7 +11,8 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Referer": "https://www.ourairdrie.ca/"
       },
       body: JSON.stringify(req.body)
     });
