@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Airdrie — Your Community, In One Place</title>
+<meta name="description" content="A searchable directory of 3,700+ Airdrie, Alberta businesses, a local events calendar, free community resources, daily weather and road closures - all in one place.">
+<link rel="canonical" href="https://ouraidrie.ca/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Our Airdrie - Your Community, In One Place">
+<meta property="og:description" content="A searchable directory of 3,700+ Airdrie businesses, local events, free resources, weather and closures - all in one place.">
+<meta property="og:url" content="https://ouraidrie.ca/">
+<meta property="og:site_name" content="Our Airdrie">
+<meta property="og:locale" content="en_CA">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Our Airdrie - Your Community, In One Place">
+<meta name="twitter:description" content="A searchable directory of 3,700+ Airdrie businesses, local events, free resources, weather and closures - all in one place.">
+
+<style>
+  :root {
+    --prairie-blue: #1B3A4B;
+    --prairie-blue-light: #2C5468;
+    --wheat-gold: #E8A33D;
+    --sunset: #E0703E;
+    --cream: #FBF7F0;
+    --cream-dark: #F3ECE0;
+    --charcoal: #2B2B2B;
+    --grey: #6B6B6B;
+    --border: #E5DFD3;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    background: var(--prairie-blue);
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .logo { color: var(--white); font-weight: 800; font-size: 23px; letter-spacing: -0.3px; display: flex; align-items: center; gap: 11px; }
+  .logo .brand-icon { flex-shrink: 0; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25)); }
+  .logo .logo-accent { color: var(--wheat-gold); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-toggle {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 8px; width: 40px; height: 40px;
+  }
+  .nav-toggle span { display: block; width: 22px; height: 2.5px; background: var(--white); border-radius: 2px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, var(--prairie-blue) 0%, var(--prairie-blue-light) 100%);
+    color: var(--white);
+    padding: 72px 0 96px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: polygon(0 100%, 100% 100%, 100% 40%, 75% 70%, 50% 35%, 25% 65%, 0 30%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,163,61,0.15);
+    border: 1px solid var(--wheat-gold);
+    color: var(--wheat-gold);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 em { color: var(--wheat-gold); font-style: normal; }
+  .hero p.sub {
+    font-size: 19px;
+    color: rgba(255,255,255,0.82);
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .stat-num { font-size: 30px; font-weight: 800; color: var(--wheat-gold); }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Signup section */
+  .signup-section {
+    background: var(--cream);
+    padding: 80px 0 60px;
+  }
+  .signup-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: stretch;
+  }
+  .signup-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .signup-card .signup-form, .signup-card .signup-form-stacked {
+    margin-top: auto;
+  }
+  .signup-card p:not(.form-note) {
+    flex-grow: 0;
+  }
+  .signup-card > p.form-note {
+    margin-top: 10px;
+  }
+  .signup-form-stacked textarea {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+    resize: vertical;
+  }
+  .signup-form-stacked textarea:focus { outline: none; border-color: var(--prairie-blue); }
+  .tag.sponsor { background: rgba(27,58,75,0.1); color: var(--prairie-blue-light); }
+  .tag.event { background: rgba(232,163,61,0.18); color: #8a6315; }
+  .tag.suggestion { background: rgba(15,118,110,0.12); color: #0f766e; }
+  .signup-form-stacked { display: flex; flex-direction: column; gap: 10px; }
+  .signup-form-stacked input, .signup-form-stacked select {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+  }
+  .signup-form-stacked input:focus, .signup-form-stacked select:focus { outline: none; border-color: var(--prairie-blue); }
+  .tag.missing { background: rgba(232,163,61,0.18); color: #8a6315; }
+  .section-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--prairie-blue);
+    letter-spacing: -0.3px;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--grey);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 10px auto 0;
+  }
+  .signup-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .signup-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .tag.resident { background: rgba(27,58,75,0.08); color: var(--prairie-blue); }
+  .tag.business { background: rgba(224,112,62,0.1); color: var(--sunset); }
+  .signup-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 8px; color: var(--charcoal); }
+  .signup-card p { color: var(--grey); font-size: 14.5px; margin-bottom: 20px; }
+  .signup-form { display: flex; gap: 10px; flex-wrap: wrap; }
+  .signup-form input {
+    flex: 1;
+    min-width: 160px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-family: inherit;
+  }
+  .signup-form input:focus { outline: none; border-color: var(--prairie-blue); }
+  .btn {
+    padding: 13px 22px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    font-size: 14.5px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--prairie-blue); color: var(--white); }
+  .btn-primary:hover { background: var(--prairie-blue-light); }
+  .btn-accent { background: var(--sunset); color: var(--white); }
+  .btn-accent:hover { background: #c75f31; }
+  .form-note { font-size: 12px; color: var(--grey); margin-top: 10px; }
+
+  /* Categories */
+  .categories-section { padding: 70px 0 80px; background: var(--white); }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 44px;
+  }
+  .cat-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: border-color 0.15s, transform 0.15s;
+    background: var(--cream);
+  }
+  .cat-card:hover { border-color: var(--wheat-gold); transform: translateY(-2px); }
+  .cat-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .cat-name { font-weight: 700; font-size: 14.5px; color: var(--charcoal); margin-bottom: 4px; }
+  .cat-count { font-size: 12.5px; color: var(--grey); }
+
+  /* Events */
+  .events-section { padding: 70px 0 80px; background: var(--cream); }
+  .events-list { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+  .event-row {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .event-date {
+    background: var(--prairie-blue);
+    color: var(--white);
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .event-date .mon { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--wheat-gold); }
+  .event-date .day { font-size: 22px; font-weight: 800; line-height: 1; }
+  .event-info h4 { font-size: 16px; font-weight: 700; color: var(--charcoal); margin-bottom: 3px; }
+  .event-info p { font-size: 13.5px; color: var(--grey); }
+  .events-more { text-align: center; margin-top: 30px; }
+  .events-more a { color: var(--prairie-blue); font-weight: 700; font-size: 14.5px; text-decoration: none; }
+
+  /* How it works */
+  .how-section { padding: 70px 0 80px; background: var(--white); }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 44px;
+  }
+  .how-step { text-align: center; padding: 0 12px; }
+  .how-num {
+    width: 44px; height: 44px;
+    background: var(--wheat-gold);
+    color: var(--prairie-blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    margin: 0 auto 16px;
+  }
+  .how-step h4 { font-size: 16.5px; font-weight: 700; margin-bottom: 8px; }
+  .how-step p { font-size: 14px; color: var(--grey); }
+
+  /* Footer */
+  footer {
+    background: var(--prairie-blue);
+    color: rgba(255,255,255,0.7);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 13px;
+  }
+  footer .logo { margin-bottom: 12px; justify-content: center; display: flex; }
+  footer a { color: rgba(255,255,255,0.85); }
+
+  @media (max-width: 720px) {
+    .signup-cards, .how-grid { grid-template-columns: 1fr; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 34px; }
+    .hero-stats { gap: 28px; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0; background: var(--prairie-blue-light);
+      padding: 8px 24px 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 80;
+    }
+    .nav-links.mobile-open { display: flex; }
+    .nav-links a { padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); }
+    .lang-select { margin-top: 12px; width: 100%; }
+  }
+
+  /* Browse directory */
+  .browse-section { padding: 20px 0 80px; background: var(--white); }
+  .browse-controls {
+    display: flex;
+    gap: 12px;
+    margin: 36px 0 8px;
+    flex-wrap: wrap;
+  }
+  .browse-controls input[type=text] {
+    flex: 2;
+    min-width: 220px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-family: inherit;
+  }
+  .browse-controls select {
+    flex: 1;
+    min-width: 180px;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-family: inherit;
+    background: var(--white);
+  }
+  .browse-controls input:focus, .browse-controls select:focus { outline: none; border-color: var(--prairie-blue); }
+  .results-count { color: var(--grey); font-size: 13.5px; margin: 14px 0 18px; }
+  .results-list { display: flex; flex-direction: column; gap: 10px; max-height: 640px; overflow-y: auto; padding-right: 4px; }
+  .biz-row {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    background: var(--cream);
+  }
+  .biz-info h5 { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 3px; }
+  .biz-info p { font-size: 13px; color: var(--grey); }
+  .biz-cat {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--prairie-blue);
+    background: rgba(27,58,75,0.08);
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .load-more-wrap { text-align: center; margin-top: 18px; }
+  .load-more-wrap button {
+    background: var(--cream-dark);
+    border: 1px solid var(--border);
+    color: var(--prairie-blue);
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .load-more-wrap button:hover { background: var(--border); }
+  .cat-card { cursor: pointer; border: none; font-family: inherit; }
+
+
+  .ask-section { padding: 70px 0 50px; background: var(--white); }
+  .ask-box { display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap; }
+  .ask-box input {
+    flex: 1;
+    min-width: 240px;
+    padding: 16px 20px;
+    border: 2px solid var(--prairie-blue);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+  }
+  .ask-box input:focus { outline: none; border-color: var(--wheat-gold); }
+  .ask-box .btn { padding: 16px 28px; border-radius: 10px; font-size: 15px; }
+  .ask-suggestions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .ask-suggestions button {
+    background: var(--cream-dark);
+    border: 1px solid var(--border);
+    color: var(--prairie-blue);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+  .ask-suggestions button:hover { background: var(--border); }
+  .ask-answer-box {
+    margin-top: 28px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .ask-answer-text { font-size: 15.5px; font-weight: 700; color: var(--prairie-blue); margin-bottom: 16px; }
+  .ask-disclaimer { font-size: 11px; color: var(--grey); margin-top: 18px; font-style: italic; }
+
+  .tab-link { cursor: pointer; }
+  .tab-link.active { color: var(--wheat-gold) !important; }
+  .about-section { padding: 60px 0 80px; background: var(--white); }
+  .about-content { max-width: 680px; margin: 40px auto 0; }
+  .about-content h3 { color: var(--prairie-blue); font-size: 19px; margin: 28px 0 10px; }
+  .about-content h3:first-child { margin-top: 0; }
+  .about-content p { color: var(--grey); font-size: 15.5px; }
+  .contact-section { padding: 60px 0 0; background: var(--cream); }
+
+  .upcoming-section { padding: 10px 0 70px; background: var(--white); }
+  .upcoming-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+  .upcoming-col { background: var(--cream); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .upcoming-col h4 { color: var(--prairie-blue); font-size: 16px; font-weight: 800; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.04em; font-size: 13px; }
+  .upcoming-item { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .upcoming-item:last-child { border-bottom: none; }
+  .upcoming-item:hover .upcoming-name { color: var(--sunset); }
+  .upcoming-badge {
+    background: var(--prairie-blue); color: var(--white); border-radius: 8px;
+    width: 44px; height: 44px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .upcoming-badge .um { font-size: 9px; text-transform: uppercase; font-weight: 700; color: var(--wheat-gold); line-height: 1; }
+  .upcoming-badge .ud { font-size: 16px; font-weight: 800; line-height: 1.1; }
+  .upcoming-name { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+  .upcoming-meta { font-size: 12px; color: var(--grey); }
+  .upcoming-empty { color: var(--grey); font-size: 13.5px; padding: 8px 0; }
+  .upcoming-more { text-align: center; margin-top: 22px; }
+  .upcoming-more a { color: var(--prairie-blue); font-weight: 700; font-size: 14px; text-decoration: none; }
+  @media (max-width: 720px) { .upcoming-grid { grid-template-columns: 1fr; } }
+
+  .faq-block { max-width: 680px; margin: 50px auto 0; border-top: 1px solid var(--border); padding-top: 40px; }
+  .faq-heading { color: var(--prairie-blue); font-size: 22px; margin-bottom: 24px; }
+  .faq-item { margin-bottom: 22px; }
+  .faq-q { font-weight: 700; color: var(--charcoal); font-size: 15.5px; margin-bottom: 6px; }
+  .faq-a { color: var(--grey); font-size: 14.5px; }
+
+  footer { text-align: left; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .footer-grid .logo { margin-bottom: 10px; }
+  .footer-links h5 { color: var(--white); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  .footer-links a { display: block; margin-bottom: 9px; font-size: 13.5px; text-decoration: none; }
+  .footer-links a:hover { color: var(--wheat-gold); }
+  .footer-bottom { padding-top: 20px; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; }
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  .signup-card, .cat-card, .biz-row, .upcoming-col, .news-item {
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .signup-card { box-shadow: 0 1px 3px rgba(27,58,75,0.05); }
+  .signup-card:hover { box-shadow: 0 4px 14px rgba(27,58,75,0.09); }
+  .biz-row { box-shadow: 0 1px 2px rgba(27,58,75,0.04); }
+  .biz-row:hover { box-shadow: 0 2px 8px rgba(27,58,75,0.08); }
+  .cat-card { box-shadow: 0 1px 2px rgba(27,58,75,0.04); }
+  .upcoming-col { box-shadow: 0 1px 3px rgba(27,58,75,0.05); }
+  .events-section { padding: 20px 0 80px; background: var(--cream); }
+  .month-pills { display: flex; gap: 10px; margin: 36px 0 28px; flex-wrap: wrap; align-items: center; }
+  .month-pill {
+    background: var(--white); border: 1.5px solid var(--border); color: var(--prairie-blue);
+    font-weight: 700; font-size: 13.5px; padding: 9px 18px; border-radius: 100px; cursor: pointer;
+  }
+  .month-pill.active { background: var(--prairie-blue); color: var(--white); border-color: var(--prairie-blue); }
+  .month-pill:hover:not(.active) { border-color: var(--wheat-gold); }
+  .month-select {
+    margin-left: auto; padding: 9px 14px; border: 1.5px solid var(--border); border-radius: 100px;
+    font-size: 13.5px; font-family: inherit; color: var(--prairie-blue); background: var(--white); cursor: pointer;
+  }
+  .day-group { margin-bottom: 26px; }
+  .day-group-label {
+    font-size: 12px; font-weight: 700; color: var(--grey); text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .event-row-item {
+    display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; cursor: pointer;
+    box-shadow: 0 1px 2px rgba(27,58,75,0.04); transition: box-shadow 0.15s, border-color 0.15s;
+  }
+  .event-row-item:hover { box-shadow: 0 3px 10px rgba(27,58,75,0.09); border-color: var(--wheat-gold); }
+  .event-row-time { font-size: 12.5px; font-weight: 700; color: var(--sunset); width: 76px; flex-shrink: 0; }
+  .event-row-name { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 2px; }
+  .event-row-venue { font-size: 12.5px; color: var(--grey); }
+  .events-empty { color: var(--grey); font-size: 14.5px; padding: 30px 0; text-align: center; }
+
+  .drawer-overlay {
+    position: fixed; inset: 0; background: rgba(27,58,75,0.4); opacity: 0; pointer-events: none;
+    transition: opacity 0.2s; z-index: 99;
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+  .event-drawer {
+    position: fixed; top: 0; right: 0; height: 100%; width: 380px; max-width: 90vw;
+    background: var(--white); box-shadow: -6px 0 24px rgba(0,0,0,0.15); z-index: 100;
+    transform: translateX(100%); transition: transform 0.25s ease; padding: 32px 28px; overflow-y: auto;
+  }
+  .event-drawer.open { transform: translateX(0); }
+  .drawer-close {
+    position: absolute; top: 18px; right: 18px; background: none; border: none; font-size: 28px;
+    color: var(--grey); cursor: pointer; line-height: 1;
+  }
+  .drawer-close:hover { color: var(--sunset); }
+  .drawer-event-title { font-size: 20px; font-weight: 800; color: var(--prairie-blue); margin: 20px 0 14px; padding-right: 20px; }
+  .drawer-meta-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 14px; color: var(--charcoal); }
+  .drawer-meta-icon { color: var(--wheat-gold); font-weight: 800; flex-shrink: 0; }
+  .drawer-description { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 14.5px; color: var(--grey); line-height: 1.6; }
+  .drawer-day-item { padding: 12px 0; border-top: 1px solid var(--border); cursor: pointer; }
+  .drawer-day-item:hover .event-row-name { color: var(--sunset); }
+  @media (max-width: 720px) {
+    .event-drawer { width: 100%; }
+    .month-select { margin-left: 0; }
+  }
+
+  .lang-select {
+    background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 100px; padding: 6px 12px; font-size: 13px; font-family: inherit; cursor: pointer;
+  }
+  .lang-select option { color: var(--charcoal); }
+
+  .resources-section { padding: 60px 0 80px; background: var(--white); }
+  .res-category { max-width: 680px; margin: 0 auto; padding-top: 36px; }
+  .res-category:first-of-type { padding-top: 40px; }
+  .res-category h3 { color: var(--prairie-blue); font-size: 19px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  .res-item {
+    background: var(--cream); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; margin-bottom: 12px;
+  }
+  .res-name { font-weight: 700; color: var(--charcoal); font-size: 15.5px; margin-bottom: 6px; }
+  .res-desc { color: var(--grey); font-size: 14px; margin-bottom: 10px; }
+  .res-item a { color: var(--prairie-blue); font-weight: 700; font-size: 13.5px; text-decoration: none; }
+  .res-item a:hover { color: var(--sunset); }
+  .res-disclaimer { max-width: 680px; margin: 30px auto 0; font-size: 12px; color: var(--grey); font-style: italic; text-align: center; }
+
+  .weather-banner {
+    background: var(--wheat-gold); color: #4a3107; text-align: center;
+    font-size: 13.5px; font-weight: 700; padding: 9px 16px;
+  }
+  .weather-banner .wb-tip { font-weight: 500; }
+  @media (max-width: 720px) { .weather-banner { font-size: 12.5px; padding: 8px 12px; } }
+
+  .closures-ticker {
+    background: var(--sunset); color: var(--white); overflow: hidden;
+    white-space: nowrap; padding: 9px 0; position: relative;
+  }
+  .closures-ticker-track {
+    display: inline-block; white-space: nowrap;
+    animation: closures-scroll 32s linear infinite;
+  }
+  .closures-ticker:hover .closures-ticker-track { animation-play-state: paused; }
+  .closures-ticker-item { display: inline-block; font-size: 13px; font-weight: 600; }
+  .closures-ticker a { color: var(--white); font-weight: 800; text-decoration: underline; }
+  @keyframes closures-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .closures-ticker-track { animation: none; }
+    .closures-ticker { overflow-x: auto; }
+  }
+
+  .whats-here-section { padding: 30px 0 10px; background: var(--white); }
+  .whats-here-heading { text-align: center; font-size: 18px; font-weight: 800; color: var(--prairie-blue); margin-bottom: 6px; }
+  .whats-here-sub { text-align: center; font-size: 13.5px; color: var(--grey); margin-bottom: 22px; }
+  .whats-here-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .whats-here-tile {
+    background: var(--white); border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 24px 16px; text-align: center; cursor: pointer; font-family: inherit;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    box-shadow: 0 1px 3px rgba(27,58,75,0.05);
+    transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+    outline: none;
+  }
+  .whats-here-tile:hover {
+    border-color: var(--wheat-gold); transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(27,58,75,0.1);
+  }
+  .whats-here-tile:focus-visible {
+    border-color: var(--prairie-blue); box-shadow: 0 0 0 3px rgba(27,58,75,0.15);
+  }
+  .wh-icon-wrap {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(160deg, rgba(232,163,61,0.16), rgba(224,112,62,0.1));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 6px;
+  }
+  .wh-icon { font-size: 24px; line-height: 1; }
+  .wh-label { font-weight: 800; font-size: 14px; color: var(--prairie-blue); letter-spacing: -0.1px; }
+  .wh-sub { font-size: 12px; color: var(--grey); }
+  @media (max-width: 720px) { .whats-here-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .section-note { text-align: center; font-size: 13px; color: var(--grey); margin-top: 8px; }
+  .section-note a { color: var(--prairie-blue); font-weight: 700; text-decoration: none; }
+  .section-note a:hover { color: var(--sunset); }
+
+  .res-jumpnav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+  .res-jumpnav a {
+    background: var(--cream-dark); border: 1px solid var(--border); color: var(--prairie-blue);
+    font-size: 12.5px; font-weight: 700; padding: 7px 14px; border-radius: 100px; text-decoration: none;
+  }
+  .res-jumpnav a:hover { background: var(--border); }
+
+  .biz-row-actions { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+  .claim-link, .share-btn {
+    background: none; border: none; font-family: inherit; cursor: pointer; padding: 0;
+    font-size: 12px; font-weight: 700;
+  }
+  .claim-link { color: var(--prairie-blue); }
+  .claim-link:hover { color: var(--sunset); text-decoration: underline; }
+  .share-btn { color: var(--grey); }
+  .share-btn:hover { color: var(--prairie-blue); }
+  .share-btn-drawer {
+    margin-top: 20px; padding: 10px 18px !important; border: 1.5px solid var(--border) !important;
+    border-radius: 8px; font-size: 13px !important; color: var(--prairie-blue) !important;
+  }
+  .share-btn-drawer:hover { border-color: var(--wheat-gold) !important; background: var(--cream); }
+
+  .fact-banner {
+    background: rgba(15,118,110,0.07); border-top: 1px solid rgba(15,118,110,0.2);
+    border-bottom: 1px solid rgba(15,118,110,0.2); padding: 12px 16px; text-align: center;
+    font-size: 13.5px; color: #0f5c54;
+  }
+  .fact-banner strong { color: #0a3d38; }
+
+  .ask-results-scroll { max-height: 460px; overflow-y: auto; padding-right: 4px; }
+</style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><clipPath id="c"><circle cx="50" cy="50" r="46"/></clipPath></defs><g clip-path="url(#c)"><rect x="4" y="4" width="92" height="92" fill="%23FBF7F0"/><circle cx="50" cy="40" r="16" fill="%23E8A33D"/><path d="M4,62 C20,46 35,58 50,52 C65,46 80,56 96,60 L96,96 L4,96 Z" fill="%231B3A4B"/></g><circle cx="50" cy="50" r="46" fill="none" stroke="%231B3A4B" stroke-width="3"/></svg>">
+<!--
+  ANALYTICS SETUP - Google Analytics 4 (free)
+  1. Go to analytics.google.com and create a free account + property for this site
+  2. You'll get a Measurement ID that looks like "G-XXXXXXXXXX"
+  3. Replace BOTH occurrences of "G-XXXXXXXXXX" below with your real ID
+  4. This only works once the site is hosted on a real domain - it will not track anything
+     meaningfully while opened as a local file
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<div class="weather-banner" id="weather-banner">Loading today's Airdrie weather...</div>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><svg class="brand-icon" viewBox="0 0 100 100" width="38" height="38" aria-hidden="true"><defs><clipPath id="bclip"><circle cx="50" cy="50" r="46"/></clipPath></defs><g clip-path="url(#bclip)"><rect x="4" y="4" width="92" height="92" fill="#FBF7F0"/><circle cx="50" cy="40" r="16" fill="#E8A33D"/><path d="M4,62 C20,46 35,58 50,52 C65,46 80,56 96,60 L96,96 L4,96 Z" fill="#1B3A4B"/></g><circle cx="50" cy="50" r="46" fill="none" stroke="#E8A33D" stroke-width="4"/></svg><span class="logo-text">Our<span class="logo-accent">Airdrie</span></span></div>
+    <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu" aria-expanded="false" id="nav-toggle-btn">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="#" onclick="showTab('home');closeMobileNav();return false;" class="tab-link active" data-tab="home">Home</a>
+      <a href="#" onclick="showTab('directory');closeMobileNav();return false;" class="tab-link" data-tab="directory">Directory</a>
+      <a href="#" onclick="showTab('events');closeMobileNav();return false;" class="tab-link" data-tab="events">Events</a>
+      <a href="#" onclick="showTab('about');closeMobileNav();return false;" class="tab-link" data-tab="about">About</a>
+      <a href="#" onclick="showTab('resources');closeMobileNav();return false;" class="tab-link" data-tab="resources">Resources</a>
+      <a href="#" onclick="showTab('contact');closeMobileNav();return false;" class="tab-link" data-tab="contact">Contact</a>
+      <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="zh-CN">中文</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </div>
+  </div>
+</nav>
+<div class="tab-page" id="tab-home">
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-badge">Live in Airdrie</span>
+    <h1>Everything happening in Airdrie, <em>in one place.</em></h1>
+    <p class="sub">Local businesses, events, free programs, weather and closures - all in one place.</p>
+    <div class="hero-stats">
+      <div><div class="stat-num" id="stat-businesses">...</div><div class="stat-label">Local Businesses</div></div>
+      <div><div class="stat-num" id="stat-events">...</div><div class="stat-label">Upcoming Events</div></div>
+      <div><div class="stat-num" id="stat-categories">...</div><div class="stat-label">Categories</div></div>
+    </div>
+  </div>
+</section>
+<div class="fact-banner" id="fact-banner"></div>
+<section class="whats-here-section">
+  <div class="wrap">
+    <h3 class="whats-here-heading">Everything Airdrie, in four places</h3>
+    <p class="whats-here-sub">Use the tabs above to browse, or just ask a question below — here's what's here:</p>
+    <div class="whats-here-grid">
+      <button class="whats-here-tile" onclick="showTab('directory')">
+        <span class="wh-icon-wrap"><span class="wh-icon">&#127970;</span></span>
+        <span class="wh-label">Business Directory</span>
+        <span class="wh-sub" id="wh-business-count">... local listings</span>
+      </button>
+      <button class="whats-here-tile" onclick="showTab('events')">
+        <span class="wh-icon-wrap"><span class="wh-icon">&#128197;</span></span>
+        <span class="wh-label">Events Calendar</span>
+        <span class="wh-sub">What's happening locally</span>
+      </button>
+      <button class="whats-here-tile" onclick="showTab('resources')">
+        <span class="wh-icon-wrap"><span class="wh-icon">&#129309;</span></span>
+        <span class="wh-label">Free Resources</span>
+        <span class="wh-sub">Programs, subsidies &amp; more</span>
+      </button>
+      <button class="whats-here-tile" onclick="document.getElementById('weather-banner').scrollIntoView({behavior:'smooth'})">
+        <span class="wh-icon-wrap"><span class="wh-icon">&#127780;&#65039;</span></span>
+        <span class="wh-label">Weather &amp; Closures</span>
+        <span class="wh-sub">Updated daily</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="ask-section" id="ask">
+  <div class="wrap">
+    <h2 class="section-title">Ask Our Airdrie</h2>
+    <p class="section-sub">Type a question in plain English — "I need a pet groomer" or "what's happening this weekend"</p>
+    <div class="ask-box">
+      <input type="text" id="ask-input" placeholder="e.g. I need a plumber, the weather today, or free programs" onkeydown="if(event.key==='Enter') askQuestion()">
+      <button class="btn btn-primary" onclick="askQuestion()">Ask</button>
+    </div>
+    <div class="ask-suggestions">
+      <button onclick="askExample('I need a pet groomer')">I need a pet groomer</button>
+      <button onclick="askExample('whats happening this weekend')">What's happening this weekend?</button>
+      <button onclick="askExample('whats the weather today')">What's the weather today?</button>
+      <button onclick="askExample('any road closures')">Any road closures?</button>
+      <button onclick="askExample('free programs for newcomers')">Free programs for newcomers?</button>
+    </div>
+    <div id="ask-answer"></div>
+  </div>
+</section>
+<section class="upcoming-section">
+  <div class="wrap">
+    <h2 class="section-title">Coming up in Airdrie</h2>
+    <p class="section-sub">A quick look at this week and next — full calendar on the Events tab.</p>
+    <div class="upcoming-grid">
+      <div class="upcoming-col">
+        <h4>This Week</h4>
+        <div id="upcoming-this-week"></div>
+      </div>
+      <div class="upcoming-col">
+        <h4>Next Week</h4>
+        <div id="upcoming-next-week"></div>
+      </div>
+    </div>
+    <div class="upcoming-more"><a href="#" onclick="showTab('events');return false;">See the full calendar →</a></div>
+  </div>
+</section>
+<div class="closures-ticker" id="closures-ticker">
+  <div class="closures-ticker-track">
+    <span class="closures-ticker-item">&#9888;&#65039; <strong>Main Street reconstruction:</strong> May 4 - Aug 4, 2026 &nbsp;&bull;&nbsp; <strong>24th Street construction:</strong> Starting May 2026 (2-year project) &nbsp;&bull;&nbsp; <strong>Pedestrian bridge closures:</strong> Apr 1 - Oct 1, 2026 &nbsp;&bull;&nbsp; <strong>Pathway closures</strong> (Sagewood/Canals, Highland Park): Through Jun 30, 2026 &nbsp;&bull;&nbsp; <strong>Genesis Place Arenas:</strong> Temporarily closed - public skating relocated to Ron Ebbesen Twin Arenas &nbsp;&bull;&nbsp; <a href="https://www.airdrie.ca/index.cfm?serviceID=1896" target="_blank" rel="noopener">Check the City&rsquo;s live closure map &rarr;</a> &nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span class="closures-ticker-item">&#9888;&#65039; <strong>Main Street reconstruction:</strong> May 4 - Aug 4, 2026 &nbsp;&bull;&nbsp; <strong>24th Street construction:</strong> Starting May 2026 (2-year project) &nbsp;&bull;&nbsp; <strong>Pedestrian bridge closures:</strong> Apr 1 - Oct 1, 2026 &nbsp;&bull;&nbsp; <strong>Pathway closures</strong> (Sagewood/Canals, Highland Park): Through Jun 30, 2026 &nbsp;&bull;&nbsp; <strong>Genesis Place Arenas:</strong> Temporarily closed - public skating relocated to Ron Ebbesen Twin Arenas &nbsp;&bull;&nbsp; <a href="https://www.airdrie.ca/index.cfm?serviceID=1896" target="_blank" rel="noopener">Check the City&rsquo;s live closure map &rarr;</a> &nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
+</div>
+<div class="tab-page" id="tab-directory" style="display:none;">
+<section class="categories-section" id="categories">
+  <div class="wrap">
+    <h2 class="section-title">Browse by category</h2>
+    <p class="section-sub" id="directory-count-sub"><span id="directory-count-num">...</span> licensed Airdrie businesses, sourced from the City of Airdrie's official directory. Click a category to browse.</p>
+    <p class="section-note">Looking for free programs or civic resources instead? Check the <a href="#" onclick="showTab('resources');return false;">Resources tab</a>.</p>
+    <div class="cat-grid">
+      <button class="cat-card" onclick="filterByCategory('Home & Trade Services')"><span class="cat-icon">🔧</span><div class="cat-name">Home & Trade Services</div><div class="cat-count">1,331 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Health & Wellness')"><span class="cat-icon">💆</span><div class="cat-name">Health & Wellness</div><div class="cat-count">318 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Professional & Financial Services')"><span class="cat-icon">💼</span><div class="cat-name">Professional & Financial Services</div><div class="cat-count">315 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Restaurants & Food')"><span class="cat-icon">🍽️</span><div class="cat-name">Restaurants & Food</div><div class="cat-count">308 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Shopping & Retail')"><span class="cat-icon">🛍️</span><div class="cat-name">Shopping & Retail</div><div class="cat-count">275 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Personal Care & Beauty')"><span class="cat-icon">💅</span><div class="cat-name">Personal Care & Beauty</div><div class="cat-count">168 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Automotive')"><span class="cat-icon">🚗</span><div class="cat-name">Automotive</div><div class="cat-count">152 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Education & Childcare')"><span class="cat-icon">🎓</span><div class="cat-name">Education & Childcare</div><div class="cat-count">132 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Industrial & Energy')"><span class="cat-icon">🏗️</span><div class="cat-name">Industrial & Energy</div><div class="cat-count">95 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Sports, Recreation & Fitness')"><span class="cat-icon">⚽</span><div class="cat-name">Sports, Recreation & Fitness</div><div class="cat-count">63 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Real Estate & Housing')"><span class="cat-icon">🏠</span><div class="cat-name">Real Estate & Housing</div><div class="cat-count">49 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Pets')"><span class="cat-icon">🐾</span><div class="cat-name">Pets</div><div class="cat-count">37 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Community & Non-Profit')"><span class="cat-icon">🙌</span><div class="cat-name">Community & Non-Profit</div><div class="cat-count">30 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Travel & Hospitality')"><span class="cat-icon">✈️</span><div class="cat-name">Travel & Hospitality</div><div class="cat-count">29 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Agriculture')"><span class="cat-icon">🌾</span><div class="cat-name">Agriculture</div><div class="cat-count">12 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Entertainment & Media')"><span class="cat-icon">🎭</span><div class="cat-name">Entertainment & Media</div><div class="cat-count">7 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Government & Utilities')"><span class="cat-icon">🏛️</span><div class="cat-name">Government & Utilities</div><div class="cat-count">6 businesses</div></button>
+      <button class="cat-card" onclick="filterByCategory('Other - Uncategorized')"><span class="cat-icon">📋</span><div class="cat-name">Other - Uncategorized</div><div class="cat-count">429 businesses</div></button>
+    </div>
+  </div>
+</section><section class="browse-section" id="browse">
+  <div class="wrap">
+    <h2 class="section-title">Search the directory</h2>
+    <p class="section-sub">Search by business name or filter by category — all <span id="search-count-num">...</span> listings, live.</p>
+    <div class="browse-controls">
+      <input type="text" id="search-input" placeholder="Search business name..." oninput="renderResults()">
+      <select id="category-select" onchange="renderResults()">
+        <option value="">All categories</option>
+        <option value="Home & Trade Services">Home & Trade Services (1,331)</option><option value="Health & Wellness">Health & Wellness (318)</option><option value="Professional & Financial Services">Professional & Financial Services (315)</option><option value="Restaurants & Food">Restaurants & Food (308)</option><option value="Shopping & Retail">Shopping & Retail (275)</option><option value="Personal Care & Beauty">Personal Care & Beauty (168)</option><option value="Automotive">Automotive (152)</option><option value="Education & Childcare">Education & Childcare (132)</option><option value="Industrial & Energy">Industrial & Energy (95)</option><option value="Sports, Recreation & Fitness">Sports, Recreation & Fitness (63)</option><option value="Real Estate & Housing">Real Estate & Housing (49)</option><option value="Pets">Pets (37)</option><option value="Community & Non-Profit">Community & Non-Profit (30)</option><option value="Travel & Hospitality">Travel & Hospitality (29)</option><option value="Agriculture">Agriculture (12)</option><option value="Entertainment & Media">Entertainment & Media (7)</option><option value="Government & Utilities">Government & Utilities (6)</option><option value="Other - Uncategorized">Other - Uncategorized (429)</option>
+      </select>
+    </div>
+    <div class="results-count" id="results-count"></div>
+    <div class="results-list" id="results-list"></div>
+    <div class="load-more-wrap" id="load-more-wrap">
+      <button onclick="loadMore()">Show more results</button>
+    </div>
+  </div>
+</section>
+</div>
+<div class="tab-page" id="tab-events" style="display:none;">
+<section class="events-section" id="events">
+  <div class="wrap">
+    <h2 class="section-title">What's happening in Airdrie</h2>
+    <p class="section-sub">Real, local events only - click any event to see the details.</p>
+    <div class="month-pills" id="month-pills"></div>
+    <div class="events-month-list" id="events-month-list"></div>
+  </div>
+</section>
+</div>
+<div class="tab-page" id="tab-about" style="display:none;">
+<section class="about-section">
+  <div class="wrap">
+    <h2 class="section-title">About Our Airdrie</h2>
+    <p class="section-sub">Why this exists, and what's next.</p>
+    <div class="about-content">
+      <h3>What this is</h3>
+      <p>Our Airdrie pulls together local business listings, a community events calendar, free programs and civic resources, and daily weather and road closure updates - all in one searchable site. Every business listing comes straight from the City of Airdrie's own licensing records, cross-checked against the Chamber of Commerce directory, so it's accurate and current — not scraped from social media.</p>
+      <h3>Built for Airdrie first</h3>
+      <p>Not a generic national directory. Every listing, every event is local — and built to grow with the city as it heads toward 100,000 residents.</p>
+      <h3>What's next</h3>
+      <p>More businesses claiming and updating their own listings, real-time event submissions from local organizations, and deals that residents can actually use. If you want to help shape it, reach out on the Contact tab.</p>
+    </div>
+
+    <div class="faq-block">
+      <h3 class="faq-heading">Frequently asked questions</h3>
+      <div class="faq-item">
+        <div class="faq-q">Is this an official City of Airdrie site?</div>
+        <div class="faq-a">No. Our Airdrie is an independent community project. The business directory pulls from the City of Airdrie's public licence records and the Airdrie Regional Chamber of Commerce directory, but this site isn't run or endorsed by either.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is it free to use?</div>
+        <div class="faq-a">Yes, for residents it's free to browse, search, and see events — always. Businesses can list for free too.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I add or fix my business listing?</div>
+        <div class="faq-a">Use the "Add a business we're missing" form on the Contact tab to report a new listing, or use the same form to flag corrections to an existing one.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where does the event information come from?</div>
+        <div class="faq-a">Events are pulled from public community calendars (like DiscoverAirdrie.com) and event listing sites. It's a periodic snapshot, not a live feed, so always confirm details with the event organizer before heading out.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the search box really AI?</div>
+        <div class="faq-a">Honestly, no — it's rule-based keyword matching against the directory data, not a hosted AI model. It's built to handle common phrasing like "I need a plumber" or "what's happening this weekend," but it won't understand everything a real AI assistant would.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's actually on this site?</div>
+        <div class="faq-a">Four things: a searchable directory of <span id="faq-count-num">...</span> local businesses, a calendar of community events, a list of free and low-cost programs (subsidies, free courses, newcomer support, parks), and daily weather with current road closures - all on one site.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is my privacy protected?</div>
+        <div class="faq-a">You can browse the entire directory, calendar, and resources without creating an account or submitting any personal information. If you do use one of our forms, we only use what you submit to respond to your request - we never sell your information. Full details are in our <a href="privacy.html" style="color:var(--prairie-blue); font-weight:700;">Privacy Policy</a>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<div class="tab-page" id="tab-resources" style="display:none;">
+<section class="resources-section">
+  <div class="wrap">
+    <h2 class="section-title">Free &amp; low-cost help in Airdrie</h2>
+    <p class="section-sub">Real programs available to residents right now, beyond the business directory.</p>
+    <div class="res-jumpnav">
+      <a href="#res-financial">Financial Help</a>
+      <a href="#res-training">Business Training</a>
+      <a href="#res-library">Library</a>
+      <a href="#res-newcomer">Newcomer Support</a>
+      <a href="#res-freestuff">Free Stuff</a>
+      <a href="#res-parks">Parks</a>
+    </div>
+
+    <div class="res-category">
+      <h3 id="res-financial">Financial help &amp; subsidies</h3>
+      <div class="res-item">
+        <div class="res-name">Airdrie Fair Access Program</div>
+        <p class="res-desc">Income-based subsidies (25%, 50%, or 75% off) for Genesis Place recreation, Airdrie Transit, and arts programming. Applications go through Community Links.</p>
+        <a href="https://www.airdrie.ca/index.cfm?serviceID=2157" target="_blank" rel="noopener">View eligibility &amp; apply &rarr;</a>
+      </div>
+      <div class="res-item">
+        <div class="res-name">211 Alberta</div>
+        <p class="res-desc">Free 24/7 phone or text line for help finding housing, financial, food, and legal support.</p>
+        <a href="https://ab.211.ca/" target="_blank" rel="noopener">ab.211.ca &rarr;</a>
+      </div>
+    </div>
+
+    <div class="res-category">
+      <h3 id="res-training">Free business training</h3>
+      <div class="res-item">
+        <div class="res-name">SMARTstart (Airdrie Entrepreneur Common)</div>
+        <p class="res-desc">Free training and mentorship program for new and growing Airdrie small businesses.</p>
+        <a href="https://airdriecommon.ca/" target="_blank" rel="noopener">airdriecommon.ca &rarr;</a>
+      </div>
+      <div class="res-item">
+        <div class="res-name">Business Link</div>
+        <p class="res-desc">Free Alberta-wide small business workshops, webinars, and guides.</p>
+        <a href="https://businesslink.ca/" target="_blank" rel="noopener">businesslink.ca &rarr;</a>
+      </div>
+    </div>
+
+    <div class="res-category">
+      <h3 id="res-library">Library programs (free)</h3>
+      <div class="res-item">
+        <div class="res-name">Airdrie Public Library Programming</div>
+        <p class="res-desc">Storytime, French-language programs, teen nights, summer reading club, and grant-writing workshops - all free, all open to residents.</p>
+        <a href="https://www.yourapl.ca/Programs-and-Events/Programming" target="_blank" rel="noopener">See the schedule &rarr;</a>
+      </div>
+    </div>
+
+    <div class="res-category">
+      <h3 id="res-newcomer">Newcomer &amp; settlement support</h3>
+      <div class="res-item">
+        <div class="res-name">City of Airdrie - Information for Newcomers</div>
+        <p class="res-desc">Official starting point for newcomer services, including settlement support referrals for Airdrie and the surrounding area.</p>
+        <a href="https://www.airdrie.ca/index.cfm?serviceID=2609" target="_blank" rel="noopener">View newcomer resources &rarr;</a>
+      </div>
+    </div>
+
+    <div class="res-category">
+      <h3 id="res-freestuff">Free stuff &amp; reuse</h3>
+      <div class="res-item">
+        <div class="res-name">Airdrie Freecycle</div>
+        <p class="res-desc">An active local group for giving away and finding free items - everything posted must be free.</p>
+        <a href="https://trashnothing.com/airdrie-freecycle" target="_blank" rel="noopener">Join the group &rarr;</a>
+      </div>
+    </div>
+
+    <div class="res-category">
+      <h3 id="res-parks">Parks &amp; outdoor spaces</h3>
+      <div class="res-item">
+        <div class="res-name">Chinook Winds Regional Park</div>
+        <p class="res-desc">55+ acres with 2km of paved pathways. Three playgrounds, a skate park, spray park, beach volleyball, ball diamonds, a winter toboggan hill, and seasonal concessions.</p>
+      </div>
+      <div class="res-item">
+        <div class="res-name">Nose Creek Regional Park</div>
+        <p class="res-desc">20 acres right in the downtown core. Amphitheatre, concession area, fire pit, picnic tables, a covered shelter, and nature trails.</p>
+      </div>
+      <div class="res-item">
+        <div class="res-name">Fletcher Regional Park</div>
+        <p class="res-desc">A playground, three shale ball diamonds, and a nine-hole disc golf course.</p>
+      </div>
+      <p style="font-size:13px; color:var(--grey); margin-top:8px;">Airdrie maintains 90 playgrounds in total across parks and school sites - <a href="https://www.airdrie.ca/index.cfm?serviceID=1835" target="_blank" rel="noopener" style="color:var(--prairie-blue); font-weight:700;">see the full parks map &rarr;</a></p>
+    </div>
+
+    <p class="res-disclaimer">Program details, eligibility, and links can change - always confirm directly with the organization before relying on this information.</p>
+  </div>
+</section>
+</div>
+<div class="tab-page" id="tab-contact" style="display:none;">
+<section class="signup-section" id="signup">
+  <div class="wrap">
+    <h2 class="section-title">Get in touch</h2>
+    <p class="section-sub">Get weekly updates, list your business free, report something missing, or just say hello.</p>
+    <div class="signup-cards">
+      <div class="signup-card" id="resident-card">
+        <span class="tag resident">I live in Airdrie</span>
+        <h3>Get the weekly update</h3>
+        <p>A short weekly email with new Airdrie businesses, events and deals. Unsubscribe anytime.</p>
+        <form class="signup-form" id="resident-form" onsubmit="return handleSignup(event, 'resident')">
+          <input type="hidden" name="_subject" value="New Our Airdrie resident signup">
+          <input type="hidden" name="_autoresponse" value="Welcome to Our Airdrie! Thanks for signing up. You'll get a short weekly email with new local businesses, events, and deals around Airdrie. No spam, and you can unsubscribe anytime just by replying to one of our emails.">
+          <input type="hidden" name="signup_type" value="Resident">
+          <input type="email" name="email" placeholder="you@email.com" required>
+          <button type="submit" class="btn btn-primary">Notify Me</button>
+        </form>
+        <p class="form-note">No spam. One short email a week.</p>
+      </div>
+      <div class="signup-card" id="business-card">
+        <span class="tag business">I own a business</span>
+        <h3>Claim your free founding listing</h3>
+        <p>List your business free right now — be one of our first 50 founding members and get priority placement.</p>
+        <form class="signup-form" id="business-form" onsubmit="return handleSignup(event, 'business')">
+          <input type="hidden" name="_subject" value="New Our Airdrie business signup">
+          <input type="hidden" name="_autoresponse" value="Thanks for claiming your free founding listing on Our Airdrie! We'll review your details and follow up shortly to get your business fully listed in the directory. As a founding member, you'll get priority placement once the site grows. Welcome aboard.">
+          <input type="hidden" name="signup_type" value="Business">
+          <input type="text" name="business_name" placeholder="Business name" required>
+          <input type="email" name="email" placeholder="you@business.com" required>
+          <button type="submit" class="btn btn-accent">Claim My Spot</button>
+        </form>
+        <p class="form-note">Free founding membership, no catch.</p>
+      </div>
+      <div class="signup-card" id="missing-business-card">
+        <span class="tag missing">Spot something missing?</span>
+        <h3>Add a business we're missing</h3>
+        <p>Know a local business that's not in the directory yet? Tell us and we'll add it.</p>
+        <form class="signup-form-stacked" id="missing-business-form" onsubmit="return handleMissingBusiness(event)">
+          <input type="hidden" name="_subject" value="Missing business reported - Our Airdrie">
+          <input type="hidden" name="_autoresponse" value="Thanks for letting us know about a business we're missing from Our Airdrie! We'll review the details you sent and add it to the directory soon. We appreciate you helping fill in the gaps.">
+          <input type="text" name="business_name" placeholder="Business name" required>
+          <select name="category" required>
+            <option value="" disabled selected>Category</option>
+            <option>Home & Trade Services</option>
+            <option>Health & Wellness</option>
+            <option>Professional & Financial Services</option>
+            <option>Restaurants & Food</option>
+            <option>Shopping & Retail</option>
+            <option>Personal Care & Beauty</option>
+            <option>Automotive</option>
+            <option>Education & Childcare</option>
+            <option>Industrial & Energy</option>
+            <option>Sports, Recreation & Fitness</option>
+            <option>Real Estate & Housing</option>
+            <option>Pets</option>
+            <option>Community & Non-Profit</option>
+            <option>Travel & Hospitality</option>
+            <option>Agriculture</option>
+            <option>Entertainment & Media</option>
+            <option>Government & Utilities</option>
+            <option>Other / Not sure</option>
+          </select>
+          <input type="text" name="address" placeholder="Address (if known)">
+          <input type="text" name="phone" placeholder="Phone (if known)">
+          <input type="email" name="your_email" placeholder="Your email (optional, in case we have questions)">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Submit Business</button>
+        </form>
+        <p class="form-note">Thanks for helping fill in the gaps.</p>
+      </div>
+      <div class="signup-card" id="sponsor-card">
+        <span class="tag sponsor">Reach Airdrie residents</span>
+        <h3>Interested in sponsoring?</h3>
+        <p>Banner placements, newsletter sponsorship, and featured event slots will be available as the platform grows. Tell us what you're interested in and we'll follow up.</p>
+        <form class="signup-form-stacked" id="sponsor-form" onsubmit="return handleSponsor(event)">
+          <input type="hidden" name="_subject" value="Sponsorship inquiry - Our Airdrie">
+          <input type="hidden" name="_autoresponse" value="Thanks for your interest in sponsoring Our Airdrie! We'll follow up soon to talk through banner placements, newsletter sponsorship, and event slots as they become available.">
+          <input type="text" name="organization" placeholder="Organization name" required>
+          <input type="email" name="email" placeholder="you@email.com" required>
+          <textarea name="message" placeholder="What are you interested in sponsoring? (e.g. homepage banner, weekly email, an event)" rows="3"></textarea>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Inquiry</button>
+        </form>
+        <p class="form-note">No commitment — just opens the conversation.</p>
+      </div>
+      <div class="signup-card" id="event-card">
+        <span class="tag event">Know about something happening?</span>
+        <h3>Submit an event</h3>
+        <p>Found an event somewhere, a flyer, or word of mouth that should be on our calendar? Tell us about it and we'll add it.</p>
+        <form class="signup-form-stacked" id="event-form" onsubmit="return handleEventSubmit(event)">
+          <input type="hidden" name="_subject" value="Event submission - Our Airdrie">
+          <input type="hidden" name="_autoresponse" value="Thanks for the tip! We'll review the event details and add it to the Our Airdrie calendar soon.">
+          <input type="text" name="event_name" placeholder="Event name" required>
+          <input type="text" name="event_date" placeholder="Date (e.g. July 12, 2026)" required>
+          <input type="text" name="event_venue" placeholder="Venue / location">
+          <textarea name="event_details" placeholder="Details, time, and a link to the event page or source if you have one" rows="3"></textarea>
+          <input type="email" name="your_email" placeholder="Your email (optional)">
+          <button type="submit" class="btn btn-accent" style="width:100%;">Submit Event</button>
+        </form>
+        <p class="form-note">We review every submission before it goes live.</p>
+      </div>
+      <div class="signup-card" id="suggestion-card">
+        <span class="tag suggestion">Have an idea?</span>
+        <h3>Suggest something</h3>
+        <p>Missing a feature, found something confusing, or have an idea for what this site should do next? Tell us.</p>
+        <form class="signup-form-stacked" id="suggestion-form" onsubmit="return handleSuggestion(event)">
+          <input type="hidden" name="_subject" value="Suggestion - Our Airdrie">
+          <input type="hidden" name="_autoresponse" value="Thanks for the suggestion! We read every one and use them to decide what to build next.">
+          <textarea name="suggestion" placeholder="What would you like to see added or changed?" rows="4" required></textarea>
+          <input type="email" name="your_email" placeholder="Your email (optional, in case we follow up)">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Suggestion</button>
+        </form>
+        <p class="form-note">Every suggestion gets read - no idea is too small.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeEventDrawer()"></div>
+<div class="event-drawer" id="event-drawer">
+  <button class="drawer-close" onclick="closeEventDrawer()" aria-label="Close">&times;</button>
+  <div id="drawer-content"></div>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><svg class="brand-icon" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true"><defs><clipPath id="bclip"><circle cx="50" cy="50" r="46"/></clipPath></defs><g clip-path="url(#bclip)"><rect x="4" y="4" width="92" height="92" fill="#FBF7F0"/><circle cx="50" cy="40" r="16" fill="#E8A33D"/><path d="M4,62 C20,46 35,58 50,52 C65,46 80,56 96,60 L96,96 L4,96 Z" fill="#1B3A4B"/></g><circle cx="50" cy="50" r="46" fill="none" stroke="#1B3A4B" stroke-width="3"/></svg><span class="logo-text">Our<span class="logo-accent">Airdrie</span></span></div>
+        <p>A community project for Airdrie, Alberta. Not affiliated with the City of Airdrie or the Airdrie Regional Chamber of Commerce.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Explore</h5>
+        <a href="#" onclick="showTab('directory');return false;">Business Directory</a>
+        <a href="#" onclick="showTab('events');return false;">Events Calendar</a>
+        <a href="#" onclick="showTab('about');return false;">About &amp; FAQ</a>
+      </div>
+      <div class="footer-links">
+        <h5>Get in touch</h5>
+        <a href="#" onclick="showTab('contact');return false;">Contact &amp; Sponsorship</a>
+        <a href="mailto:camilocamaes@gmail.com">camilocamaes@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Our Airdrie. Business data sourced from the City of Airdrie and the Airdrie Regional Chamber of Commerce. &middot; <a href="privacy.html" style="color:rgba(255,255,255,0.6);">Privacy Policy</a></div>
+  </div>
+</footer>
+
+<script>
+function weatherIcon(code) {
+  if (code === 0) return "\u2600\uFE0F";
+  if (code >= 1 && code <= 3) return "\u26C5";
+  if (code === 45 || code === 48) return "\uD83C\uDF2B\uFE0F";
+  if (code >= 51 && code <= 67) return "\uD83C\uDF27\uFE0F";
+  if (code >= 71 && code <= 77) return "\u2744\uFE0F";
+  if (code >= 80 && code <= 82) return "\uD83C\uDF26\uFE0F";
+  if (code >= 95) return "\u26C8\uFE0F";
+  return "\uD83C\uDF24\uFE0F";
+}
+
+function weatherTip(tempC, code, windKmh) {
+  if (code >= 95) return "Thunderstorms expected - stay indoors if you can.";
+  if (code >= 71 && code <= 86) return "Snow today - drive carefully and dress warm.";
+  if (code >= 51 && code <= 67) return "Rain expected - grab an umbrella before heading out.";
+  if (tempC >= 28) return "It's hot today - sunscreen, water, and shade breaks recommended.";
+  if (tempC >= 22) return "Warm one today - good day to be outside.";
+  if (tempC <= -15) return "Bitterly cold - bundle up and limit time outside.";
+  if (tempC <= 0) return "Below freezing - dress warm and watch for icy sidewalks.";
+  if (windKmh >= 40) return "Windy out there - secure loose items.";
+  return "A nice day in Airdrie - get outside if you can.";
+}
+
+let lastWeather = null;
+
+
+const AIRDRIE_FACTS = [
+  "Airdrie is the fastest-growing city in Alberta, with a 2025 population of about 92,500 - projected to pass 100,000 by 2032.",
+  "Airdrie's myAIRDRIE resident portal has roughly 85,000 active accounts - over 85% of households and 90% of businesses in the city.",
+  "The average Airdrie resident is 34 years old, and 57% of residents have a post-secondary education.",
+  "Nose Creek Regional Park spans 20 acres right in Airdrie's downtown core, with an amphitheatre and nature trails.",
+  "Chinook Winds Regional Park covers more than 55 acres with over 2km of paved pathways, a skate park, and a spray park.",
+  "Airdrie maintains 90 playgrounds across its parks and school sites.",
+  "Fletcher Regional Park has a nine-hole disc golf course - one of the city's lesser-known recreation spots.",
+  "The Airdrie Public Library runs a free Summer Reading Club and French-language storytime programs for kids."
+];
+
+function renderFunFact() {
+  const banner = document.getElementById("fact-banner");
+  if (!banner) return;
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const fact = AIRDRIE_FACTS[dayOfYear % AIRDRIE_FACTS.length];
+  banner.innerHTML = `<strong>Did you know?</strong> ${fact}`;
+}
+
+function fetchWeather() {
+  const banner = document.getElementById("weather-banner");
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=51.2917&longitude=-114.0144&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FEdmonton")
+    .then(res => res.json())
+    .then(data => {
+      const cw = data.current_weather;
+      const high = Math.round(data.daily.temperature_2m_max[0]);
+      const low = Math.round(data.daily.temperature_2m_min[0]);
+      const temp = Math.round(cw.temperature);
+      const icon = weatherIcon(cw.weathercode);
+      const tip = weatherTip(temp, cw.weathercode, cw.windspeed);
+      lastWeather = { temp, high, low, icon, tip };
+      banner.innerHTML = `${icon} <strong>${temp}&deg;C</strong> in Airdrie today (H:${high}&deg; L:${low}&deg;) &mdash; <span class="wb-tip">${tip}</span>`;
+    })
+    .catch(() => {
+      banner.innerHTML = "Weather unavailable right now - check back later.";
+    });
+}
+
+function toggleMobileNav() {
+  const nav = document.getElementById("nav-links");
+  const btn = document.getElementById("nav-toggle-btn");
+  const isOpen = nav.classList.toggle("mobile-open");
+  btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+function closeMobileNav() {
+  document.getElementById("nav-links").classList.remove("mobile-open");
+  document.getElementById("nav-toggle-btn").setAttribute("aria-expanded", "false");
+}
+
+function changeLanguage(lang) {
+  const url = new URL(window.location.href);
+  if (lang === "en") {
+    if (url.hostname === "translate.google.com") {
+      const original = url.searchParams.get("u");
+      if (original) { window.location.href = original; return; }
+    }
+    return;
+  }
+  if (window.location.protocol === "file:") {
+    alert("Translation needs the site to be hosted on a real web address (like ouraidrie.ca) - it can't translate a page opened as a local file. This will work once the site is live online.");
+    return;
+  }
+  const target = `https://translate.google.com/translate?sl=en&tl=${lang}&u=${encodeURIComponent(window.location.href)}`;
+  window.location.href = target;
+}
+
+function renderUpcomingHome() {
+  const now = new Date();
+  let weekStart = new Date(now); weekStart.setHours(0,0,0,0);
+  let weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + 7);
+  let nextStart = new Date(weekEnd);
+  let nextEnd = new Date(nextStart); nextEnd.setDate(nextEnd.getDate() + 7);
+
+  const thisWeek = EVENTS.filter(e => { const d = new Date(e.date + "T00:00:00"); return d >= weekStart && d < weekEnd; })
+    .sort((a,b) => a.date.localeCompare(b.date));
+  const nextWeek = EVENTS.filter(e => { const d = new Date(e.date + "T00:00:00"); return d >= nextStart && d < nextEnd; })
+    .sort((a,b) => a.date.localeCompare(b.date));
+
+  document.getElementById("upcoming-this-week").innerHTML = renderUpcomingList(thisWeek);
+  document.getElementById("upcoming-next-week").innerHTML = renderUpcomingList(nextWeek);
+}
+
+function renderUpcomingList(list) {
+  if (list.length === 0) return '<div class="upcoming-empty">Nothing in our snapshot for this window — check the full calendar.</div>';
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return list.slice(0, 5).map(e => {
+    const d = new Date(e.date + "T00:00:00");
+    return `<div class="upcoming-item" onclick="openEventDrawer(${EVENTS.indexOf(e)})">
+      <div class="upcoming-badge"><div class="um">${months[d.getMonth()]}</div><div class="ud">${d.getDate()}</div></div>
+      <div><div class="upcoming-name">${escapeHtml(e.name)}</div><div class="upcoming-meta">${escapeHtml(e.time)} &middot; ${escapeHtml(e.venue)}</div></div>
+    </div>`;
+  }).join("");
+}
+
+function showTab(tabId) {
+  logInteraction("tab_nav", tabId);
+  document.querySelectorAll(".tab-page").forEach(el => el.style.display = "none");
+  document.getElementById("tab-" + tabId).style.display = "";
+  document.querySelectorAll(".tab-link").forEach(el => el.classList.toggle("active", el.dataset.tab === tabId));
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+const NOTIFY_EMAIL = "camilocamaes@gmail.com";
+
+const SUPABASE_URL = "https://qehxqhgpypublcqxocgt.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlaHhxaGdweXB1YmxjcXhvY2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMDM4MDUsImV4cCI6MjA5Nzg3OTgwNX0.sj8mCISeMRHqSP-6nOgMtuzn8segvXiD4BccVDXB8jA";
+const SESSION_ID = Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+function supaHeaders() {
+  return {
+    "apikey": SUPABASE_ANON_KEY,
+    "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+    "Content-Type": "application/json"
+  };
+}
+
+async function supaSelect(table, params) {
+  const pageSize = 1000;
+  let offset = 0;
+  let all = [];
+  while (true) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params || "select=*"}`, {
+      headers: Object.assign(supaHeaders(), { "Range": `${offset}-${offset + pageSize - 1}` })
+    });
+    const page = await res.json();
+    if (!Array.isArray(page) || page.length === 0) break;
+    all = all.concat(page);
+    if (page.length < pageSize) break;
+    offset += pageSize;
+  }
+  return all;
+}
+
+function supaInsert(table, row) {
+  fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+    method: "POST",
+    headers: Object.assign(supaHeaders(), { "Prefer": "return=minimal" }),
+    body: JSON.stringify(row)
+  }).catch(() => {});
+}
+
+function logInteraction(type, value, resultCount) {
+  supaInsert("interactions", {
+    interaction_type: type,
+    value: value != null ? String(value).slice(0, 500) : null,
+    result_count: (resultCount === undefined ? null : resultCount),
+    session_id: SESSION_ID
+  });
+}
+
+function logSubmission(formType, formData) {
+  const payload = {};
+  formData.forEach((v, k) => { payload[k] = v; });
+  supaInsert("form_submissions", { form_type: formType, payload: payload });
+}
+
+async function fetchAllData() {
+  try {
+    const [biz, ev, res, cl] = await Promise.all([
+      supaSelect("businesses", "select=name,category,address,phone,website&order=name"),
+      supaSelect("events", "select=*&order=event_date"),
+      supaSelect("resources", "select=*"),
+      supaSelect("closures", "select=*")
+    ]);
+    BUSINESSES = biz.map(b => ({ name: b.name, category: b.category, address: b.address || "", phone: b.phone || "", website: b.website || "" }));
+    EVENTS = ev.map(e => ({ name: e.name, date: e.event_date, time: e.event_time || "", venue: e.venue || "", address: e.address || "", description: e.description || "" }));
+    RESOURCES = res.map(r => ({ name: r.name, category: r.category, description: r.description || "", url: r.url || "" }));
+    CLOSURES = cl.map(c => ({ name: c.name, dates: c.dates, description: c.description || "" }));
+  } catch (err) {
+    document.getElementById("results-count").textContent = "Could not load live data - please refresh the page.";
+  }
+  updateHeroStats();
+  doRender();
+  renderEventsTab();
+  renderUpcomingHome();
+  renderFunFact();
+}
+
+function updateHeroStats() {
+  const bizEl = document.getElementById("stat-businesses");
+  const evEl = document.getElementById("stat-events");
+  const catEl = document.getElementById("stat-categories");
+  if (bizEl) bizEl.textContent = BUSINESSES.length.toLocaleString();
+  if (evEl) evEl.textContent = EVENTS.length + "+";
+  if (catEl) {
+    const uniqueCats = new Set(BUSINESSES.map(b => b.category));
+    catEl.textContent = uniqueCats.size;
+  }
+  const whBizEl = document.getElementById("wh-business-count");
+  if (whBizEl) whBizEl.textContent = BUSINESSES.length.toLocaleString() + " local listings";
+  ["directory-count-num", "search-count-num", "faq-count-num"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = BUSINESSES.length.toLocaleString();
+  });
+}
+
+
+function handleSuggestion(e) {
+  e.preventDefault();
+  const form = e.target;
+  const card = document.getElementById("suggestion-card");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  logSubmission("suggestion", data);
+
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: data
+  })
+  .then(res => res.json())
+  .then(result => {
+    card.innerHTML = `
+      <span class="tag suggestion">Have an idea?</span>
+      <h3>Thanks! \u{1F64C}</h3>
+      <p>We read every suggestion - this helps shape what gets built next.</p>
+    `;
+  })
+  .catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
+  });
+
+  return false;
+}
+
+function handleEventSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const card = document.getElementById("event-card");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  logSubmission("event_submission", data);
+
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: data
+  })
+  .then(res => res.json())
+  .then(result => {
+    card.innerHTML = `
+      <span class="tag event">Know about something happening?</span>
+      <h3>Thanks! \u{1F389}</h3>
+      <p>We'll review your submission and add it to the calendar soon.</p>
+    `;
+  })
+  .catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
+  });
+
+  return false;
+}
+
+function handleSponsor(e) {
+  e.preventDefault();
+  const form = e.target;
+  const card = document.getElementById("sponsor-card");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  logSubmission("sponsor_inquiry", data);
+
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: data
+  })
+  .then(res => res.json())
+  .then(result => {
+    card.innerHTML = `
+      <span class="tag sponsor">Reach Airdrie residents</span>
+      <h3>Thanks for reaching out! 🎉</h3>
+      <p>We'll be in touch about sponsorship opportunities soon.</p>
+    `;
+  })
+  .catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
+  });
+
+  return false;
+}
+
+function handleMissingBusiness(e) {
+  e.preventDefault();
+  const form = e.target;
+  const card = document.getElementById("missing-business-card");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  logSubmission("missing_business", data);
+
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: data
+  })
+  .then(res => res.json())
+  .then(result => {
+    card.innerHTML = `
+      <span class="tag missing">Spot something missing?</span>
+      <h3>Thanks! 🎉</h3>
+      <p>We've got it — we'll review and add it to the directory soon.</p>
+    `;
+  })
+  .catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
+  });
+
+  return false;
+}
+
+function handleSignup(e, type) {
+  e.preventDefault();
+  const form = e.target;
+  const card = type === "resident" ? document.getElementById("resident-card") : document.getElementById("business-card");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  logSubmission(type === "resident" ? "resident_signup" : "business_signup", data);
+
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: data
+  })
+  .then(res => res.json())
+  .then(result => {
+    card.innerHTML = `
+      <span class="tag ${type}">${type === "resident" ? "I live in Airdrie" : "I own a business"}</span>
+      <h3>You're on the list! 🎉</h3>
+      <p>Thanks for signing up — we'll be in touch as soon as Our Airdrie launches.</p>
+    `;
+  })
+  .catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
+  });
+
+  return false;
+}
+
+
+let BUSINESSES = [];
+let EVENTS = [];
+let resultsLimit = 30;
+
+function filterByCategory(cat) {
+  logInteraction("category_click", cat);
+  document.getElementById("category-select").value = cat;
+  document.getElementById("search-input").value = "";
+  resultsLimit = 30;
+  renderResults();
+  showTab("directory"); setTimeout(() => document.getElementById("browse").scrollIntoView({ behavior: "smooth" }), 50);
+}
+
+function renderResults() {
+  resultsLimit = 30;
+  doRender();
+}
+
+function loadMore() {
+  resultsLimit += 50;
+  doRender(true);
+}
+
+function doRender() {
+  const q = document.getElementById("search-input").value.trim().toLowerCase();
+  const cat = document.getElementById("category-select").value;
+  let filtered = BUSINESSES.filter(b => {
+    if (cat && b.category !== cat) return false;
+    if (q && !b.name.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const total = filtered.length;
+  const shown = filtered.slice(0, resultsLimit);
+  document.getElementById("results-count").textContent =
+    total === 0 ? "No businesses found." : `Showing ${shown.length} of ${total.toLocaleString()} businesses`;
+  document.getElementById("results-list").innerHTML = shown.map(b => `
+    <div class="biz-row">
+      <div class="biz-info">
+        <h5>${escapeHtml(b.name)}</h5>
+        <p>${escapeHtml(b.address || "Address not listed")} ${b.phone ? " · " + escapeHtml(b.phone) : ""}</p>
+        <div class="biz-row-actions">
+          <button class="claim-link" data-bizname="${escapeHtml(b.name)}" onclick="claimListing(this)">Is this your business? Claim it free &rarr;</button>
+          <button class="share-btn" data-name="${escapeHtml(b.name)}" data-category="${escapeHtml(b.category)}" data-address="${escapeHtml(b.address || "")}" data-phone="${escapeHtml(b.phone || "")}" onclick="shareFromDataset(this)" aria-label="Share this business">&#8599; Share</button>
+        </div>
+      </div>
+      <span class="biz-cat">${escapeHtml(b.category)}</span>
+    </div>
+  `).join("");
+  document.getElementById("load-more-wrap").style.display = shown.length < total ? "block" : "none";
+}
+
+function escapeHtml(s) {
+  return (s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+function getMonthKey(dateStr) { return dateStr.slice(0, 7); }
+
+function getAvailableMonths() {
+  const keys = [...new Set(EVENTS.map(e => getMonthKey(e.date)))].sort();
+  return keys;
+}
+
+function monthLabel(key) {
+  const [y, m] = key.split("-").map(Number);
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return `${months[m-1]} ${y}`;
+}
+
+let currentMonthKey = null;
+
+function renderEventsTab(monthKey) {
+  const months = getAvailableMonths();
+  const now = new Date();
+  const thisMonthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
+  const nextMonthDate = new Date(now.getFullYear(), now.getMonth()+1, 1);
+  const nextMonthKey = `${nextMonthDate.getFullYear()}-${String(nextMonthDate.getMonth()+1).padStart(2,"0")}`;
+
+  if (!monthKey) monthKey = months.includes(thisMonthKey) ? thisMonthKey : (months[0] || thisMonthKey);
+  currentMonthKey = monthKey;
+
+  const primaryMonths = [thisMonthKey, nextMonthKey].filter(k => months.includes(k));
+  const otherMonths = months.filter(k => !primaryMonths.includes(k));
+
+  let pillsHtml = primaryMonths.map(k => `
+    <button class="month-pill${k === monthKey ? ' active' : ''}" onclick="renderEventsTab('${k}')">${k === thisMonthKey ? 'This month' : 'Next month'}</button>
+  `).join("");
+
+  if (otherMonths.length) {
+    pillsHtml += `<select class="month-select" onchange="renderEventsTab(this.value)">
+      <option value="" disabled ${!otherMonths.includes(monthKey) ? "selected" : ""}>More months...</option>
+      ${otherMonths.map(k => `<option value="${k}" ${k === monthKey ? "selected" : ""}>${monthLabel(k)}</option>`).join("")}
+    </select>`;
+  }
+  document.getElementById("month-pills").innerHTML = pillsHtml;
+
+  const monthEvents = EVENTS.filter(e => getMonthKey(e.date) === monthKey).sort((a,b) => a.date.localeCompare(b.date));
+  if (monthEvents.length === 0) {
+    document.getElementById("events-month-list").innerHTML = `<div class="events-empty">No events found for ${monthLabel(monthKey)} in our current snapshot.</div>`;
+    return;
+  }
+
+  const byDate = {};
+  monthEvents.forEach(e => { (byDate[e.date] = byDate[e.date] || []).push(e); });
+
+  let html = "";
+  Object.keys(byDate).sort().forEach(dateStr => {
+    const d = new Date(dateStr + "T00:00:00");
+    const label = d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+    html += `<div class="day-group"><div class="day-group-label">${escapeHtml(label)}</div>`;
+    byDate[dateStr].forEach(e => {
+      const idx = EVENTS.indexOf(e);
+      html += `<div class="event-row-item" onclick="openEventDrawer(${idx})">
+        <div class="event-row-time">${escapeHtml(e.time)}</div>
+        <div><div class="event-row-name">${escapeHtml(e.name)}</div><div class="event-row-venue">${escapeHtml(e.venue)}</div></div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById("events-month-list").innerHTML = html;
+}
+
+let currentDrawerEventIdx = null;
+
+function openEventDrawer(idx) {
+  currentDrawerEventIdx = idx;
+  const e = EVENTS[idx];
+  logInteraction("event_open", e.name);
+  const d = new Date(e.date + "T00:00:00");
+  const niceDate = d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+  document.getElementById("drawer-content").innerHTML = `
+    <div class="drawer-event-title">${escapeHtml(e.name)}</div>
+    <div class="drawer-meta-row"><span class="drawer-meta-icon">&#9679;</span><span>${escapeHtml(niceDate)} at ${escapeHtml(e.time)}</span></div>
+    <div class="drawer-meta-row"><span class="drawer-meta-icon">&#9679;</span><span>${escapeHtml(e.venue)}<br>${escapeHtml(e.address)}</span></div>
+    <div class="drawer-description">${escapeHtml(e.description || "")}</div>
+    <button class="share-btn share-btn-drawer" onclick="shareCurrentEvent()">&#8599; Share this event</button>
+  `;
+  document.getElementById("event-drawer").classList.add("open");
+  document.getElementById("drawer-overlay").classList.add("open");
+}
+
+function shareCurrentEvent() {
+  if (currentDrawerEventIdx === null) return;
+  logInteraction("share_click", EVENTS[currentDrawerEventIdx].name);
+  const e = EVENTS[currentDrawerEventIdx];
+  const d = new Date(e.date + "T00:00:00");
+  const niceDate = d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+  const text = `${e.name} - ${niceDate} at ${e.time}, ${e.venue}, Airdrie. Found on Our Airdrie.`;
+  shareItem(e.name, text);
+}
+
+function shareItem(title, text) {
+  if (navigator.share) {
+    navigator.share({ title: title, text: text }).catch(() => {});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => alert("Copied! Paste it anywhere to share."));
+  } else {
+    alert(text);
+  }
+}
+
+function shareFromDataset(btn) {
+  const d = btn.dataset;
+  logInteraction("share_click", d.name);
+  const text = `${d.name} - ${d.category}, ${d.address || "Airdrie, AB"}${d.phone ? " - " + d.phone : ""}. Found on Our Airdrie.`;
+  shareItem(d.name, text);
+}
+
+function claimListing(btn) {
+  const name = btn.dataset.bizname;
+  logInteraction("claim_click", name);
+  showTab("contact");
+  setTimeout(() => {
+    const input = document.querySelector("#business-form input[name=business_name]");
+    if (input) input.value = name;
+    document.getElementById("business-form").scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 60);
+}
+
+function closeEventDrawer() {
+  document.getElementById("event-drawer").classList.remove("open");
+  document.getElementById("drawer-overlay").classList.remove("open");
+}
+
+
+
+const CATEGORY_SYNONYMS = {
+  "Home & Trade Services": ["plumber","plumbing","electrician","electrical","roofer","roofing","landscaper","landscaping","cleaner","cleaning","contractor","handyman","renovation","painter","painting","hvac","furnace","window","drywall","mover","moving","pest"],
+  "Health & Wellness": ["dentist","dental","doctor","clinic","chiropractor","massage","physio","physiotherapy","optometrist","pharmacy","counsellor","counselor","therapist","therapy","wellness","health"],
+  "Restaurants & Food": ["restaurant","food","eat","dinner","lunch","breakfast","cafe","coffee","bakery","pizza","brewery","bar"],
+  "Automotive": ["mechanic","auto","car repair","tire","car wash","towing"],
+  "Personal Care & Beauty": ["hair","salon","barber","esthetician","beauty","nails","spa","tattoo"],
+  "Pets": ["pet groomer","groomer","grooming","vet","veterinary","dog","cat","pet"],
+  "Real Estate & Housing": ["realtor","real estate","mortgage","property manager"],
+  "Professional & Financial Services": ["accountant","lawyer","legal","financial advisor","insurance","bookkeeper","tax"],
+  "Education & Childcare": ["daycare","dayhome","tutor","tutoring","school","childcare"],
+  "Sports, Recreation & Fitness": ["gym","fitness","yoga","swim","dance"],
+  "Shopping & Retail": ["store","shop","retail","boutique"],
+};
+
+function askExample(text) {
+  document.getElementById("ask-input").value = text;
+  askQuestion();
+}
+
+let RESOURCES = [];
+let CLOSURES = [];
+
+function askQuestion() {
+  const raw = document.getElementById("ask-input").value.trim();
+  const box = document.getElementById("ask-answer");
+  if (!raw) { box.innerHTML = ""; return; }
+  const q = raw.toLowerCase();
+
+  const weatherWords = ["weather","temperature","hot","cold","rain","snow","sunny","forecast","degrees","outside today"];
+  const closureWords = ["road closure","closure","closed road","construction","detour","main street","24th street"];
+  const resourceWords = ["free program","free course","subsidy","subsidies","newcomer","immigrant","settlement","freecycle","free stuff","library program","park","playground","disc golf","fair access","211","business training","entrepreneur","resource","help"];
+  const eventWords = ["happening","event","events","weekend","this week","next week","today","tomorrow","tonight","calendar","going on"];
+
+  if (weatherWords.some(w => q.includes(w))) {
+    answerWithWeather(q, box);
+  } else if (closureWords.some(w => q.includes(w))) {
+    answerWithClosures(q, box);
+  } else if (resourceWords.some(w => q.includes(w))) {
+    answerWithResources(q, box);
+  } else if (eventWords.some(w => q.includes(w))) {
+    answerWithEvents(q, box);
+  } else {
+    answerWithBusinesses(q, box);
+  }
+}
+
+function answerWithWeather(q, box) {
+  let html = `<div class="ask-answer-box"><div class="ask-answer-text">`;
+  if (!lastWeather) {
+    html += `Weather data is still loading - try again in a moment.</div>`;
+  } else {
+    const w = lastWeather;
+    html += `Today's weather in Airdrie:</div>
+      <div class="biz-row" style="display:block;">
+        <h5 style="font-size:17px;">${w.icon} ${w.temp}&deg;C (High ${w.high}&deg; / Low ${w.low}&deg;)</h5>
+        <p style="margin-top:6px;">${escapeHtml(w.tip)}</p>
+      </div>`;
+  }
+  html += `<p class="ask-disclaimer">Live weather data from Open-Meteo.</p></div>`;
+  box.innerHTML = html;
+}
+
+function answerWithClosures(q, box) {
+  let html = `<div class="ask-answer-box"><div class="ask-answer-text">Current road &amp; pathway closures:</div>`;
+  CLOSURES.forEach(c => {
+    html += `<div class="biz-row" style="margin-bottom:8px;">
+      <div class="biz-info"><h5>${escapeHtml(c.name)}</h5><p>${escapeHtml(c.dates)} &middot; ${escapeHtml(c.description)}</p></div>
+    </div>`;
+  });
+  html += `<p class="ask-disclaimer">Snapshot only - check the City's live closure map for current status.</p></div>`;
+  box.innerHTML = html;
+}
+
+function answerWithResources(q, box) {
+  const stopwords = ["i","need","a","an","the","find","me","looking","for","where","can","get","whats","what's","is","are","there","any","good","near","want","some"];
+  const tokens = q.replace(/[?.,!]/g, "").split(/\s+/).filter(t => t && !stopwords.includes(t));
+  let matches = RESOURCES.filter(r => tokens.some(t => r.name.toLowerCase().includes(t) || r.category.toLowerCase().includes(t) || r.description.toLowerCase().includes(t)));
+  if (matches.length === 0) matches = RESOURCES;
+
+  let html = `<div class="ask-answer-box"><div class="ask-answer-text">Found ${matches.length} resource${matches.length === 1 ? "" : "s"}:</div>`;
+  logInteraction("search_resources", q, matches.length);
+  matches.forEach(r => {
+    html += `<div class="biz-row" style="margin-bottom:8px;">
+      <div class="biz-info"><h5>${escapeHtml(r.name)}</h5><p>${escapeHtml(r.description)}</p></div>
+      <span class="biz-cat">${escapeHtml(r.category)}</span>
+    </div>`;
+  });
+  html += `<p class="ask-disclaimer">See the Resources tab for full details and links.</p></div>`;
+  box.innerHTML = html;
+}
+
+const MONTH_NAMES = ["january","february","march","april","may","june","july","august","september","october","november","december"];
+const MONTH_ABBR = {"jan":0,"feb":1,"mar":2,"apr":3,"jun":5,"jul":6,"aug":7,"sep":8,"sept":8,"oct":9,"nov":10,"dec":11};
+
+function parseSpecificDate(q) {
+  let monthIdx = -1;
+  for (let i = 0; i < MONTH_NAMES.length; i++) {
+    if (new RegExp("\\b" + MONTH_NAMES[i] + "\\b").test(q)) { monthIdx = i; break; }
+  }
+  if (monthIdx === -1) {
+    for (const abbr in MONTH_ABBR) {
+      if (new RegExp("\\b" + abbr + "\\b").test(q)) { monthIdx = MONTH_ABBR[abbr]; break; }
+    }
+  }
+  if (monthIdx === -1) return null;
+
+  const dayMatch = q.match(/\b(\d{1,2})(st|nd|rd|th)?\b/);
+  const day = dayMatch ? parseInt(dayMatch[1], 10) : null;
+
+  const years = [...new Set(EVENTS.map(e => parseInt(e.date.slice(0, 4))))];
+  const thisYear = new Date().getFullYear();
+  const year = years.includes(thisYear) ? thisYear : (years[0] || thisYear);
+
+  return { monthIdx, day, year };
+}
+
+function answerWithEvents(q, box) {
+  const specific = parseSpecificDate(q);
+  let matches, headingText;
+
+  if (specific) {
+    const mm = String(specific.monthIdx + 1).padStart(2, "0");
+    const monthLabel = MONTH_NAMES[specific.monthIdx].charAt(0).toUpperCase() + MONTH_NAMES[specific.monthIdx].slice(1);
+    if (specific.day) {
+      const dd = String(specific.day).padStart(2, "0");
+      const dateStr = `${specific.year}-${mm}-${dd}`;
+      matches = EVENTS.filter(e => e.date === dateStr).sort((a, b) => a.date.localeCompare(b.date));
+      headingText = `on ${monthLabel} ${specific.day}, ${specific.year}`;
+    } else {
+      matches = EVENTS.filter(e => e.date.startsWith(`${specific.year}-${mm}`)).sort((a, b) => a.date.localeCompare(b.date));
+      headingText = `in ${monthLabel} ${specific.year}`;
+    }
+  } else {
+    const now = new Date();
+    let start = new Date(now); start.setHours(0, 0, 0, 0);
+    let end = new Date(start);
+
+    if (q.includes("today")) {
+      end.setDate(end.getDate() + 1);
+      headingText = "today";
+    } else if (q.includes("tomorrow")) {
+      start.setDate(start.getDate() + 1);
+      end.setDate(end.getDate() + 2);
+      headingText = "tomorrow";
+    } else if (q.includes("weekend")) {
+      const day = start.getDay();
+      const daysToSat = (6 - day + 7) % 7;
+      start.setDate(start.getDate() + daysToSat);
+      end.setDate(start.getDate() + 2);
+      headingText = "this weekend";
+    } else if (q.includes("next week")) {
+      start.setDate(start.getDate() + 7);
+      end.setDate(start.getDate() + 7);
+      headingText = "next week";
+    } else {
+      end.setDate(end.getDate() + 7);
+      headingText = "in the next 7 days";
+    }
+
+    matches = EVENTS.filter(e => {
+      const d = new Date(e.date + "T00:00:00");
+      return d >= start && d < end;
+    }).sort((a, b) => a.date.localeCompare(b.date));
+  }
+
+  let html = `<div class="ask-answer-box"><div class="ask-answer-text">`;
+  if (matches.length === 0) {
+    html += `No events found ${escapeHtml(headingText)} in our current snapshot. Try the full calendar below.</div>`;
+    logInteraction("search_events", q, 0);
+  } else {
+    html += `Found ${matches.length} event${matches.length === 1 ? "" : "s"} ${escapeHtml(headingText)}:</div>`;
+    logInteraction("search_events", q, matches.length);
+    matches.forEach(e => {
+      html += `<div class="biz-row" style="margin-bottom:8px;">
+        <div class="biz-info"><h5>${escapeHtml(e.name)}</h5><p>${escapeHtml(e.date)} at ${escapeHtml(e.time)} &middot; ${escapeHtml(e.venue)}</p></div>
+      </div>`;
+    });
+  }
+  html += `<p class="ask-disclaimer">Matched using simple date-range rules on our scraped events snapshot — not a live AI model.</p></div>`;
+  box.innerHTML = html;
+}
+
+function answerWithBusinesses(q, box) {
+  // Specific keyword rules: trigger words map to a NAME pattern (and usually a category)
+  // so "find a dentist" only returns dental practices, not the whole Health & Wellness bucket.
+  const KEYWORD_RULES = [
+    { triggers: ["breakfast","brunch"], category: "Restaurants & Food", pattern: /^(?!.*(brewing|brewery|liquor|wine bar|\bpub\b)).*$/i, label: "breakfast spot" },
+    { triggers: ["lunch","dinner","dinning","dining","place to eat","eat out","eating out"], category: "Restaurants & Food", pattern: /./, label: "restaurant" },
+    { triggers: ["pasta","italian","spaghetti"], category: "Restaurants & Food", pattern: /pizza|italian|pasta|bistro|trattoria|cucina/i, label: "Italian restaurant" },
+    { triggers: ["wings","chicken wings"], category: "Restaurants & Food", pattern: /\bwing\b/i, label: "wings restaurant" },
+    { triggers: ["dentist","dental"], category: "Health & Wellness", pattern: /dental|dentist|orthodont|denture/i, label: "dentist" },
+    { triggers: ["chiropractor","chiropractic"], category: "Health & Wellness", pattern: /chiropract/i, label: "chiropractor" },
+    { triggers: ["massage"], category: "Health & Wellness", pattern: /massage/i, label: "massage therapist" },
+    { triggers: ["physio","physiotherapy","physiotherapist"], category: "Health & Wellness", pattern: /physio/i, label: "physiotherapist" },
+    { triggers: ["optometrist","eye doctor","eyecare","eye care"], category: "Health & Wellness", pattern: /eye|optic|optom|vision/i, label: "optometrist" },
+    { triggers: ["pharmacy","pharmacist"], category: "Health & Wellness", pattern: /pharma|drug ?mart|drug store/i, label: "pharmacy" },
+    { triggers: ["counsellor","counselor","therapist","therapy","mental health","psycholog"], category: "Health & Wellness", pattern: /counsel|therap|psycholog/i, label: "counsellor/therapist" },
+    { triggers: ["doctor","clinic","family doctor","medical"], category: "Health & Wellness", pattern: /medical|clinic|health centre|health center|family practice/i, label: "medical clinic" },
+    { triggers: ["hearing","audiolog"], category: "Health & Wellness", pattern: /hearing|audiolog/i, label: "hearing clinic" },
+
+    { triggers: ["plumber","plumbing"], category: "Home & Trade Services", pattern: /plumb/i, label: "plumber" },
+    { triggers: ["electrician","electrical"], category: "Home & Trade Services", pattern: /electric/i, label: "electrician" },
+    { triggers: ["roofer","roofing"], category: "Home & Trade Services", pattern: /roof/i, label: "roofer" },
+    { triggers: ["landscaper","landscaping","lawn"], category: "Home & Trade Services", pattern: /landscap|lawn|yard/i, label: "landscaper" },
+    { triggers: ["cleaner","cleaning","housekeep"], category: "Home & Trade Services", pattern: /clean/i, label: "cleaning service" },
+    { triggers: ["painter","painting"], category: "Home & Trade Services", pattern: /paint/i, label: "painter" },
+    { triggers: ["hvac","furnace","heating","air condition"], category: "Home & Trade Services", pattern: /hvac|furnace|heating|air condition/i, label: "HVAC service" },
+    { triggers: ["mover","moving"], category: "Home & Trade Services", pattern: /mov(e|ing)/i, label: "moving company" },
+    { triggers: ["pest control","exterminator"], category: "Home & Trade Services", pattern: /pest/i, label: "pest control" },
+    { triggers: ["renovation","renovator","contractor"], category: "Home & Trade Services", pattern: /renovat|contract|construct/i, label: "contractor" },
+    { triggers: ["locksmith"], category: "Home & Trade Services", pattern: /locksmith/i, label: "locksmith" },
+
+    { triggers: ["mechanic","auto repair","car repair"], category: "Automotive", pattern: /mechanic|auto.*repair|repair.*auto/i, label: "mechanic" },
+    { triggers: ["tire","tires"], category: "Automotive", pattern: /tire/i, label: "tire shop" },
+    { triggers: ["car wash"], category: "Automotive", pattern: /car wash/i, label: "car wash" },
+    { triggers: ["towing","tow truck"], category: "Automotive", pattern: /tow/i, label: "towing service" },
+
+    { triggers: ["hairdresser","hair salon","haircut","barber"], category: "Personal Care & Beauty", pattern: /hair|barber/i, label: "hair salon" },
+    { triggers: ["esthetician","esthetics","facial"], category: "Personal Care & Beauty", pattern: /esthetic|spa|facial/i, label: "esthetics/spa" },
+    { triggers: ["nail salon","manicure","pedicure","nails"], category: "Personal Care & Beauty", pattern: /nail/i, label: "nail salon" },
+    { triggers: ["tattoo"], category: "Personal Care & Beauty", pattern: /tattoo/i, label: "tattoo studio" },
+
+    { triggers: ["pet groomer","pet grooming","dog groomer","dog grooming","groomer","grooming"], category: "Pets", pattern: /groom/i, label: "pet groomer" },
+    { triggers: ["vet","veterinary","veterinarian"], category: "Pets", pattern: /vet|animal hospital/i, label: "veterinarian" },
+
+    { triggers: ["realtor","real estate agent"], category: "Real Estate & Housing", pattern: /realt|real estate/i, label: "realtor" },
+    { triggers: ["mortgage","mortgage broker"], category: "Real Estate & Housing", pattern: /mortgage/i, label: "mortgage broker" },
+
+    { triggers: ["accountant","accounting","bookkeeper","bookkeeping"], category: "Professional & Financial Services", pattern: /account|bookkeep|tax/i, label: "accountant" },
+    { triggers: ["lawyer","legal","attorney"], category: "Professional & Financial Services", pattern: /law|legal/i, label: "lawyer" },
+    { triggers: ["financial advisor","financial planner"], category: "Professional & Financial Services", pattern: /financial|wealth/i, label: "financial advisor" },
+    { triggers: ["insurance","insurance agent"], category: "Professional & Financial Services", pattern: /insurance/i, label: "insurance agent" },
+
+    { triggers: ["daycare","dayhome","childcare"], category: "Education & Childcare", pattern: /daycare|dayhome|childcare|child care/i, label: "daycare" },
+    { triggers: ["tutor","tutoring"], category: "Education & Childcare", pattern: /tutor/i, label: "tutoring" },
+
+    { triggers: ["gym","fitness"], category: "Sports, Recreation & Fitness", pattern: /fitness|gym/i, label: "gym" },
+    { triggers: ["yoga"], category: "Sports, Recreation & Fitness", pattern: /yoga/i, label: "yoga studio" },
+    { triggers: ["swim","swimming","swim lessons","swim school","pool"], category: "Sports, Recreation & Fitness", pattern: /swim/i, label: "swim school" },
+    { triggers: ["soccer"], category: "Sports, Recreation & Fitness", pattern: /soccer/i, label: "soccer club" },
+    { triggers: ["dance","dancing"], category: "Sports, Recreation & Fitness", pattern: /dance/i, label: "dance studio" },
+    { triggers: ["gymnastics","gymnastic"], category: "Sports, Recreation & Fitness", pattern: /gymnastic/i, label: "gymnastics club" },
+    { triggers: ["martial arts","karate","taekwondo","boxing","kickbox"], category: "Sports, Recreation & Fitness", pattern: /martial art|karate|taekwondo|boxing|kickbox/i, label: "martial arts/boxing" },
+    { triggers: ["golf"], category: "Sports, Recreation & Fitness", pattern: /golf/i, label: "golf course" },
+    { triggers: ["pilates"], category: "Sports, Recreation & Fitness", pattern: /pilates/i, label: "pilates studio" },
+    { triggers: ["curling"], category: "Sports, Recreation & Fitness", pattern: /curling/i, label: "curling club" },
+    { triggers: ["lacrosse"], category: "Sports, Recreation & Fitness", pattern: /lacrosse/i, label: "lacrosse club" },
+    { triggers: ["hockey","skating","skate"], category: "Sports, Recreation & Fitness", pattern: /hockey|skat/i, label: "hockey/skating" },
+  ];
+
+  let rule = null;
+  for (const r of KEYWORD_RULES) {
+    if (r.triggers.some(t => q.includes(t))) { rule = r; break; }
+  }
+
+  let matches, label, broadFallback = false;
+  if (rule) {
+    matches = BUSINESSES.filter(b => b.category === rule.category && rule.pattern.test(b.name));
+    label = rule.label;
+    if (matches.length === 0) {
+      // fall back to the whole category if the specific name pattern found nothing
+      matches = BUSINESSES.filter(b => b.category === rule.category);
+      broadFallback = true;
+    }
+  } else {
+    let matchedCategory = null;
+    for (const [cat, words] of Object.entries(CATEGORY_SYNONYMS)) {
+      if (words.some(w => q.includes(w))) { matchedCategory = cat; break; }
+    }
+    const stopwords = ["i","need","a","an","the","find","me","looking","for","where","can","get","whats","what's","is","are","there","any","good","near","want","some"];
+    const tokens = q.replace(/[?.,!]/g, "").split(/\s+/).filter(t => t && !stopwords.includes(t));
+    const searchText = tokens.join(" ");
+
+    if (matchedCategory) {
+      // Generic narrowing: even for a broad category match, first try to narrow by the
+      // actual meaningful words in the query (e.g. "pizza" within Restaurants & Food)
+      // before falling back to the entire category. This catches terms not covered
+      // by an explicit KEYWORD_RULES entry above, without having to hand-list every
+      // possible business type.
+      let narrowed = [];
+      if (tokens.length) {
+        narrowed = BUSINESSES.filter(b =>
+          b.category === matchedCategory &&
+          tokens.some(t => b.name.toLowerCase().includes(t))
+        );
+      }
+      if (narrowed.length > 0) {
+        matches = narrowed;
+        label = searchText || matchedCategory;
+        broadFallback = false;
+      } else {
+        matches = BUSINESSES.filter(b => b.category === matchedCategory);
+        label = matchedCategory;
+        broadFallback = true;
+      }
+    } else {
+      matches = BUSINESSES.filter(b => searchText && b.name.toLowerCase().includes(searchText));
+      if (matches.length === 0 && tokens.length) {
+        matches = BUSINESSES.filter(b => tokens.some(t => b.name.toLowerCase().includes(t) || b.category.toLowerCase().includes(t)));
+      }
+      label = searchText;
+    }
+  }
+
+  let html = `<div class="ask-answer-box"><div class="ask-answer-text">`;
+  if (matches.length === 0) {
+    html += `Couldn't find a match for that in the directory yet. Try the category search below.</div>`;
+    logInteraction("search_businesses", q, 0);
+  } else {
+    const labelText = (rule || broadFallback) ? escapeHtml(label) : "matching &ldquo;" + escapeHtml(label) + "&rdquo;";
+    html += `Found ${matches.length} ${labelText} business${matches.length === 1 ? "" : "es"}${broadFallback ? " (no exact match for that term, showing the broader category)" : ""}:</div>`;
+    logInteraction("search_businesses", q, matches.length);
+    html += `<div class="ask-results-scroll">`;
+    matches.forEach(b => {
+      html += `<div class="biz-row" style="margin-bottom:8px;">
+        <div class="biz-info"><h5>${escapeHtml(b.name)}</h5><p>${escapeHtml(b.address || "Address not listed")}${b.phone ? " &middot; " + escapeHtml(b.phone) : ""}</p></div>
+        <span class="biz-cat">${escapeHtml(b.category)}</span>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  html += `<p class="ask-disclaimer">Matched using keyword rules against our business directory — not a live AI model.</p></div>`;
+  box.innerHTML = html;
+}
+
+fetchWeather();
+fetchAllData();
+
+</script>
+
+</body>
+</html>
