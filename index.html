@@ -1370,10 +1370,10 @@ function handleSuggestion(e) {
   const data = new FormData(form);
   logSubmission("suggestion", data);
 
-  fetch("/api/contact", {
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(Object.fromEntries(data.entries()))
+    headers: { "Accept": "application/json" },
+    body: data
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1404,10 +1404,10 @@ function handleEventSubmit(e) {
   const data = new FormData(form);
   logSubmission("event_submission", data);
 
-  fetch("/api/contact", {
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(Object.fromEntries(data.entries()))
+    headers: { "Accept": "application/json" },
+    body: data
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1438,10 +1438,10 @@ function handleSponsor(e) {
   const data = new FormData(form);
   logSubmission("sponsor_inquiry", data);
 
-  fetch("/api/contact", {
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(Object.fromEntries(data.entries()))
+    headers: { "Accept": "application/json" },
+    body: data
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1472,10 +1472,10 @@ function handleMissingBusiness(e) {
   const data = new FormData(form);
   logSubmission("missing_business", data);
 
-  fetch("/api/contact", {
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(Object.fromEntries(data.entries()))
+    headers: { "Accept": "application/json" },
+    body: data
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1506,10 +1506,10 @@ function handleSignup(e, type) {
   const data = new FormData(form);
   logSubmission(type === "resident" ? "resident_signup" : "business_signup", data);
 
-  fetch("/api/contact", {
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(Object.fromEntries(data.entries()))
+    headers: { "Accept": "application/json" },
+    body: data
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
