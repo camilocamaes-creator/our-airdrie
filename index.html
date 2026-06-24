@@ -1183,7 +1183,7 @@ function renderFunFact() {
 function fetchWeather() {
   const banner = document.getElementById("weather-banner");
   fetch("https://api.open-meteo.com/v1/forecast?latitude=51.2917&longitude=-114.0144&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FEdmonton")
-    .then(res => res.json())
+    .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
     .then(data => {
       const cw = data.current_weather;
       const high = Math.round(data.daily.temperature_2m_max[0]);
@@ -1375,7 +1375,7 @@ function handleSuggestion(e) {
     headers: { "Accept": "application/json" },
     body: data
   })
-  .then(res => res.json())
+  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
     card.innerHTML = `
       <span class="tag suggestion">Have an idea?</span>
@@ -1409,7 +1409,7 @@ function handleEventSubmit(e) {
     headers: { "Accept": "application/json" },
     body: data
   })
-  .then(res => res.json())
+  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
     card.innerHTML = `
       <span class="tag event">Know about something happening?</span>
@@ -1443,7 +1443,7 @@ function handleSponsor(e) {
     headers: { "Accept": "application/json" },
     body: data
   })
-  .then(res => res.json())
+  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
     card.innerHTML = `
       <span class="tag sponsor">Reach Airdrie residents</span>
@@ -1477,7 +1477,7 @@ function handleMissingBusiness(e) {
     headers: { "Accept": "application/json" },
     body: data
   })
-  .then(res => res.json())
+  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
     card.innerHTML = `
       <span class="tag missing">Spot something missing?</span>
@@ -1511,7 +1511,7 @@ function handleSignup(e, type) {
     headers: { "Accept": "application/json" },
     body: data
   })
-  .then(res => res.json())
+  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
     card.innerHTML = `
       <span class="tag ${type}">${type === "resident" ? "I live in Airdrie" : "I own a business"}</span>
