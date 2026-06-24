@@ -1183,7 +1183,7 @@ function renderFunFact() {
 function fetchWeather() {
   const banner = document.getElementById("weather-banner");
   fetch("https://api.open-meteo.com/v1/forecast?latitude=51.2917&longitude=-114.0144&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FEdmonton")
-    .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
+    .then(res => { if (!res.ok) throw new Error("Weather fetch failed"); return res.json(); })
     .then(data => {
       const cw = data.current_weather;
       const high = Math.round(data.daily.temperature_2m_max[0]);
@@ -1370,10 +1370,10 @@ function handleSuggestion(e) {
   const data = new FormData(form);
   logSubmission("suggestion", data);
 
-  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+  fetch("/api/contact", {
     method: "POST",
-    headers: { "Accept": "application/json" },
-    body: data
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.fromEntries(data.entries()))
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1404,10 +1404,10 @@ function handleEventSubmit(e) {
   const data = new FormData(form);
   logSubmission("event_submission", data);
 
-  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+  fetch("/api/contact", {
     method: "POST",
-    headers: { "Accept": "application/json" },
-    body: data
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.fromEntries(data.entries()))
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1438,10 +1438,10 @@ function handleSponsor(e) {
   const data = new FormData(form);
   logSubmission("sponsor_inquiry", data);
 
-  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+  fetch("/api/contact", {
     method: "POST",
-    headers: { "Accept": "application/json" },
-    body: data
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.fromEntries(data.entries()))
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1472,10 +1472,10 @@ function handleMissingBusiness(e) {
   const data = new FormData(form);
   logSubmission("missing_business", data);
 
-  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+  fetch("/api/contact", {
     method: "POST",
-    headers: { "Accept": "application/json" },
-    body: data
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.fromEntries(data.entries()))
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
@@ -1506,10 +1506,10 @@ function handleSignup(e, type) {
   const data = new FormData(form);
   logSubmission(type === "resident" ? "resident_signup" : "business_signup", data);
 
-  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+  fetch("/api/contact", {
     method: "POST",
-    headers: { "Accept": "application/json" },
-    body: data
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.fromEntries(data.entries()))
   })
   .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
   .then(result => {
