@@ -984,10 +984,8 @@
         <span class="tag resident">I live in Airdrie</span>
         <h3>Get the weekly update</h3>
         <p>A short weekly email with new Airdrie businesses, events and deals. Unsubscribe anytime.</p>
-        <form class="signup-form" id="resident-form" action="https://formsubmit.co/contact@ourairdrie.ca" method="POST" onsubmit="logSubmission('resident_signup', new FormData(this))">
+        <form class="signup-form" id="resident-form" onsubmit="return handleSignup(event, 'resident')">
           <input type="hidden" name="_subject" value="New Our Airdrie resident signup">
-          <input type="hidden" name="_autoresponse" value="Welcome to Our Airdrie! Thanks for signing up. You're on the list for our weekly email with new local businesses, events, and deals around Airdrie - we're putting it together and you'll get the first one soon. No spam, and you can unsubscribe anytime just by replying to one of our emails.">
-          <input type="hidden" name="_next" value="https://www.ourairdrie.ca/?signup=resident#tab-contact">
           <input type="hidden" name="signup_type" value="Resident">
           <input type="email" name="email" placeholder="you@email.com" required>
           <button type="submit" class="btn btn-primary">Notify Me</button>
@@ -998,10 +996,8 @@
         <span class="tag business">I own a business</span>
         <h3>Claim your free founding listing</h3>
         <p>List your business free right now — be one of our first 50 founding members and get priority placement.</p>
-        <form class="signup-form" id="business-form" action="https://formsubmit.co/contact@ourairdrie.ca" method="POST" onsubmit="logSubmission('business_signup', new FormData(this))">
+        <form class="signup-form" id="business-form" onsubmit="return handleSignup(event, 'business')">
           <input type="hidden" name="_subject" value="New Our Airdrie business signup">
-          <input type="hidden" name="_autoresponse" value="Thanks for claiming your free founding listing on Our Airdrie! We'll review your details and follow up shortly to get your business fully listed in the directory. As a founding member, you'll get priority placement once the site grows. Welcome aboard.">
-          <input type="hidden" name="_next" value="https://www.ourairdrie.ca/?signup=business#tab-contact">
           <input type="hidden" name="signup_type" value="Business">
           <input type="text" name="business_name" placeholder="Business name" required>
           <input type="email" name="email" placeholder="you@business.com" required>
@@ -1385,6 +1381,46 @@ function handleSuggestion(e) {
       <h3>Thanks! \u{1F64C}</h3>
       <p>We read every suggestion - this helps shape what gets built next.</p>
     `;
+  })
+  .catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
+  });
+
+  return false;
+}
+
+function handleSignup(e, type) {
+  e.preventDefault();
+  const form = e.target;
+  const card = type === "resident" ? document.getElementById("resident-card") : document.getElementById("business-card");
+  const btn = form.querySelector("button[type=submit]");
+  const originalText = btn.textContent;
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  const email = data.get("email");
+  logSubmission(type === "resident" ? "resident_signup" : "business_signup", data);
+
+  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: data
+  })
+  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
+  .then(result => {
+    card.innerHTML = `
+      <span class="tag ${type}">${type === "resident" ? "I live in Airdrie" : "I own a business"}</span>
+      <h3>You're on the list! \u{1F389}</h3>
+      <p>${type === "resident" ? "Thanks for signing up - check your email for a quick confirmation, and you're on the list for our weekly email, coming soon." : "Thanks for signing up - check your email for confirmation. We'll be in touch shortly about your free founding listing."}</p>
+    `;
+    fetch("/api/welcome-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, type })
+    }).catch(() => {});
   })
   .catch(err => {
     btn.textContent = originalText;
@@ -2011,24 +2047,6 @@ function answerWithBusinesses(q, box) {
 
 fetchWeather();
 fetchAllData();
-
-(function checkSignupRedirect() {
-  const params = new URLSearchParams(window.location.search);
-  const signup = params.get("signup");
-  if (signup !== "resident" && signup !== "business") return;
-
-  showTab("contact");
-  const cardId = signup === "resident" ? "resident-card" : "business-card";
-  const card = document.getElementById(cardId);
-  if (card) {
-    card.innerHTML = `
-      <span class="tag ${signup}">${signup === "resident" ? "I live in Airdrie" : "I own a business"}</span>
-      <h3>You're on the list! \u{1F389}</h3>
-      <p>${signup === "resident" ? "Thanks for signing up - check your email for a quick confirmation, and you're on the list for our weekly email, coming soon." : "Thanks for signing up - check your email for confirmation. We'll be in touch shortly about your free founding listing."}</p>
-    `;
-  }
-  history.replaceState(null, "", window.location.pathname + window.location.hash);
-})();
 
 </script>
 
