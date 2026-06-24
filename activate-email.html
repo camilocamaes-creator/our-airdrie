@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Activate FormSubmit</title>
+</head>
+<body>
+<h1>One-time FormSubmit activation</h1>
+<p>Click the button below once. This sends a real (non-AJAX) form submission, which makes FormSubmit send an activation email to contact@ourairdrie.ca. Click the link in that email, then this page is no longer needed.</p>
+<form action="https://formsubmit.co/contact@ourairdrie.ca" method="POST">
+  <input type="hidden" name="_subject" value="Activation test - Our Airdrie">
+  <input type="text" name="message" value="This is a one-time activation submission.">
+  <button type="submit">Send activation email</button>
+</form>
+</body>
+</html>
