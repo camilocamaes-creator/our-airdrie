@@ -986,7 +986,7 @@
         <p>A short weekly email with new Airdrie businesses, events and deals. Unsubscribe anytime.</p>
         <form class="signup-form" id="resident-form" onsubmit="return handleSignup(event, 'resident')">
           <input type="hidden" name="_subject" value="New Our Airdrie resident signup">
-          <input type="hidden" name="_autoresponse" value="Welcome to Our Airdrie! Thanks for signing up. You'll get a short weekly email with new local businesses, events, and deals around Airdrie. No spam, and you can unsubscribe anytime just by replying to one of our emails.">
+          <input type="hidden" name="_autoresponse" value="Welcome to Our Airdrie! Thanks for signing up. You're on the list for our weekly email with new local businesses, events, and deals around Airdrie - we're putting it together and you'll get the first one soon. No spam, and you can unsubscribe anytime just by replying to one of our emails.">
           <input type="hidden" name="signup_type" value="Resident">
           <input type="email" name="email" placeholder="you@email.com" required>
           <button type="submit" class="btn btn-primary">Notify Me</button>
@@ -1516,7 +1516,7 @@ function handleSignup(e, type) {
     card.innerHTML = `
       <span class="tag ${type}">${type === "resident" ? "I live in Airdrie" : "I own a business"}</span>
       <h3>You're on the list! 🎉</h3>
-      <p>Thanks for signing up — we'll be in touch as soon as Our Airdrie launches.</p>
+      <p>${type === "resident" ? "Thanks for signing up - you're on the list for our weekly email, coming soon." : "Thanks for signing up - we'll be in touch shortly about your free founding listing."}</p>
     `;
   })
   .catch(err => {
