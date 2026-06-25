@@ -2189,6 +2189,7 @@ function askQuestion() {
   } else {
     answerWithBusinesses(q, box);
   }
+  setTimeout(() => { box.scrollIntoView({ behavior: "smooth", block: "start" }); }, 50);
 }
 
 function answerWithGarbage(q, box) {
