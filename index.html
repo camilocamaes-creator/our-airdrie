@@ -1032,19 +1032,6 @@
         </form>
         <p class="form-note">Thanks for helping fill in the gaps.</p>
       </div>
-      <div class="signup-card" id="sponsor-card">
-        <span class="tag sponsor">Reach Airdrie residents</span>
-        <h3>Interested in sponsoring?</h3>
-        <p>Banner placements, newsletter sponsorship, and featured event slots will be available as the platform grows. Tell us what you're interested in and we'll follow up.</p>
-        <form class="signup-form-stacked" id="sponsor-form" onsubmit="return handleSponsor(event)">
-          <input type="hidden" name="_subject" value="Sponsorship inquiry - Our Airdrie">
-          <input type="text" name="organization" placeholder="Organization name" required>
-          <input type="email" name="email" placeholder="you@email.com" required>
-          <textarea name="message" placeholder="What are you interested in sponsoring? (e.g. homepage banner, weekly email, an event)" rows="3"></textarea>
-          <button type="submit" class="btn btn-primary" style="width:100%;">Send Inquiry</button>
-        </form>
-        <p class="form-note">No commitment — just opens the conversation.</p>
-      </div>
       <div class="signup-card" id="event-card">
         <span class="tag event">Know about something happening?</span>
         <h3>Submit an event</h3>
@@ -1457,48 +1444,6 @@ function handleEventSubmit(e) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: submitterEmail, type: "event_submission" })
-      }).catch(() => {});
-    }
-  })
-  .catch(err => {
-    btn.textContent = originalText;
-    btn.disabled = false;
-    alert("Something went wrong submitting the form. Please try again, or email " + NOTIFY_EMAIL + " directly.");
-  });
-
-  return false;
-}
-
-function handleSponsor(e) {
-  e.preventDefault();
-  const form = e.target;
-  const card = document.getElementById("sponsor-card");
-  const btn = form.querySelector("button[type=submit]");
-  const originalText = btn.textContent;
-  btn.textContent = "Sending...";
-  btn.disabled = true;
-
-  const data = new FormData(form);
-  const submitterEmail = data.get("email");
-  logSubmission("sponsor_inquiry", data);
-
-  fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
-    method: "POST",
-    headers: { "Accept": "application/json" },
-    body: data
-  })
-  .then(res => { if (!res.ok) throw new Error("Submission failed"); return res; })
-  .then(result => {
-    card.innerHTML = `
-      <span class="tag sponsor">Reach Airdrie residents</span>
-      <h3>Thanks for reaching out! 🎉</h3>
-      <p>We'll be in touch about sponsorship opportunities soon.</p>
-    `;
-    if (submitterEmail) {
-      fetch("/api/welcome-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: submitterEmail, type: "sponsor" })
       }).catch(() => {});
     }
   })
