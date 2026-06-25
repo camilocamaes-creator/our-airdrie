@@ -1583,8 +1583,12 @@ function changeLanguage(lang) {
 
 function renderUpcomingHome() {
   const now = new Date();
+  // This week = today through end of Sunday
   let weekStart = new Date(now); weekStart.setHours(0,0,0,0);
-  let weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + 7);
+  const dayOfWeek = weekStart.getDay(); // 0=Sun, 1=Mon ... 6=Sat
+  const daysUntilSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
+  let weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + daysUntilSunday + 1); weekEnd.setHours(0,0,0,0);
+  // Next week = following Monday through Sunday
   let nextStart = new Date(weekEnd);
   let nextEnd = new Date(nextStart); nextEnd.setDate(nextEnd.getDate() + 7);
 
