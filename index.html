@@ -33,6 +33,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
+    overflow-x: hidden;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--charcoal);
     background: var(--cream);
@@ -356,6 +357,10 @@
     background: var(--white);
   }
   .browse-controls input:focus, .browse-controls select:focus { outline: none; border-color: var(--prairie-blue); }
+  @media (max-width: 640px) {
+    .browse-controls { flex-direction: column; }
+    .browse-controls input[type=text], .browse-controls select { min-width: 0; width: 100%; flex: none; }
+  }
   .results-count { color: var(--grey); font-size: 13.5px; margin: 14px 0 18px; }
   .results-list { display: flex; flex-direction: column; gap: 10px; max-height: 640px; overflow-y: auto; padding-right: 4px; }
   .biz-row {
