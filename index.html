@@ -1600,7 +1600,7 @@ function renderUpcomingHome() {
 function renderUpcomingList(list) {
   if (list.length === 0) return '<div class="upcoming-empty">Nothing in our snapshot for this window — check the full calendar.</div>';
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  return list.slice(0, 10).map(e => {
+  return list.map(e => {
     const d = new Date(e.date + "T00:00:00");
     return `<div class="upcoming-item" onclick="openEventDrawer(${EVENTS.indexOf(e)})">
       <div class="upcoming-badge"><div class="um">${months[d.getMonth()]}</div><div class="ud">${d.getDate()}</div></div>
