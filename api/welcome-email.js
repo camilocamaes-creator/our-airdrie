@@ -8,9 +8,9 @@ const TEMPLATES = {
     footer: "No spam, ever. You can unsubscribe anytime just by replying to one of our emails."
   },
   business: {
-    subject: "You're a founding member of Our Airdrie!",
+    subject: "Your business listing on Our Airdrie",
     heading: "Welcome aboard!",
-    body: "Thanks for claiming your free founding listing on Our Airdrie. We'll review your details and follow up shortly to get your business fully listed in the directory. As a founding member, you'll get priority placement as the site grows.",
+    body: "Thanks for adding your business to Our Airdrie. We'll review your details and follow up shortly to get it fully listed in the directory.",
     footer: "Questions in the meantime? Just reply to this email."
   },
   missing_business: {

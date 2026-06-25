@@ -986,16 +986,16 @@
       </div>
       <div class="signup-card" id="business-card">
         <span class="tag business">I own a business</span>
-        <h3>Claim your free founding listing</h3>
-        <p>List your business free right now — be one of our first 50 founding members and get priority placement.</p>
+        <h3>List your business for free</h3>
+        <p>Add your business to the directory at no cost. Takes less than a minute.</p>
         <form class="signup-form" id="business-form" onsubmit="return handleSignup(event, 'business')">
           <input type="hidden" name="_subject" value="New Our Airdrie business signup">
           <input type="hidden" name="signup_type" value="Business">
           <input type="text" name="business_name" placeholder="Business name" required>
           <input type="email" name="email" placeholder="you@business.com" required>
-          <button type="submit" class="btn btn-accent">Claim My Spot</button>
+          <button type="submit" class="btn btn-accent">Add My Business</button>
         </form>
-        <p class="form-note">Free founding membership, no catch.</p>
+        <p class="form-note">Free to list, no catch.</p>
       </div>
       <div class="signup-card" id="missing-business-card">
         <span class="tag missing">Spot something missing?</span>
@@ -1410,7 +1410,7 @@ function handleSignup(e, type) {
     card.innerHTML = `
       <span class="tag ${type}">${type === "resident" ? "I live in Airdrie" : "I own a business"}</span>
       <h3>You're on the list! \u{1F389}</h3>
-      <p>${type === "resident" ? "Thanks for signing up - check your email for a quick confirmation, and you're on the list for our weekly email, coming soon." : "Thanks for signing up - check your email for confirmation. We'll be in touch shortly about your free founding listing."}</p>
+      <p>${type === "resident" ? "Thanks for signing up - check your email for a quick confirmation, and you're on the list for our weekly email, coming soon." : "Thanks for signing up - check your email for confirmation. We'll review your details and get your business listed soon."}</p>
     `;
     fetch("/api/welcome-email", {
       method: "POST",
