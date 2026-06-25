@@ -230,22 +230,26 @@
   .categories-section { padding: 70px 0 80px; background: var(--white); }
   .cat-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 44px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 28px;
   }
+  @media (max-width: 640px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
   .cat-card {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 18px;
-    text-align: center;
-    transition: border-color 0.15s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
     background: var(--cream);
+    transition: border-color 0.15s, background 0.15s;
+    text-align: left;
   }
-  .cat-card:hover { border-color: var(--wheat-gold); transform: translateY(-2px); }
-  .cat-icon { font-size: 28px; margin-bottom: 10px; display: block; }
-  .cat-name { font-weight: 700; font-size: 14.5px; color: var(--charcoal); margin-bottom: 4px; }
-  .cat-count { font-size: 12.5px; color: var(--grey); }
+  .cat-card:hover { border-color: var(--wheat-gold); background: #fff; }
+  .cat-icon { font-size: 18px; line-height: 1; flex-shrink: 0; }
+  .cat-name { font-weight: 700; font-size: 13px; color: var(--charcoal); flex: 1; }
+  .cat-count { font-size: 11.5px; color: var(--grey); white-space: nowrap; flex-shrink: 0; }
 
   /* Events */
   .events-section { padding: 70px 0 80px; background: var(--cream); }
@@ -390,7 +394,7 @@
     font-size: 14px;
   }
   .load-more-wrap button:hover { background: var(--border); }
-  .cat-card { cursor: pointer; border: none; font-family: inherit; }
+  .cat-card { cursor: pointer; font-family: inherit; }
 
 
   .ask-section { padding: 70px 0 50px; background: var(--white); }
@@ -589,7 +593,7 @@
   .whats-here-section { padding: 30px 0 10px; background: var(--white); }
   .whats-here-heading { text-align: center; font-size: 18px; font-weight: 800; color: var(--prairie-blue); margin-bottom: 6px; }
   .whats-here-sub { text-align: center; font-size: 13.5px; color: var(--grey); margin-bottom: 22px; }
-  .whats-here-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .whats-here-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .whats-here-tile {
     background: var(--white); border: 1.5px solid var(--border); border-radius: 14px;
     padding: 24px 16px; text-align: center; cursor: pointer; font-family: inherit;
@@ -614,7 +618,108 @@
   .wh-icon { font-size: 24px; line-height: 1; }
   .wh-label { font-weight: 800; font-size: 14px; color: var(--prairie-blue); letter-spacing: -0.1px; }
   .wh-sub { font-size: 12px; color: var(--grey); }
-  @media (max-width: 720px) { .whats-here-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .whats-here-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 620px) { .whats-here-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* City Info tab */
+  .cityinfo-section { padding: 60px 0 80px; background: var(--white); }
+  .cityinfo-block { max-width: 760px; margin: 40px auto 0; }
+  .cityinfo-block + .cityinfo-block { margin-top: 56px; padding-top: 48px; border-top: 2px solid var(--border); }
+  .cityinfo-block h3 { color: var(--prairie-blue); font-size: 22px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+  .cityinfo-block .block-sub { color: var(--grey); font-size: 14.5px; margin-bottom: 24px; }
+
+  .route-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  .route-card {
+    background: var(--cream); border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .route-card.featured { border-color: var(--prairie-blue); background: rgba(27,58,75,0.04); }
+  .route-num { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--sunset); margin-bottom: 4px; }
+  .route-name { font-size: 15px; font-weight: 800; color: var(--prairie-blue); margin-bottom: 6px; }
+  .route-desc { font-size: 13px; color: var(--grey); line-height: 1.5; }
+  .route-tag {
+    display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700;
+    background: var(--prairie-blue); color: var(--white); padding: 3px 9px; border-radius: 100px;
+  }
+  @media (max-width: 620px) { .route-cards { grid-template-columns: 1fr; } }
+  .route-sched-links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .route-sched-links a { font-size: 11.5px; font-weight: 700; color: var(--prairie-blue); text-decoration: none; background: var(--white); border: 1px solid var(--border); padding: 4px 9px; border-radius: 100px; }
+  .cap-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 24px 0 8px; }
+  @media (max-width: 860px) { .cap-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 480px) { .cap-grid { grid-template-columns: 1fr; } }
+  .cap-card { background: var(--cream); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 16px 14px; }
+  .cap-icon { font-size: 22px; margin-bottom: 6px; }
+  .cap-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--prairie-blue); margin-bottom: 10px; }
+  .cap-chips { display: flex; flex-direction: column; gap: 5px; }
+  .cap-chip { text-align: left; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 12.5px; color: var(--charcoal); cursor: pointer; font-family: inherit; transition: border-color 0.15s, color 0.15s; }
+  .cap-chip:hover { border-color: var(--prairie-blue); color: var(--prairie-blue); }
+  .sched-btn { font-size: 11.5px; font-weight: 700; color: var(--prairie-blue); background: var(--white); border: 1px solid var(--border); padding: 5px 11px; border-radius: 100px; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s; text-decoration: none; display: inline-block; }
+  .sched-btn:hover { background: var(--prairie-blue); color: var(--white); border-color: var(--prairie-blue); }
+  .sched-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0 20px; }
+  .sched-table th { background: var(--prairie-blue); color: var(--white); text-align: left; padding: 8px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .sched-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .sched-table tr:nth-child(even) td { background: var(--cream); }
+  .sched-table td:first-child { font-weight: 700; color: var(--prairie-blue); }
+  .sched-section-head { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sunset); margin: 18px 0 8px; }
+  .sched-freq-badge { display: inline-block; background: rgba(27,58,75,0.08); border: 1px solid var(--border); border-radius: 100px; font-size: 11.5px; font-weight: 700; color: var(--prairie-blue); padding: 4px 12px; margin-bottom: 14px; }
+  .sched-times-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; }
+  .sched-time-chip { background: var(--cream); border: 1px solid var(--border); border-radius: 6px; font-size: 12.5px; font-weight: 700; color: var(--charcoal); padding: 4px 9px; }
+  .route-sched-links a:hover { border-color: var(--prairie-blue); }
+
+  .fare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 20px; }
+  .fare-table th { background: var(--prairie-blue); color: var(--white); text-align: left; padding: 10px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .fare-table th:not(:first-child) { text-align: right; }
+  .fare-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--charcoal); }
+  .fare-table td:not(:first-child) { text-align: right; font-weight: 700; color: var(--prairie-blue); }
+  .fare-table tr:last-child td { border-bottom: none; }
+  .fare-table tr:nth-child(even) td { background: var(--cream); }
+
+  .ci-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .ci-link {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--prairie-blue); color: var(--white); text-decoration: none;
+    font-size: 13px; font-weight: 700; padding: 10px 18px; border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .ci-link:hover { background: var(--prairie-blue-light); }
+  .ci-link.secondary { background: var(--cream-dark); color: var(--prairie-blue); border: 1.5px solid var(--border); }
+  .ci-link.secondary:hover { border-color: var(--prairie-blue); }
+
+  .pickup-widget { background: var(--cream); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px 24px; margin-bottom: 20px; }
+  .pickup-label { font-size: 13px; font-weight: 700; color: var(--prairie-blue); margin-bottom: 8px; }
+  .pickup-select {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 15px; font-family: inherit; color: var(--charcoal); background: var(--white);
+    cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B3A4B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+  }
+  .pickup-select:focus { outline: none; border-color: var(--wheat-gold); }
+  .pickup-result { margin-top: 14px; display: none; }
+  .pickup-result.show { display: block; }
+  .pickup-result-inner { background: var(--white); border: 1.5px solid var(--wheat-gold); border-radius: 8px; padding: 14px 16px; }
+  .pickup-hood { font-size: 16px; font-weight: 800; color: var(--prairie-blue); margin-bottom: 4px; }
+  .pickup-note { font-size: 13px; color: var(--grey); }
+  .pickup-days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0 12px; }
+  .pickup-day-card { background: var(--cream-dark); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: center; }
+  .pickup-day-icon { font-size: 22px; margin-bottom: 4px; }
+  .pickup-day-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--grey); margin-bottom: 4px; }
+  .pickup-day-value { font-size: 22px; font-weight: 800; color: var(--prairie-blue); }
+  .pickup-day-freq { font-size: 11px; color: var(--grey); margin-top: 2px; }
+  .pickup-note { font-size: 12.5px; color: var(--grey); }
+  .pickup-note a { color: var(--prairie-blue); font-weight: 700; text-decoration: none; }
+  .pickup-note a:hover { color: var(--sunset); }
+
+  .cart-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; margin-bottom: 20px; }
+  .cart-card { border-radius: 10px; padding: 14px; text-align: center; }
+  .cart-card.black { background: #1a1a1a; color: var(--white); }
+  .cart-card.blue { background: #1b4f8a; color: var(--white); }
+  .cart-card.green { background: #2d6a4f; color: var(--white); }
+  .cart-card.brown { background: #6b4226; color: var(--white); }
+  .cart-icon { font-size: 26px; margin-bottom: 6px; }
+  .cart-name { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .cart-items { font-size: 11px; line-height: 1.5; opacity: 0.9; }
+  @media (max-width: 620px) { .cart-grid { grid-template-columns: repeat(2, 1fr); } }
 
   .section-note { text-align: center; font-size: 13px; color: var(--grey); margin-top: 8px; }
   .section-note a { color: var(--prairie-blue); font-weight: 700; text-decoration: none; }
@@ -651,7 +756,7 @@
 
   .ask-results-scroll { max-height: 460px; overflow-y: auto; padding-right: 4px; }
 </style>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><clipPath id="c"><circle cx="50" cy="50" r="46"/></clipPath></defs><g clip-path="url(#c)"><rect x="4" y="4" width="92" height="92" fill="%23FBF7F0"/><circle cx="50" cy="40" r="16" fill="%23E8A33D"/><path d="M4,62 C20,46 35,58 50,52 C65,46 80,56 96,60 L96,96 L4,96 Z" fill="%231B3A4B"/></g><circle cx="50" cy="50" r="46" fill="none" stroke="%231B3A4B" stroke-width="3"/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Ccircle cx='50' cy='50' r='46'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Crect x='4' y='4' width='92' height='92' fill='%23FBF7F0'/%3E%3Ccircle cx='50' cy='40' r='16' fill='%23E8A33D'/%3E%3Cpath d='M4,62 C20,46 35,58 50,52 C65,46 80,56 96,60 L96,96 L4,96 Z' fill='%231B3A4B'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%231B3A4B' stroke-width='3'/%3E%3C/svg%3E">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8N04KE72N"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -676,6 +781,8 @@
       <a href="#" onclick="showTab('events');closeMobileNav();return false;" class="tab-link" data-tab="events">Events</a>
       <a href="#" onclick="showTab('about');closeMobileNav();return false;" class="tab-link" data-tab="about">About</a>
       <a href="#" onclick="showTab('resources');closeMobileNav();return false;" class="tab-link" data-tab="resources">Resources</a>
+      <a href="#" onclick="showTab('cityinfo');closeMobileNav();return false;" class="tab-link" data-tab="cityinfo">Garbage &amp; Recycling</a>
+      <a href="#" onclick="showTab('transit');closeMobileNav();return false;" class="tab-link" data-tab="transit">Transit</a>
       <a href="#" onclick="showTab('contact');closeMobileNav();return false;" class="tab-link" data-tab="contact">Contact</a>
       <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)">
         <option value="en">English</option>
@@ -690,21 +797,71 @@
 <div class="tab-page" id="tab-home">
 <section class="hero">
   <div class="wrap">
-    <span class="hero-badge">Live in Airdrie</span>
-    <h1>Everything happening in Airdrie, <em>in one place.</em></h1>
-    <p class="sub">Local businesses, events, free programs, weather and closures - all in one place.</p>
+    <h1>Your guide to everything Airdrie.</h1>
+    <p class="sub">Local businesses, events, transit schedules, garbage pickup days, free programs, and city updates — all in one place.</p>
     <div class="hero-stats">
       <div><div class="stat-num" id="stat-businesses">...</div><div class="stat-label">Local Businesses</div></div>
       <div><div class="stat-num" id="stat-events">...</div><div class="stat-label">Upcoming Events</div></div>
       <div><div class="stat-num" id="stat-categories">...</div><div class="stat-label">Categories</div></div>
+      <div><div class="stat-num">44</div><div class="stat-label">Neighbourhoods</div></div>
+      <div><div class="stat-num" id="stat-resources">...</div><div class="stat-label">Free Programs</div></div>
+      <div><div class="stat-num">6</div><div class="stat-label">Transit Routes</div></div>
     </div>
   </div>
 </section>
 <div class="fact-banner" id="fact-banner"></div>
+<section class="ask-section" id="ask">
+  <div class="wrap">
+    <h2 class="section-title">Ask anything about Airdrie</h2>
+    <p class="section-sub">Type a question in plain English and get an answer right here — no digging through tabs or downloading anything.</p>
+    <div class="ask-box">
+      <input type="text" id="ask-input" placeholder="e.g. I need a plumber, garbage day in Bayview, bus to Calgary..." onkeydown="if(event.key==='Enter') askQuestion()">
+      <button class="btn btn-primary" onclick="askQuestion()">Ask</button>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cap-icon">&#127970;</div>
+        <div class="cap-label">Find a business</div>
+        <div class="cap-chips">
+          <button class="cap-chip" onclick="askExample('I need a plumber')">I need a plumber</button>
+          <button class="cap-chip" onclick="askExample('best dentist in airdrie')">dentist near me</button>
+          <button class="cap-chip" onclick="askExample('restaurants in airdrie')">restaurants</button>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#128197;</div>
+        <div class="cap-label">Events &amp; activities</div>
+        <div class="cap-chips">
+          <button class="cap-chip" onclick="askExample('whats happening this weekend')">what's on this weekend?</button>
+          <button class="cap-chip" onclick="askExample('events for kids')">events for kids</button>
+          <button class="cap-chip" onclick="askExample('free programs airdrie')">free programs</button>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#128652;</div>
+        <div class="cap-label">Transit &amp; schedules</div>
+        <div class="cap-chips">
+          <button class="cap-chip" onclick="askExample('bus to downtown calgary')">bus to Calgary?</button>
+          <button class="cap-chip" onclick="askExample('route 900 schedule')">Route 900 schedule</button>
+          <button class="cap-chip" onclick="askExample('transit fares')">transit fares</button>
+        </div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9851;</div>
+        <div class="cap-label">City services</div>
+        <div class="cap-chips">
+          <button class="cap-chip" onclick="askExample('garbage pickup bayview')">garbage day in Bayview?</button>
+          <button class="cap-chip" onclick="askExample('any road closures')">road closures?</button>
+          <button class="cap-chip" onclick="askExample('whats the weather today')">weather today?</button>
+        </div>
+      </div>
+    </div>
+    <div id="ask-answer"></div>
+  </div>
+</section>
 <section class="whats-here-section">
   <div class="wrap">
-    <h3 class="whats-here-heading">Everything Airdrie, in four places</h3>
-    <p class="whats-here-sub">Use the tabs above to browse, or just ask a question below — here's what's here:</p>
+    <h3 class="whats-here-heading">Or browse section by section</h3>
     <div class="whats-here-grid">
       <button class="whats-here-tile" onclick="showTab('directory')">
         <span class="wh-icon-wrap"><span class="wh-icon">&#127970;</span></span>
@@ -726,26 +883,17 @@
         <span class="wh-label">Weather &amp; Closures</span>
         <span class="wh-sub">Updated daily</span>
       </button>
+      <button class="whats-here-tile" onclick="showTab('cityinfo')">
+        <span class="wh-icon-wrap"><span class="wh-icon">&#9851;</span></span>
+        <span class="wh-label">Garbage &amp; Recycling</span>
+        <span class="wh-sub">Pickup days by neighbourhood</span>
+      </button>
+      <button class="whats-here-tile" onclick="showTab('transit')">
+        <span class="wh-icon-wrap"><span class="wh-icon">&#128652;</span></span>
+        <span class="wh-label">Transit</span>
+        <span class="wh-sub">Routes &amp; schedules</span>
+      </button>
     </div>
-  </div>
-</section>
-
-<section class="ask-section" id="ask">
-  <div class="wrap">
-    <h2 class="section-title">Ask Our Airdrie</h2>
-    <p class="section-sub">Type a question in plain English — "I need a pet groomer" or "what's happening this weekend"</p>
-    <div class="ask-box">
-      <input type="text" id="ask-input" placeholder="e.g. I need a plumber, the weather today, or free programs" onkeydown="if(event.key==='Enter') askQuestion()">
-      <button class="btn btn-primary" onclick="askQuestion()">Ask</button>
-    </div>
-    <div class="ask-suggestions">
-      <button onclick="askExample('I need a pet groomer')">I need a pet groomer</button>
-      <button onclick="askExample('whats happening this weekend')">What's happening this weekend?</button>
-      <button onclick="askExample('whats the weather today')">What's the weather today?</button>
-      <button onclick="askExample('any road closures')">Any road closures?</button>
-      <button onclick="askExample('free programs for newcomers')">Free programs for newcomers?</button>
-    </div>
-    <div id="ask-answer"></div>
   </div>
 </section>
 <section class="upcoming-section">
@@ -835,42 +983,47 @@
     <p class="section-sub">Why this exists, and what's next.</p>
     <div class="about-content">
       <h3>What this is</h3>
-      <p>Our Airdrie pulls together local business listings, a community events calendar, free programs and civic resources, and daily weather and road closure updates - all in one searchable site. The business directory is built from public sources data. It exists because residents had no single place to find this information — until now.</p>
+      <p>Our Airdrie is a single place for Airdrie residents to find what they need without hunting across five different websites. Type a question in plain English, like "when's the next bus to Calgary," "what day is recycling pickup in Windsong," "plumber near me," or "what's on this weekend," and get an answer, not a link to a PDF.</p>
+      <p>The site covers a searchable business directory, a community events calendar, transit schedules for all 6 Airdrie routes, garbage and recycling pickup by neighbourhood, free programs and civic resources, and daily weather. Everything is specific to Airdrie, with no generic national filler.</p>
+      <h3>Transit: schedules on screen, no downloads</h3>
+      <p>All 6 Airdrie Transit routes are built directly into the site: local routes 1 and 3, Route 900 to CrossIron Mills and the Rundle LRT, and the ICE express routes 901 and 902 to downtown Calgary. Tap any route from the Transit tab or search for it, and the full schedule opens right on the page. No PDF required.</p>
+      <h3>Garbage and recycling by neighbourhood</h3>
+      <p>Pick your neighbourhood from the list (all 44 are covered) and see your collection day, what's collected each week, and the schedule for large item pickup and organic waste carts. The Garbage and Recycling tab has it all in one place.</p>
       <h3>Built for Airdrie first</h3>
-      <p>Not a generic national directory. Every listing, every event is local — and built to grow with the city as it heads toward 100,000 residents.</p>
+      <p>Not a generic national directory. Every listing, event, and schedule is local, built to grow with the city as it heads toward 100,000 residents.</p>
       <h3>What's next</h3>
-      <p>More events as local organizations submit them, more free programs and resources as they're found, and deals residents can actually use. If there's something you wish this site had, reach out on the Contact tab and tell us.</p>
+      <p>More events as local organizations submit them, more free programs as we find them, and richer answers to the questions residents ask most. If something's missing or wrong, reach out on the Contact tab.</p>
     </div>
 
     <div class="faq-block">
       <h3 class="faq-heading">Frequently asked questions</h3>
       <div class="faq-item">
         <div class="faq-q">Is this an official City of Airdrie site?</div>
-        <div class="faq-a">No. Our Airdrie is an independent community project. The business directory is built from public sources data.</div>
+        <div class="faq-a">No. Our Airdrie is an independent community project. The business directory is built from public source data.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is it free to use?</div>
-        <div class="faq-a">Yes, for residents it's free to browse, search, and see events — always. Businesses can list for free too.</div>
+        <div class="faq-a">Yes. It's always free for residents to browse, search, and see events. Businesses can list for free too.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How do I add or fix my business listing?</div>
-        <div class="faq-a">Use the "Add a business we're missing" form on the Contact tab to report a new listing, or use the same form to flag corrections to an existing one.</div>
+        <div class="faq-a">Use the "Add a business we're missing" form on the Contact tab to report a new listing, or use the same form to flag a correction to an existing one.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Where does the event information come from?</div>
-        <div class="faq-a">Events are pulled from public community calendars and event listing sites. It's a periodic snapshot, not a live feed, so always confirm details with the event organizer before heading out.</div>
+        <div class="faq-a">Events are pulled from public community calendars and event listing sites. It's a periodic snapshot, not a live feed, so always confirm details with the organizer before heading out.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is the search box really AI?</div>
-        <div class="faq-a">Honestly, no — it's rule-based keyword matching against the directory data, not a hosted AI model. It's built to handle common phrasing like "I need a plumber" or "what's happening this weekend," but it won't understand everything a real AI assistant would.</div>
+        <div class="faq-a">Not quite. It's rule-based keyword matching against the directory data, not a hosted AI model. It handles common phrasing like "I need a plumber" or "what's happening this weekend," but it won't understand everything a true AI assistant would.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What's actually on this site?</div>
-        <div class="faq-a">A searchable directory of <span id="faq-count-num">...</span> local businesses, a calendar of community events, a list of free and low-cost programs (subsidies, free courses, newcomer support, parks), daily weather with current road closures, a plain-language search box you can type questions into, and a way for businesses to claim or add their own listing - all on one site.</div>
+        <div class="faq-a">A searchable directory of <span id="faq-count-num">...</span> local businesses, a community events calendar, transit schedules for all 6 Airdrie routes (no PDF downloads), garbage and recycling pickup days for all 44 neighbourhoods, a list of free and low-cost programs, daily weather with road closures, and a plain-language search box, all in one place.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How is my privacy protected?</div>
-        <div class="faq-a">You can browse the entire directory, calendar, and resources without creating an account or submitting any personal information. If you do use one of our forms, we only use what you submit to respond to your request - we never sell your information. Full details are in our <a href="privacy.html" style="color:var(--prairie-blue); font-weight:700;">Privacy Policy</a>.</div>
+        <div class="faq-a">You can browse the entire directory, calendar, and resources without creating an account or submitting any personal information. If you use one of our forms, we only use what you submit to respond to your request, and we never sell your information. Full details are in our <a href="privacy.html" style="color:var(--prairie-blue); font-weight:700;">Privacy Policy</a>.</div>
       </div>
     </div>
   </div>
@@ -965,6 +1118,224 @@
     <p class="res-disclaimer">Program details, eligibility, and links can change - always confirm directly with the organization before relying on this information.</p>
   </div>
 </section>
+</div>
+<div class="tab-page" id="tab-cityinfo" style="display:none;">
+<section class="cityinfo-section">
+  <div class="wrap">
+    <h2 class="section-title">Garbage &amp; Recycling Pickup</h2>
+    <p class="section-sub">Garbage and recycling pickup days by neighbourhood.</p>
+
+    <!-- GARBAGE & RECYCLING -->
+    <div class="cityinfo-block">
+      <h3>&#128682; Garbage &amp; Recycling Pickup</h3>
+      <p class="block-sub">Airdrie uses neighbourhood-based collection schedules. Find your pickup day below, then set your carts out by 7&nbsp;a.m. on collection day.</p>
+
+      <div class="pickup-widget">
+        <div class="pickup-label">Select your neighbourhood</div>
+        <select class="pickup-select" id="pickup-select" onchange="handlePickupSelect(this.value)">
+          <option value="">— Choose your neighbourhood —</option>
+          <option>Airdrie Meadows</option>
+          <option>Bayside</option>
+          <option>Baysprings</option>
+          <option>Bayview</option>
+          <option>Big Springs</option>
+          <option>Canals</option>
+          <option>Chinook Gate</option>
+          <option>Cobblestone Creek</option>
+          <option>Coopers Crossing</option>
+          <option>Downtown</option>
+          <option>Edgewater</option>
+          <option>Fairways</option>
+          <option>Hillcrest</option>
+          <option>Jensen</option>
+          <option>Key Ranch</option>
+          <option>King's Heights</option>
+          <option>Lanark</option>
+          <option>Luxstone</option>
+          <option>Meadowbrook</option>
+          <option>Midtown</option>
+          <option>Morningside</option>
+          <option>Old Town</option>
+          <option>Prairie Springs</option>
+          <option>Ravenswood</option>
+          <option>Reunion</option>
+          <option>Ridgegate</option>
+          <option>Sagewood</option>
+          <option>Sawgrass Park</option>
+          <option>Silver Creek</option>
+          <option>South Point</option>
+          <option>South Windsong</option>
+          <option>Southwinds</option>
+          <option>Stonegate</option>
+          <option>Summerhill</option>
+          <option>Sunridge</option>
+          <option>The Village</option>
+          <option>Thorburn</option>
+          <option>Vantage Rise</option>
+          <option>Waterstone</option>
+          <option>Wildflower</option>
+          <option>Williamstown</option>
+          <option>Willowbrook</option>
+          <option>Windsong</option>
+          <option>Woodside</option>
+        </select>
+        <div class="pickup-result" id="pickup-result">
+          <div class="pickup-result-inner">
+            <div class="pickup-hood" id="pickup-hood"></div>
+            <div class="pickup-days-grid">
+              <div class="pickup-day-card">
+                <div class="pickup-day-icon">&#128682;</div>
+                <div class="pickup-day-label">Garbage &amp; Organics</div>
+                <div class="pickup-day-value" id="pickup-garbage-day"></div>
+                <div class="pickup-day-freq">Every week</div>
+              </div>
+              <div class="pickup-day-card">
+                <div class="pickup-day-icon">&#9854;</div>
+                <div class="pickup-day-label">Recycling</div>
+                <div class="pickup-day-value" id="pickup-recycling-day"></div>
+                <div class="pickup-day-freq">Every other week</div>
+              </div>
+            </div>
+            <div class="pickup-note">&#128204; Set carts out by 7 a.m. Sign up for exact week reminders via <a href="https://myairdrie.ca" target="_blank" rel="noopener">myAIRDRIE</a>. Schedule may vary by street within the neighbourhood.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-grid">
+        <div class="cart-card black">
+          <div class="cart-icon">&#128682;</div>
+          <div class="cart-name">Black Cart</div>
+          <div class="cart-items">General garbage<br>Non-recyclable waste<br>Collected weekly</div>
+        </div>
+        <div class="cart-card blue">
+          <div class="cart-icon">&#9854;</div>
+          <div class="cart-name">Blue Cart</div>
+          <div class="cart-items">Paper &amp; cardboard<br>Plastics 1–7<br>Glass &amp; metal cans<br>Bi-weekly</div>
+        </div>
+        <div class="cart-card green">
+          <div class="cart-icon">&#127807;</div>
+          <div class="cart-name">Green Cart</div>
+          <div class="cart-items">Food scraps<br>Yard waste<br>Compostable items<br>Bi-weekly</div>
+        </div>
+        <div class="cart-card brown">
+          <div class="cart-icon">&#127810;</div>
+          <div class="cart-name">Yard Waste</div>
+          <div class="cart-items">Leaves &amp; grass<br>Branches (under 1m)<br>Seasonal collection</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="res-disclaimer">Collection schedules are set by the City of Airdrie and may change. Always confirm with the City.</p>
+  </div>
+</section>
+</div>
+<div class="tab-page" id="tab-transit" style="display:none;">
+<section class="cityinfo-section">
+  <div class="wrap">
+    <h2 class="section-title">&#128652; Airdrie Transit</h2>
+    <p class="section-sub">Local routes, Calgary connections, on-demand service, and accessible transit. Tap any route to see the full schedule.</p>
+
+    <div class="cityinfo-block" style="max-width:860px;">
+      <div class="route-cards" style="grid-template-columns:repeat(3,1fr);">
+        <div class="route-card featured">
+          <div class="route-num">Route 1 — Local</div>
+          <div class="route-name">South Terminal Loop (via East)</div>
+          <div class="route-desc">Loops through King's Heights, East Lake, Bert Church, Gateway, and 8th St. Every 30 min Mon–Fri, every 60 min Saturday.</div>
+          <span class="route-tag">Every 30 min · Mon–Sat</span>
+          <div class="route-sched-links" style="margin-top:12px;">
+            <button class="sched-btn" onclick="openTransitSchedule('route1_mf')">Mon–Fri schedule</button>
+            <button class="sched-btn" onclick="openTransitSchedule('route1_sat')">Saturday schedule</button>
+          </div>
+        </div>
+        <div class="route-card featured">
+          <div class="route-num">Route 3 — Local</div>
+          <div class="route-name">South Terminal Loop (via West)</div>
+          <div class="route-desc">Loops through Chinook Winds, 8th St, Coopers, Woodside, Fairways, Gateway, and Genesis Place. Every 30 min Mon–Fri, every 60 min Saturday.</div>
+          <span class="route-tag">Every 30 min · Mon–Sat</span>
+          <div class="route-sched-links" style="margin-top:12px;">
+            <button class="sched-btn" onclick="openTransitSchedule('route3_mf')">Mon–Fri schedule</button>
+            <button class="sched-btn" onclick="openTransitSchedule('route3_sat')">Saturday schedule</button>
+          </div>
+        </div>
+        <div class="route-card">
+          <div class="route-num">Route 900 — Regional</div>
+          <div class="route-name">CrossIron Mills &amp; Rundle LRT</div>
+          <div class="route-desc">Hourly service 7 days a week from Airdrie to CrossIron Mills then south to Rundle LRT Station in NE Calgary. Runs on all holidays except Christmas Day.</div>
+          <span class="route-tag">Every 60 min · 7 days</span>
+          <div class="route-sched-links" style="margin-top:12px;">
+            <button class="sched-btn" onclick="openTransitSchedule('route900_ms')">Mon–Sat schedule</button>
+            <button class="sched-btn" onclick="openTransitSchedule('route900_sun')">Sunday &amp; holiday schedule</button>
+          </div>
+        </div>
+        <div class="route-card">
+          <div class="route-num">Route 901 — ICE</div>
+          <div class="route-name">East Airdrie → Downtown Calgary</div>
+          <div class="route-desc">Intercity express from East Lake and South Terminal to downtown Calgary (1 St at 8 Ave SW). Weekdays only. ICE passes valid on all Airdrie routes.</div>
+          <span class="route-tag">Express · Weekdays</span>
+          <div class="route-sched-links" style="margin-top:12px;">
+            <button class="sched-btn" onclick="openTransitSchedule('route901')">View schedule</button>
+          </div>
+        </div>
+        <div class="route-card">
+          <div class="route-num">Route 902 — ICE</div>
+          <div class="route-name">West Airdrie → Downtown Calgary</div>
+          <div class="route-desc">Intercity express from Main St, Gateway, and 8th St to downtown Calgary. Four trips each direction on weekdays. Calgary Transit passes not accepted.</div>
+          <span class="route-tag">Express · Weekdays</span>
+          <div class="route-sched-links" style="margin-top:12px;">
+            <button class="sched-btn" onclick="openTransitSchedule('route902')">View schedule</button>
+          </div>
+        </div>
+        <div class="route-card">
+          <div class="route-num">Hello To Go</div>
+          <div class="route-name">On-Demand Service</div>
+          <div class="route-desc">Flexible door-to-door transit — book a ride instead of walking to a stop. Local fare applies ($2.95 cash). Book through the HotSpot app on iOS or Android.</div>
+          <span class="route-tag">On demand</span>
+          <div class="route-sched-links" style="margin-top:12px;">
+            <a class="sched-btn" href="https://www.airdrie.ca/getLink.cfm?ID=12565" target="_blank" rel="noopener">Service info &amp; booking</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--cream);border:1.5px solid var(--border);border-radius:12px;padding:20px 24px;margin:24px 0 8px;">
+        <div class="route-num" style="margin-bottom:8px;">ACCESS Airdrie — Accessible Transit</div>
+        <p style="font-size:14px;color:var(--charcoal);line-height:1.6;margin:0;">Paratransit service for residents unable to use conventional transit due to a disability or medical condition. Pre-registration is required. <a href="https://www.airdrie.ca/getLink.cfm?ID=10483" target="_blank" rel="noopener" style="color:var(--prairie-blue);font-weight:700;">Information &amp; eligibility →</a></p>
+      </div>
+
+      <h4 style="color:var(--prairie-blue);font-size:14px;font-weight:800;margin:28px 0 12px;text-transform:uppercase;letter-spacing:0.04em;">Fares (effective Sept 2, 2025)</h4>
+      <div style="overflow-x:auto;">
+        <table class="fare-table">
+          <thead>
+            <tr>
+              <th>Fare type</th>
+              <th>Local / Hello To Go</th>
+              <th>Route 900</th>
+              <th>ICE 901/902</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Cash (one-way)</td><td>$2.95</td><td>$5.45</td><td>$7.85</td></tr>
+            <tr><td>Ticket book (10)</td><td>$24.90</td><td>$48.30</td><td>$58.90</td></tr>
+            <tr><td>Monthly pass — Adult (19–64)</td><td>$70.15</td><td>$89.50</td><td>$133.75</td></tr>
+            <tr><td>Monthly pass — Youth/Student (6–25)</td><td>$49.60</td><td>$64.05</td><td>$99.15</td></tr>
+            <tr><td>Monthly pass — Senior (65+)</td><td>$40.70</td><td>$64.05</td><td>$75.75</td></tr>
+            <tr><td>Children (newborn–5 with paying adult)</td><td colspan="3" style="text-align:center;font-weight:700;color:#2d6a4f;">Free</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--grey);margin-bottom:20px;">Pay by cash (exact change only — drivers cannot make change), the <strong>HotSpot app</strong> (iOS/Android), or in person at City Hall, Calgary Co-op, Genesis Place, or Shoppers Drug Mart. Low-income residents may qualify for the <a href="https://www.airdrie.ca/index.cfm?serviceID=2157" target="_blank" rel="noopener" style="color:var(--prairie-blue);font-weight:700;">Airdrie Fair Access Program</a> for subsidized fares. Most routes close on statutory holidays (Route 900 runs on all holidays except Christmas Day).</p>
+
+    </div>
+
+    <p class="res-disclaimer">Service details, schedules, and fares are set by the City of Airdrie and can change. Always confirm with the City before making travel plans.</p>
+  </div>
+</section>
+</div>
+<!-- Transit Schedule Drawer -->
+<div class="drawer-overlay" id="transit-drawer-overlay" onclick="closeTransitDrawer()"></div>
+<div class="event-drawer" id="transit-drawer">
+  <button class="drawer-close" onclick="closeTransitDrawer()">&#215;</button>
+  <div id="transit-drawer-content"></div>
 </div>
 <div class="tab-page" id="tab-contact" style="display:none;">
 <section class="signup-section" id="signup">
@@ -1150,7 +1521,7 @@ function renderFunFact() {
   if (!banner) return;
   const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
   const fact = AIRDRIE_FACTS[dayOfYear % AIRDRIE_FACTS.length];
-  banner.innerHTML = `<strong>Did you know?</strong> ${fact}`;
+  banner.innerHTML = `<strong>Did you know?</strong> ${escapeHtml(fact)}`;
 }
 
 function fetchWeather() {
@@ -1228,6 +1599,65 @@ function renderUpcomingList(list) {
   }).join("");
 }
 
+const PICKUP_SCHEDULES = {
+  "Airdrie Meadows":  { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Bayside":          { garbage: "Thursday",  recycling: "Friday" },
+  "Baysprings":       { garbage: "Thursday",  recycling: "Friday" },
+  "Bayview":          { garbage: "Thursday",  recycling: "Friday" },
+  "Big Springs":      { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Canals":           { garbage: "Friday",    recycling: "Monday" },
+  "Chinook Gate":     { garbage: "Thursday",  recycling: "Friday" },
+  "Cobblestone Creek":{ garbage: "Thursday",  recycling: "Friday" },
+  "Coopers Crossing": { garbage: "Monday",    recycling: "Tuesday" },
+  "Downtown":         { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Edgewater":        { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Fairways":         { garbage: "Friday",    recycling: "Monday" },
+  "Hillcrest":        { garbage: "Monday",    recycling: "Tuesday" },
+  "Jensen":           { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Key Ranch":        { garbage: "Friday",    recycling: "Monday" },
+  "King's Heights":   { garbage: "Wednesday", recycling: "Thursday" },
+  "Lanark":           { garbage: "Wednesday", recycling: "Thursday" },
+  "Luxstone":         { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Meadowbrook":      { garbage: "Wednesday", recycling: "Thursday" },
+  "Midtown":          { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Morningside":      { garbage: "Monday",    recycling: "Tuesday" },
+  "Old Town":         { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Prairie Springs":  { garbage: "Thursday",  recycling: "Friday" },
+  "Ravenswood":       { garbage: "Wednesday", recycling: "Thursday" },
+  "Reunion":          { garbage: "Friday",    recycling: "Monday" },
+  "Ridgegate":        { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Sagewood":         { garbage: "Friday",    recycling: "Monday" },
+  "Sawgrass Park":    { garbage: "Friday",    recycling: "Monday" },
+  "Silver Creek":     { garbage: "Friday",    recycling: "Monday" },
+  "South Point":      { garbage: "Monday",    recycling: "Tuesday" },
+  "South Windsong":   { garbage: "Monday",    recycling: "Tuesday" },
+  "Southwinds":       { garbage: "Monday",    recycling: "Tuesday" },
+  "Stonegate":        { garbage: "Friday",    recycling: "Monday" },
+  "Summerhill":       { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Sunridge":         { garbage: "Tuesday",   recycling: "Wednesday" },
+  "The Village":      { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Thorburn":         { garbage: "Wednesday", recycling: "Thursday" },
+  "Vantage Rise":     { garbage: "Thursday",  recycling: "Friday" },
+  "Waterstone":       { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Wildflower":       { garbage: "Friday",    recycling: "Monday" },
+  "Williamstown":     { garbage: "Friday",    recycling: "Monday" },
+  "Willowbrook":      { garbage: "Tuesday",   recycling: "Wednesday" },
+  "Windsong":         { garbage: "Thursday",  recycling: "Friday" },
+  "Woodside":         { garbage: "Friday",    recycling: "Monday" },
+};
+
+function handlePickupSelect(val) {
+  const result = document.getElementById("pickup-result");
+  if (!val) { result.classList.remove("show"); return; }
+  const s = PICKUP_SCHEDULES[val];
+  if (!s) { result.classList.remove("show"); return; }
+  document.getElementById("pickup-hood").textContent = val;
+  document.getElementById("pickup-garbage-day").textContent = s.garbage;
+  document.getElementById("pickup-recycling-day").textContent = s.recycling;
+  result.classList.add("show");
+  logInteraction("garbage_lookup", val);
+}
+
 function showTab(tabId) {
   logInteraction("tab_nav", tabId);
   document.querySelectorAll(".tab-page").forEach(el => el.style.display = "none");
@@ -1292,6 +1722,9 @@ function logSubmission(formType, formData) {
 }
 
 async function fetchAllData() {
+  const listEl = document.getElementById("results-list");
+  const countEl = document.getElementById("results-count");
+  if (listEl) listEl.innerHTML = `<p style="color:var(--grey);font-size:14px;padding:24px 0 8px;">Loading directory…</p>`;
   try {
     const [biz, ev, res, cl] = await Promise.all([
       supaSelect("businesses", "select=name,category,address,phone,website&order=name"),
@@ -1304,7 +1737,8 @@ async function fetchAllData() {
     RESOURCES = res.map(r => ({ name: r.name, category: r.category, description: r.description || "", url: r.url || "" }));
     CLOSURES = cl.map(c => ({ name: c.name, dates: c.dates, description: c.description || "" }));
   } catch (err) {
-    document.getElementById("results-count").textContent = "Could not load live data - please refresh the page.";
+    if (listEl) listEl.innerHTML = `<p style="color:var(--grey);font-size:14px;padding:24px 0 8px;">Couldn't load the directory right now — please refresh the page. If the problem continues, try again in a few minutes.</p>`;
+    if (countEl) countEl.textContent = "";
   }
   updateHeroStats();
   doRender();
@@ -1323,6 +1757,8 @@ function updateHeroStats() {
     const uniqueCats = new Set(BUSINESSES.map(b => b.category));
     catEl.textContent = uniqueCats.size;
   }
+  const resEl = document.getElementById("stat-resources");
+  if (resEl && typeof RESOURCES !== 'undefined') resEl.textContent = RESOURCES.length + "+";
   const whBizEl = document.getElementById("wh-business-count");
   if (whBizEl) whBizEl.textContent = BUSINESSES.length.toLocaleString() + " local listings";
   ["directory-count-num", "search-count-num", "faq-count-num"].forEach(id => {
@@ -1526,6 +1962,14 @@ function loadMore() {
 function doRender() {
   const q = document.getElementById("search-input").value.trim().toLowerCase();
   const cat = document.getElementById("category-select").value;
+
+  if (!q && !cat) {
+    document.getElementById("results-count").textContent = "";
+    document.getElementById("results-list").innerHTML = `<p style="color:var(--grey);font-size:14px;padding:24px 0 8px;">Select a category above or search by name to see businesses.</p>`;
+    document.getElementById("load-more-wrap").style.display = "none";
+    return;
+  }
+
   let filtered = BUSINESSES.filter(b => {
     if (cat && b.category !== cat) return false;
     if (q && !b.name.toLowerCase().includes(q)) return false;
@@ -1717,8 +2161,14 @@ function askQuestion() {
   const closureWords = ["road closure","closure","closed road","construction","detour","main street","24th street"];
   const resourceWords = ["free program","free course","subsidy","subsidies","newcomer","immigrant","settlement","freecycle","free stuff","library program","park","playground","disc golf","fair access","211","business training","entrepreneur","resource","help"];
   const eventWords = ["happening","event","events","weekend","this week","next week","today","tomorrow","tonight","calendar","going on"];
+  const garbageWords = ["garbage","recycling","recycle","trash","bin","cart","pickup","pick up","collection","waste","organics","green cart","blue cart","black cart"];
+  const transitWords = ["bus","transit","route","schedule","fare","pass","ticket","hotspot","hello to go","access airdrie","route 1","route 3","route 900","route 901","route 902","downtown calgary","crossiron","cross iron","paratransit","commute"];
 
-  if (weatherWords.some(w => q.includes(w))) {
+  if (garbageWords.some(w => q.includes(w))) {
+    answerWithGarbage(q, box);
+  } else if (transitWords.some(w => q.includes(w))) {
+    answerWithTransit(q, box);
+  } else if (weatherWords.some(w => q.includes(w))) {
     answerWithWeather(q, box);
   } else if (closureWords.some(w => q.includes(w))) {
     answerWithClosures(q, box);
@@ -1728,6 +2178,420 @@ function askQuestion() {
     answerWithEvents(q, box);
   } else {
     answerWithBusinesses(q, box);
+  }
+}
+
+function answerWithGarbage(q, box) {
+  logInteraction("ask_garbage", q);
+  // Check if a specific neighbourhood is mentioned
+  const hoods = Object.keys(PICKUP_SCHEDULES);
+  const mentioned = hoods.find(h => q.includes(h.toLowerCase()));
+  if (mentioned) {
+    const s = PICKUP_SCHEDULES[mentioned];
+    box.innerHTML = `<div class="ask-answer-box">
+      <div class="ask-answer-text">Garbage &amp; recycling schedule for ${mentioned}:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">🗑️</div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);margin-bottom:4px;">Garbage &amp; Organics</div>
+          <div style="font-size:22px;font-weight:800;color:var(--prairie-blue);">${s.garbage}</div>
+          <div style="font-size:11px;color:var(--grey);">Every week</div>
+        </div>
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">♻️</div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);margin-bottom:4px;">Recycling</div>
+          <div style="font-size:22px;font-weight:800;color:var(--prairie-blue);">${s.recycling}</div>
+          <div style="font-size:11px;color:var(--grey);">Every other week</div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--grey);">Set carts out by 7 a.m. Sign up for exact week reminders via <a href="https://myairdrie.ca" target="_blank" rel="noopener" style="color:var(--prairie-blue);font-weight:700;">myAIRDRIE</a>.</p>
+      <p class="ask-disclaimer">Data sourced from the City of Airdrie's collection schedule. May vary by street — confirm via myAIRDRIE.</p>
+    </div>`;
+  } else {
+    // Show the picker
+    box.innerHTML = `<div class="ask-answer-box">
+      <div class="ask-answer-text">Which neighbourhood are you in?</div>
+      <p style="font-size:14px;color:var(--grey);margin-bottom:12px;">Select your neighbourhood to see your garbage and recycling pickup days:</p>
+      <select onchange="if(this.value){showTab('cityinfo');setTimeout(()=>{document.getElementById('pickup-select').value=this.value;handlePickupSelect(this.value);document.getElementById('pickup-select').scrollIntoView({behavior:'smooth',block:'center'});},100);}" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:inherit;color:var(--charcoal);background:var(--white);cursor:pointer;">
+        <option value="">— Choose your neighbourhood —</option>
+        ${Object.keys(PICKUP_SCHEDULES).sort().map(h=>`<option value="${h}">${h}</option>`).join('')}
+      </select>
+      <p class="ask-disclaimer">All 44 Airdrie neighbourhoods covered. Data from the City of Airdrie.</p>
+    </div>`;
+  }
+}
+
+// ── Transit schedule drawer ──────────────────────────────────────────────────
+
+const TRANSIT_SCHEDULES = {
+  route1_mf: {
+    title: "Route 1 — Mon–Fri",
+    subtitle: "South Terminal → King's Heights → East Lake → Gateway → 8 St → South Terminal",
+    freq: "Every 30 minutes · 6:00 AM – 8:55 PM",
+    type: "stops",
+    stops: [
+      { name: "South Transit Terminal", first: "6:00 AM", last: "8:00 PM" },
+      { name: "Main St at Sierra Springs Dr", first: "6:02 AM", last: "8:02 PM" },
+      { name: "Main St at Co-op", first: "6:03 AM", last: "8:03 PM" },
+      { name: "Yankee Valley Bv at Market St", first: "6:05 AM", last: "8:05 PM" },
+      { name: "East Lake Bv at Meadowbrook Dr", first: "6:12 AM", last: "8:12 PM" },
+      { name: "East Lake Bv at Bert Church", first: "6:17 AM", last: "8:17 PM" },
+      { name: "East Lake Bv at East Lake Av", first: "6:21 AM", last: "8:21 PM" },
+      { name: "Main St at Gateway Dr", first: "6:25 AM", last: "8:25 PM" },
+      { name: "Gateway Dr at Superstore", first: "6:27 AM", last: "8:27 PM" },
+      { name: "Veterans Bv at 8 St", first: "6:29 AM", last: "8:29 PM" },
+      { name: "1 Ave at Sagewood Dr", first: "6:35 AM", last: "8:35 PM" },
+      { name: "1 Ave at Canals Bv", first: "6:37 AM", last: "8:37 PM" },
+      { name: "8 St at Canoe Dr", first: "6:39 AM", last: "8:39 PM" },
+      { name: "8 St at Bayside Bv", first: "6:40 AM", last: "8:40 PM" },
+      { name: "Chinook Winds Dr at Chinook Winds Pl", first: "6:44 AM", last: "8:44 PM" },
+      { name: "8 St at Coopers Dr", first: "6:47 AM", last: "8:47 PM" },
+      { name: "8 St at Coopers Lk", first: "6:48 AM", last: "8:48 PM" },
+      { name: "South Transit Terminal (return)", first: "6:55 AM", last: "8:55 PM" },
+    ]
+  },
+  route1_sat: {
+    title: "Route 1 — Saturday",
+    subtitle: "South Terminal → King's Heights → East Lake → Gateway → 8 St → South Terminal",
+    freq: "Every 60 minutes · 7:00 AM – 8:00 PM (last return ~9:10 PM)",
+    type: "stops",
+    stops: [
+      { name: "South Transit Terminal", first: "7:00 AM", last: "8:00 PM" },
+      { name: "Main St at Sierra Springs Dr", first: "7:02 AM", last: "8:02 PM" },
+      { name: "Yankee Valley Bv at Market St", first: "7:05 AM", last: "8:05 PM" },
+      { name: "East Lake Bv at Meadowbrook Dr", first: "7:12 AM", last: "8:12 PM" },
+      { name: "East Lake Bv at Bert Church", first: "7:17 AM", last: "8:17 PM" },
+      { name: "East Lake Bv at East Lake Av", first: "7:21 AM", last: "8:21 PM" },
+      { name: "Main St at Gateway Dr", first: "7:25 AM", last: "8:25 PM" },
+      { name: "Gateway Dr at Superstore", first: "7:27 AM", last: "8:27 PM" },
+      { name: "Veterans Bv at 8 St", first: "7:29 AM", last: "8:29 PM" },
+      { name: "1 Ave at Canals Bv", first: "7:37 AM", last: "8:37 PM" },
+      { name: "8 St at Canoe Dr", first: "7:38 AM", last: "8:38 PM" },
+      { name: "8 St at Bayside Bv", first: "7:40 AM", last: "8:40 PM" },
+      { name: "Chinook Winds Dr at Chinook Winds Pl", first: "7:44 AM", last: "8:44 PM" },
+      { name: "8 St at Coopers Dr", first: "7:47 AM", last: "8:47 PM" },
+      { name: "South Transit Terminal (return)", first: "7:55 AM", last: "8:55 PM" },
+    ]
+  },
+  route3_mf: {
+    title: "Route 3 — Mon–Fri",
+    subtitle: "South Terminal → Chinook Winds → 8 St → Woodside → Gateway → Genesis Place → South Terminal",
+    freq: "Every 30 minutes · 6:00 AM – 8:00 PM",
+    type: "stops",
+    stops: [
+      { name: "South Transit Terminal", first: "6:00 AM", last: "8:00 PM" },
+      { name: "Main St at Sierra Springs Dr", first: "6:02 AM", last: "8:02 PM" },
+      { name: "Main St at Co-op", first: "6:03 AM", last: "8:03 PM" },
+      { name: "Yankee Valley Bv at Luxstone Bv", first: "6:06 AM", last: "8:06 PM" },
+      { name: "Chinook Winds Dr at Chinook Winds Pl", first: "6:08 AM", last: "8:08 PM" },
+      { name: "Chinook Winds Dr at Chinook Winds Park", first: "6:10 AM", last: "8:10 PM" },
+      { name: "Windsong Dr at Windsong Bv", first: "6:11 AM", last: "8:11 PM" },
+      { name: "8 St at Coopers Dr", first: "6:12 AM", last: "8:12 PM" },
+      { name: "8 St at Bayside Dr", first: "6:14 AM", last: "8:14 PM" },
+      { name: "8 St at Luxstone Ld", first: "6:15 AM", last: "8:15 PM" },
+      { name: "8 St at Railway Av", first: "6:17 AM", last: "8:17 PM" },
+      { name: "1 Ave at Woodside Ga", first: "6:19 AM", last: "8:19 PM" },
+      { name: "1 Ave at Fairways Dr", first: "6:22 AM", last: "8:22 PM" },
+      { name: "Veterans Bv at Woodside Bv", first: "6:25 AM", last: "8:25 PM" },
+      { name: "Main St at Gateway Dr", first: "6:29 AM", last: "8:29 PM" },
+      { name: "Gateway Dr at Superstore", first: "6:31 AM", last: "8:31 PM" },
+      { name: "East Lake Bv at Bert Church", first: "6:37 AM", last: "8:37 PM" },
+      { name: "East Lake Bv at Meadowbrook Dr", first: "6:42 AM", last: "8:42 PM" },
+      { name: "South Transit Terminal (return)", first: "6:55 AM", last: "8:55 PM" },
+    ]
+  },
+  route3_sat: {
+    title: "Route 3 — Saturday",
+    subtitle: "South Terminal → Chinook Winds → 8 St → Woodside → Gateway → Genesis Place → South Terminal",
+    freq: "Every 60 minutes · 7:00 AM – 8:00 PM",
+    type: "stops",
+    stops: [
+      { name: "South Transit Terminal", first: "7:00 AM", last: "8:00 PM" },
+      { name: "Main St at Sierra Springs Dr", first: "7:02 AM", last: "8:02 PM" },
+      { name: "Yankee Valley Bv at Luxstone Bv", first: "7:06 AM", last: "8:06 PM" },
+      { name: "Chinook Winds Dr at Chinook Winds Pl", first: "7:08 AM", last: "8:08 PM" },
+      { name: "8 St at Coopers Dr", first: "7:12 AM", last: "8:12 PM" },
+      { name: "8 St at Bayside Dr", first: "7:14 AM", last: "8:14 PM" },
+      { name: "8 St at Railway Av", first: "7:17 AM", last: "8:17 PM" },
+      { name: "1 Ave at Woodside Ga", first: "7:19 AM", last: "8:19 PM" },
+      { name: "1 Ave at Fairways Dr", first: "7:22 AM", last: "8:22 PM" },
+      { name: "Veterans Bv at Woodside Bv", first: "7:25 AM", last: "8:25 PM" },
+      { name: "Main St at Gateway Dr", first: "7:29 AM", last: "8:29 PM" },
+      { name: "Gateway Dr at Superstore", first: "7:31 AM", last: "8:31 PM" },
+      { name: "East Lake Bv at Bert Church", first: "7:37 AM", last: "8:37 PM" },
+      { name: "East Lake Bv at Meadowbrook Dr", first: "7:40 AM", last: "8:40 PM" },
+      { name: "South Transit Terminal (return)", first: "7:55 AM", last: "8:55 PM" },
+    ]
+  },
+  route900_ms: {
+    title: "Route 900 — Mon–Sat",
+    subtitle: "Airdrie → CrossIron Mills → Rundle LRT (NE Calgary) and return",
+    freq: "Every 60 minutes · first departure 6:15 AM, last return to Airdrie 10:50 PM",
+    type: "route900",
+    outbound: {
+      label: "Airdrie → CrossIron Mills → Calgary",
+      stops: [
+        { name: "Gateway Dr at Superstore", times: ["6:15a","7:15a","8:15a","9:15a","10:15a","11:15a","12:15p","1:15p","2:15p","3:15p","4:15p","5:15p","6:15p","7:15p","8:15p","9:15p"] },
+        { name: "South Transit Terminal", times: ["6:30a","7:30a","8:30a","9:30a","10:30a","11:30a","12:30p","1:30p","2:30p","3:30p","4:30p","5:30p","6:30p","7:30p","8:30p","9:30p"] },
+        { name: "CrossIron Mills", times: ["6:45a","7:45a","8:45a","9:45a","10:45a","11:45a","12:45p","1:45p","2:45p","3:45p","4:45p","5:45p","6:45p","7:45p","8:45p","9:45p"] },
+        { name: "Rundle LRT Station", times: ["7:10a","8:10a","9:10a","10:10a","11:10a","12:10p","1:10p","2:10p","3:10p","4:10p","5:10p","6:10p","7:10p","8:10p","9:10p","10:10p"] },
+      ]
+    },
+    inbound: {
+      label: "Calgary → CrossIron Mills → Airdrie",
+      stops: [
+        { name: "CrossIron Mills", times: ["7:35a","8:35a","9:35a","10:35a","11:35a","12:35p","1:35p","2:35p","3:35p","4:35p","5:35p","6:35p","7:35p","8:35p","9:35p","10:35p"] },
+        { name: "South Transit Terminal", times: ["7:50a","8:50a","9:50a","10:50a","11:50a","12:50p","1:50p","2:50p","3:50p","4:50p","5:50p","6:50p","7:50p","8:50p","9:50p","10:50p"] },
+        { name: "Main St at Sierra Springs Dr", times: ["7:52a","8:52a","9:52a","10:52a","11:52a","12:52p","1:52p","2:52p","3:52p","4:52p","5:52p","6:52p","7:52p","8:52p","9:52p","10:52p"] },
+      ]
+    }
+  },
+  route900_sun: {
+    title: "Route 900 — Sunday &amp; Holidays",
+    subtitle: "Airdrie → CrossIron Mills → Rundle LRT (NE Calgary) and return",
+    freq: "Every 60 minutes · first departure 8:15 AM, last return to Airdrie 8:50 PM",
+    type: "route900",
+    outbound: {
+      label: "Airdrie → CrossIron Mills → Calgary",
+      stops: [
+        { name: "Gateway Dr at Superstore", times: ["8:15a","9:15a","10:15a","11:15a","12:15p","1:15p","2:15p","3:15p","4:15p","5:15p","6:15p","7:15p"] },
+        { name: "South Transit Terminal", times: ["8:30a","9:30a","10:30a","11:30a","12:30p","1:30p","2:30p","3:30p","4:30p","5:30p","6:30p","7:30p"] },
+        { name: "CrossIron Mills", times: ["8:45a","9:45a","10:45a","11:45a","12:45p","1:45p","2:45p","3:45p","4:45p","5:45p","6:45p","7:45p"] },
+        { name: "Rundle LRT Station", times: ["9:10a","10:10a","11:10a","12:10p","1:10p","2:10p","3:10p","4:10p","5:10p","6:10p","7:10p","8:10p"] },
+      ]
+    },
+    inbound: {
+      label: "Calgary → CrossIron Mills → Airdrie",
+      stops: [
+        { name: "CrossIron Mills", times: ["9:35a","10:35a","11:35a","12:35p","1:35p","2:35p","3:35p","4:35p","5:35p","6:35p","7:35p","8:35p"] },
+        { name: "South Transit Terminal", times: ["9:50a","10:50a","11:50a","12:50p","1:50p","2:50p","3:50p","4:50p","5:50p","6:50p","7:50p","8:50p"] },
+        { name: "Main St at Sierra Springs Dr", times: ["9:52a","10:52a","11:52a","12:52p","1:52p","2:52p","3:52p","4:52p","5:52p","6:52p","7:52p","8:52p"] },
+      ]
+    }
+  },
+  route901: {
+    title: "Route 901 — ICE (Mon–Fri)",
+    subtitle: "East Airdrie ↔ Downtown Calgary · Weekdays only",
+    freq: "2 morning trips each direction · 2 afternoon trips each direction",
+    type: "ice",
+    morning: {
+      label: "Morning — Airdrie to Calgary",
+      trips: [
+        { stop: "East Lake Cr at East Lake Bv", t1: "6:00 AM", t2: "6:20 AM" },
+        { stop: "South Transit Terminal", t1: "6:10 AM", t2: "6:30 AM" },
+        { stop: "4 Ave at 1 St SE, Calgary", t1: "6:36 AM", t2: "7:00 AM" },
+        { stop: "1 St at 8 Ave SW, Calgary", t1: "6:40 AM", t2: "7:04 AM" },
+      ]
+    },
+    afternoon: {
+      label: "Afternoon — Airdrie to Calgary",
+      trips: [
+        { stop: "East Lake Cr at East Lake Bv", t1: "2:50 PM", t2: "4:20 PM" },
+        { stop: "South Transit Terminal", t1: "3:00 PM", t2: "4:30 PM" },
+        { stop: "4 Ave at 1 St SE, Calgary", t1: "3:26 PM", t2: "4:58 PM" },
+        { stop: "1 St at 8 Ave SW, Calgary", t1: "3:30 PM", t2: "5:00 PM" },
+      ]
+    }
+  },
+  route902: {
+    title: "Route 902 — ICE (Mon–Fri)",
+    subtitle: "West Airdrie ↔ Downtown Calgary · Weekdays only",
+    freq: "4 morning trips to Calgary · 4 afternoon returns to Airdrie",
+    type: "ice902",
+    morning: {
+      label: "Morning — Airdrie to Calgary",
+      trips: [
+        { stop: "Main St at Summerfield Cl", t1: "6:13 AM", t2: "6:38 AM", t3: "6:55 AM", t4: "7:22 AM" },
+        { stop: "Main St at Gateway Dr", t1: "6:23 AM", t2: "6:48 AM", t3: "7:05 AM", t4: "7:32 AM" },
+        { stop: "Gateway Dr at Superstore", t1: "6:26 AM", t2: "6:51 AM", t3: "7:08 AM", t4: "7:36 AM" },
+        { stop: "8 St at Coopers Dr", t1: "6:42 AM", t2: "7:05 AM", t3: "7:22 AM", t4: "7:51 AM" },
+        { stop: "South Transit Terminal", t1: "6:50 AM", t2: "7:10 AM", t3: "7:30 AM", t4: "8:00 AM" },
+        { stop: "4 Ave at 1 St SE, Calgary", t1: "7:22 AM", t2: "7:45 AM", t3: "8:10 AM", t4: "8:40 AM" },
+        { stop: "1 St at 8 Ave SW, Calgary", t1: "7:26 AM", t2: "7:50 AM", t3: "8:15 AM", t4: "8:44 AM" },
+      ]
+    },
+    afternoon: {
+      label: "Afternoon — Calgary to Airdrie",
+      trips: [
+        { stop: "South Transit Terminal (departs to Calgary)", t1: "3:20 PM", t2: "3:40 PM", t3: "4:00 PM", t4: "4:35 PM" },
+        { stop: "4 Ave at 1 St SE, Calgary", t1: "3:55 PM", t2: "4:15 PM", t3: "4:34 PM", t4: "5:15 PM" },
+        { stop: "1 St at 8 Ave SW, Calgary", t1: "4:00 PM", t2: "4:20 PM", t3: "4:40 PM", t4: "5:20 PM" },
+        { stop: "South Transit Terminal (returns)", t1: "4:40 PM", t2: "5:08 PM", t3: "5:35 PM", t4: "6:10 PM" },
+        { stop: "Main St at Gateway Dr", t1: "5:04 PM", t2: "5:32 PM", t3: "6:02 PM", t4: "6:37 PM" },
+        { stop: "8 St at Coopers Dr", t1: "4:52 PM", t2: "5:20 PM", t3: "5:49 PM", t4: "6:24 PM" },
+        { stop: "Chinook Winds Dr at Chinook Winds Pl", t1: "4:49 PM", t2: "5:17 PM", t3: "5:45 PM", t4: "6:20 PM" },
+      ]
+    }
+  }
+};
+
+function openTransitSchedule(routeId) {
+  const s = TRANSIT_SCHEDULES[routeId];
+  if (!s) return;
+  let html = `<div style="margin-top:8px;">
+    <div class="route-num" style="font-size:12px;">${s.title}</div>
+    <div class="drawer-event-title" style="margin-top:6px;">${s.subtitle}</div>
+    <div class="sched-freq-badge">${s.freq}</div>`;
+
+  if (s.type === 'stops') {
+    html += `<div class="sched-section-head">Stop-by-stop · First &amp; last departure</div>
+    <table class="sched-table">
+      <thead><tr><th>Stop</th><th>First bus</th><th>Last bus</th></tr></thead><tbody>`;
+    s.stops.forEach(r => {
+      html += `<tr><td>${r.name}</td><td>${r.first}</td><td>${r.last}</td></tr>`;
+    });
+    html += `</tbody></table>
+    <p style="font-size:11.5px;color:var(--grey);margin-top:4px;">Bus departs every ${s.freq.includes('30') ? '30' : '60'} minutes at the times shown above. Add 30 or 60 minutes for each subsequent trip.</p>`;
+  }
+
+  if (s.type === 'route900') {
+    [s.outbound, s.inbound].forEach(dir => {
+      html += `<div class="sched-section-head">${dir.label}</div>`;
+      dir.stops.forEach(stop => {
+        html += `<div style="margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:800;color:var(--prairie-blue);margin-bottom:5px;">${stop.name}</div>
+          <div class="sched-times-wrap">`;
+        stop.times.forEach(t => { html += `<span class="sched-time-chip">${t}</span>`; });
+        html += `</div></div>`;
+      });
+    });
+  }
+
+  if (s.type === 'ice') {
+    [s.morning, s.afternoon].forEach(dir => {
+      html += `<div class="sched-section-head">${dir.label}</div>
+      <table class="sched-table">
+        <thead><tr><th>Stop</th><th>Trip 1</th><th>Trip 2</th></tr></thead><tbody>`;
+      dir.trips.forEach(r => {
+        html += `<tr><td>${r.stop}</td><td>${r.t1}</td><td>${r.t2}</td></tr>`;
+      });
+      html += `</tbody></table>`;
+    });
+  }
+
+  if (s.type === 'ice902') {
+    [s.morning, s.afternoon].forEach(dir => {
+      html += `<div class="sched-section-head">${dir.label}</div>
+      <table class="sched-table">
+        <thead><tr><th>Stop</th><th>Trip 1</th><th>Trip 2</th><th>Trip 3</th><th>Trip 4</th></tr></thead><tbody>`;
+      dir.trips.forEach(r => {
+        html += `<tr><td>${r.stop}</td><td>${r.t1}</td><td>${r.t2}</td><td>${r.t3}</td><td>${r.t4}</td></tr>`;
+      });
+      html += `</tbody></table>`;
+    });
+  }
+
+  html += `<p style="font-size:11.5px;color:var(--grey);margin-top:16px;padding-top:12px;border-top:1px solid var(--border);">Schedules effective January 1, 2026. Subject to change — confirm with the City of Airdrie before travel.</p></div>`;
+
+  document.getElementById('transit-drawer-content').innerHTML = html;
+  document.getElementById('transit-drawer-overlay').classList.add('open');
+  document.getElementById('transit-drawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTransitDrawer() {
+  document.getElementById('transit-drawer-overlay').classList.remove('open');
+  document.getElementById('transit-drawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── End transit drawer ────────────────────────────────────────────────────────
+
+function answerWithTransit(q, box) {
+  logInteraction("ask_transit", q);
+  // Detect which route is being asked about
+  let routeInfo = null;
+  if (q.includes("route 1") || (q.includes("route 3") && !q.includes("900") && !q.includes("901") && !q.includes("902")) || (q.includes("local") && q.includes("bus"))) {
+    routeInfo = { name: "Routes 1 & 3 — Airdrie Local", desc: "Every 30 minutes Mon–Fri, every 60 minutes Saturday. Connects neighbourhoods, Genesis Place, City Hall, Gateway, and 8th Street.", schedules: [
+      {t:"Route 1 Mon–Fri", id:"route1_mf"}, {t:"Route 1 Saturday", id:"route1_sat"},
+      {t:"Route 3 Mon–Fri", id:"route3_mf"}, {t:"Route 3 Saturday", id:"route3_sat"},
+    ]};
+  } else if (q.includes("900") || q.includes("crossiron") || q.includes("cross iron") || q.includes("rundle") || q.includes("lrt")) {
+    routeInfo = { name: "Route 900 — CrossIron Mills & Rundle LRT", desc: "Every 60 minutes, 7 days a week. First bus at 6:15 a.m. Runs on all holidays except Christmas Day.", schedules: [
+      {t:"Mon–Sat schedule", id:"route900_ms"}, {t:"Sunday & holiday schedule", id:"route900_sun"},
+    ]};
+  } else if (q.includes("901") || q.includes("ice") || (q.includes("east") && q.includes("calgary"))) {
+    routeInfo = { name: "Route 901 — East Airdrie to Downtown Calgary (ICE)", desc: "Weekday express from East Lake and South Terminal to downtown Calgary (1 St at 8 Ave SW). Two morning and two afternoon trips.", schedules: [
+      {t:"Route 901 full schedule", id:"route901"},
+    ]};
+  } else if (q.includes("902") || (q.includes("west") && q.includes("calgary"))) {
+    routeInfo = { name: "Route 902 — West Airdrie to Downtown Calgary (ICE)", desc: "Weekday express from Main St, Gateway, and 8th St to downtown Calgary. Four trips each direction.", schedules: [
+      {t:"Route 902 full schedule", id:"route902"},
+    ]};
+  } else if (q.includes("downtown calgary") || q.includes("express") || (q.includes("calgary") && (q.includes("bus") || q.includes("transit") || q.includes("route") || q.includes("time") || q.includes("schedule") || q.includes("next") || q.includes("when")))) {
+    box.innerHTML = `<div class="ask-answer-box">
+      <div class="ask-answer-text">Buses to Calgary — two options:</div>
+      <div style="margin:14px 0 10px;">
+        <div style="margin-bottom:14px;padding:14px;background:var(--cream);border:1.5px solid var(--border);border-radius:10px;">
+          <div style="font-weight:800;color:var(--prairie-blue);font-size:14px;margin-bottom:4px;">Route 900 — CrossIron Mills &amp; NE Calgary (Rundle LRT)</div>
+          <div style="font-size:13px;color:var(--charcoal);margin-bottom:10px;">Every 60 min, 7 days/week starting 6:15 a.m. Connect to the CTrain at Rundle LRT. Fare: $5.45.</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;">
+            <button onclick="showTab('transit');setTimeout(()=>openTransitSchedule('route900_ms'),80);" style="font-size:12px;font-weight:700;color:var(--prairie-blue);background:var(--white);border:1.5px solid var(--prairie-blue);padding:6px 12px;border-radius:100px;cursor:pointer;font-family:inherit;">&#128197; Mon–Sat departures</button>
+            <button onclick="showTab('transit');setTimeout(()=>openTransitSchedule('route900_sun'),80);" style="font-size:12px;font-weight:700;color:var(--prairie-blue);background:var(--white);border:1.5px solid var(--prairie-blue);padding:6px 12px;border-radius:100px;cursor:pointer;font-family:inherit;">&#128197; Sunday &amp; holiday departures</button>
+          </div>
+        </div>
+        <div style="padding:14px;background:var(--cream);border:1.5px solid var(--border);border-radius:10px;">
+          <div style="font-weight:800;color:var(--prairie-blue);font-size:14px;margin-bottom:4px;">Routes 901 &amp; 902 — Downtown Calgary Express (ICE)</div>
+          <div style="font-size:13px;color:var(--charcoal);margin-bottom:10px;">Weekdays only. Route 901 from east Airdrie, 902 from west Airdrie. Direct to 1 St &amp; 8 Ave SW. Fare: $7.85.</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;">
+            <button onclick="showTab('transit');setTimeout(()=>openTransitSchedule('route901'),80);" style="font-size:12px;font-weight:700;color:var(--prairie-blue);background:var(--white);border:1.5px solid var(--prairie-blue);padding:6px 12px;border-radius:100px;cursor:pointer;font-family:inherit;">&#128197; Route 901 (east Airdrie)</button>
+            <button onclick="showTab('transit');setTimeout(()=>openTransitSchedule('route902'),80);" style="font-size:12px;font-weight:700;color:var(--prairie-blue);background:var(--white);border:1.5px solid var(--prairie-blue);padding:6px 12px;border-radius:100px;cursor:pointer;font-family:inherit;">&#128197; Route 902 (west Airdrie)</button>
+          </div>
+        </div>
+      </div>
+      <p class="ask-disclaimer">Tap any button to see exact departure times — no download needed.</p>
+    </div>`;
+    return;
+  } else if (q.includes("hello") || q.includes("on demand") || q.includes("on-demand") || q.includes("hotspot")) {
+    routeInfo = { name: "Hello To Go — On-Demand Transit", desc: "Flexible door-to-door service. Book through the HotSpot app (iOS/Android). Local fare applies ($2.95 cash). No fixed stops or timetable.", schedules: [] };
+  } else if (q.includes("access") || q.includes("accessible") || q.includes("paratransit") || q.includes("disability")) {
+    routeInfo = { name: "ACCESS Airdrie — Accessible Transit", desc: "Paratransit for residents unable to use conventional transit due to a disability or medical condition. Pre-registration required.", schedules: [] };
+  } else if (q.includes("fare") || q.includes("pass") || q.includes("ticket") || q.includes("price") || q.includes("cost")) {
+    box.innerHTML = `<div class="ask-answer-box">
+      <div class="ask-answer-text">Airdrie Transit fares (effective Sept 2, 2025):</div>
+      <div style="overflow-x:auto;margin:12px 0;">
+        <table class="fare-table">
+          <thead><tr><th>Fare type</th><th>Local / Hello To Go</th><th>Route 900</th><th>ICE 901/902</th></tr></thead>
+          <tbody>
+            <tr><td>Cash (one-way)</td><td>$2.95</td><td>$5.45</td><td>$7.85</td></tr>
+            <tr><td>Ticket book (10)</td><td>$24.90</td><td>$48.30</td><td>$58.90</td></tr>
+            <tr><td>Monthly — Adult</td><td>$70.15</td><td>$89.50</td><td>$133.75</td></tr>
+            <tr><td>Monthly — Youth/Student</td><td>$49.60</td><td>$64.05</td><td>$99.15</td></tr>
+            <tr><td>Monthly — Senior (65+)</td><td>$40.70</td><td>$64.05</td><td>$75.75</td></tr>
+            <tr><td>Children 0–5</td><td colspan="3" style="text-align:center;font-weight:700;color:#2d6a4f;">Free with paying adult</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--grey);">Pay by cash (exact change), <strong>HotSpot app</strong>, or in person at City Hall, Calgary Co-op, Genesis Place, or Shoppers Drug Mart.</p>
+      <p class="ask-disclaimer">Full timetables available on the <a href="#" onclick="showTab('transit');return false;" style="color:var(--prairie-blue);font-weight:700;">Transit tab</a> — no downloads needed.</p>
+    </div>`;
+    return;
+  }
+
+  if (routeInfo) {
+    const btnsHtml = routeInfo.schedules.length
+      ? `<div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;">${routeInfo.schedules.map(s => `<button onclick="showTab('transit');setTimeout(()=>openTransitSchedule('${s.id}'),80);" style="font-size:12px;font-weight:700;color:var(--prairie-blue);background:var(--white);border:1.5px solid var(--prairie-blue);padding:6px 12px;border-radius:100px;cursor:pointer;font-family:inherit;">&#128197; ${s.t}</button>`).join('')}</div>`
+      : '';
+    box.innerHTML = `<div class="ask-answer-box">
+      <div class="ask-answer-text">${routeInfo.name}</div>
+      <p style="font-size:14.5px;color:var(--charcoal);margin-bottom:4px;">${routeInfo.desc}</p>
+      ${btnsHtml}
+      <p class="ask-disclaimer" style="margin-top:12px;">Tap a button above to see the full timetable — no download needed. <a href="#" onclick="showTab('transit');return false;" style="color:var(--prairie-blue);font-weight:700;">See all routes →</a></p>
+    </div>`;
+  } else {
+    // General transit overview
+    box.innerHTML = `<div class="ask-answer-box">
+      <div class="ask-answer-text">Airdrie Transit — routes at a glance:</div>
+      <div style="margin:12px 0;">
+        <div class="biz-row" style="margin-bottom:8px;cursor:default;"><div class="biz-info"><h5>Routes 1 &amp; 3 — Local</h5><p>Every 30 min, Mon–Sat. Genesis Place, City Hall, shopping areas.</p></div><span class="biz-cat">$2.95</span></div>
+        <div class="biz-row" style="margin-bottom:8px;cursor:default;"><div class="biz-info"><h5>Route 900 — CrossIron Mills &amp; NE Calgary</h5><p>Every 60 min, 7 days/week. Starts 6:15 a.m.</p></div><span class="biz-cat">$5.45</span></div>
+        <div class="biz-row" style="margin-bottom:8px;cursor:default;"><div class="biz-info"><h5>Routes 901 &amp; 902 — Downtown Calgary ICE</h5><p>Express, up to 5 days/week. East and west Airdrie.</p></div><span class="biz-cat">$7.85</span></div>
+        <div class="biz-row" style="margin-bottom:8px;cursor:default;"><div class="biz-info"><h5>Hello To Go — On-Demand</h5><p>Door-to-door, book via HotSpot app.</p></div><span class="biz-cat">$2.95</span></div>
+        <div class="biz-row" style="cursor:default;"><div class="biz-info"><h5>ACCESS Airdrie — Accessible Transit</h5><p>Paratransit, pre-registration required.</p></div><span class="biz-cat">Accessible</span></div>
+      </div>
+      <p style="font-size:12.5px;color:var(--grey);">Ask about a specific route (e.g. "Route 900 schedule") or <a href="#" onclick="showTab('transit');return false;" style="color:var(--prairie-blue);font-weight:700;">see the Transit tab</a> for full schedules and fares.</p>
+      <p class="ask-disclaimer">Fares effective Sept 2, 2025. Data from the City of Airdrie.</p>
+    </div>`;
   }
 }
 
