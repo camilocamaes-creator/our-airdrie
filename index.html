@@ -1011,7 +1011,6 @@
         <p>Know a local business that's not in the directory yet? Tell us and we'll add it.</p>
         <form class="signup-form-stacked" id="missing-business-form" onsubmit="return handleMissingBusiness(event)">
           <input type="hidden" name="_subject" value="Missing business reported - Our Airdrie">
-          <input type="hidden" name="_autoresponse" value="Thanks for letting us know about a business we're missing from Our Airdrie! We'll review the details you sent and add it to the directory soon. We appreciate you helping fill in the gaps.">
           <input type="text" name="business_name" placeholder="Business name" required>
           <select name="category" required>
             <option value="" disabled selected>Category</option>
@@ -1047,7 +1046,6 @@
         <p>Banner placements, newsletter sponsorship, and featured event slots will be available as the platform grows. Tell us what you're interested in and we'll follow up.</p>
         <form class="signup-form-stacked" id="sponsor-form" onsubmit="return handleSponsor(event)">
           <input type="hidden" name="_subject" value="Sponsorship inquiry - Our Airdrie">
-          <input type="hidden" name="_autoresponse" value="Thanks for your interest in sponsoring Our Airdrie! We'll follow up soon to talk through banner placements, newsletter sponsorship, and event slots as they become available.">
           <input type="text" name="organization" placeholder="Organization name" required>
           <input type="email" name="email" placeholder="you@email.com" required>
           <textarea name="message" placeholder="What are you interested in sponsoring? (e.g. homepage banner, weekly email, an event)" rows="3"></textarea>
@@ -1061,7 +1059,6 @@
         <p>Found an event somewhere, a flyer, or word of mouth that should be on our calendar? Tell us about it and we'll add it.</p>
         <form class="signup-form-stacked" id="event-form" onsubmit="return handleEventSubmit(event)">
           <input type="hidden" name="_subject" value="Event submission - Our Airdrie">
-          <input type="hidden" name="_autoresponse" value="Thanks for the tip! We'll review the event details and add it to the Our Airdrie calendar soon.">
           <input type="text" name="event_name" placeholder="Event name" required>
           <input type="text" name="event_date" placeholder="Date (e.g. July 12, 2026)" required>
           <input type="text" name="event_venue" placeholder="Venue / location">
@@ -1077,7 +1074,6 @@
         <p>Missing a feature, found something confusing, or have an idea for what this site should do next? Tell us.</p>
         <form class="signup-form-stacked" id="suggestion-form" onsubmit="return handleSuggestion(event)">
           <input type="hidden" name="_subject" value="Suggestion - Our Airdrie">
-          <input type="hidden" name="_autoresponse" value="Thanks for the suggestion! We read every one and use them to decide what to build next.">
           <textarea name="suggestion" placeholder="What would you like to see added or changed?" rows="4" required></textarea>
           <input type="email" name="your_email" placeholder="Your email (optional, in case we follow up)">
           <button type="submit" class="btn btn-primary" style="width:100%;">Send Suggestion</button>
@@ -1367,6 +1363,7 @@ function handleSuggestion(e) {
   btn.disabled = true;
 
   const data = new FormData(form);
+  const submitterEmail = data.get("your_email");
   logSubmission("suggestion", data);
 
   fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
@@ -1381,6 +1378,13 @@ function handleSuggestion(e) {
       <h3>Thanks! \u{1F64C}</h3>
       <p>We read every suggestion - this helps shape what gets built next.</p>
     `;
+    if (submitterEmail) {
+      fetch("/api/welcome-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: submitterEmail, type: "suggestion" })
+      }).catch(() => {});
+    }
   })
   .catch(err => {
     btn.textContent = originalText;
@@ -1441,6 +1445,7 @@ function handleEventSubmit(e) {
   btn.disabled = true;
 
   const data = new FormData(form);
+  const submitterEmail = data.get("your_email");
   logSubmission("event_submission", data);
 
   fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
@@ -1455,6 +1460,13 @@ function handleEventSubmit(e) {
       <h3>Thanks! \u{1F389}</h3>
       <p>We'll review your submission and add it to the calendar soon.</p>
     `;
+    if (submitterEmail) {
+      fetch("/api/welcome-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: submitterEmail, type: "event_submission" })
+      }).catch(() => {});
+    }
   })
   .catch(err => {
     btn.textContent = originalText;
@@ -1475,6 +1487,7 @@ function handleSponsor(e) {
   btn.disabled = true;
 
   const data = new FormData(form);
+  const submitterEmail = data.get("email");
   logSubmission("sponsor_inquiry", data);
 
   fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
@@ -1489,6 +1502,13 @@ function handleSponsor(e) {
       <h3>Thanks for reaching out! 🎉</h3>
       <p>We'll be in touch about sponsorship opportunities soon.</p>
     `;
+    if (submitterEmail) {
+      fetch("/api/welcome-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: submitterEmail, type: "sponsor" })
+      }).catch(() => {});
+    }
   })
   .catch(err => {
     btn.textContent = originalText;
@@ -1509,6 +1529,7 @@ function handleMissingBusiness(e) {
   btn.disabled = true;
 
   const data = new FormData(form);
+  const submitterEmail = data.get("your_email");
   logSubmission("missing_business", data);
 
   fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
@@ -1523,6 +1544,13 @@ function handleMissingBusiness(e) {
       <h3>Thanks! 🎉</h3>
       <p>We've got it — we'll review and add it to the directory soon.</p>
     `;
+    if (submitterEmail) {
+      fetch("/api/welcome-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: submitterEmail, type: "missing_business" })
+      }).catch(() => {});
+    }
   })
   .catch(err => {
     btn.textContent = originalText;

@@ -12,6 +12,30 @@ const TEMPLATES = {
     heading: "Welcome aboard!",
     body: "Thanks for claiming your free founding listing on Our Airdrie. We'll review your details and follow up shortly to get your business fully listed in the directory. As a founding member, you'll get priority placement as the site grows.",
     footer: "Questions in the meantime? Just reply to this email."
+  },
+  missing_business: {
+    subject: "Got it - thanks for the tip!",
+    heading: "Thanks for the tip!",
+    body: "We've got your business suggestion for Our Airdrie. We'll review the details and add it to the directory soon.",
+    footer: "We appreciate you helping fill in the gaps."
+  },
+  sponsor: {
+    subject: "Thanks for your interest in sponsoring Our Airdrie",
+    heading: "Thanks for reaching out!",
+    body: "We'll follow up soon to talk through banner placements, newsletter sponsorship, and event slots as they become available.",
+    footer: "No commitment - just opens the conversation."
+  },
+  event_submission: {
+    subject: "Thanks for the event tip!",
+    heading: "Thanks for the tip!",
+    body: "We'll review the event details you sent and add it to the Our Airdrie calendar soon.",
+    footer: "We review every submission before it goes live."
+  },
+  suggestion: {
+    subject: "Thanks for the suggestion!",
+    heading: "Thanks for the suggestion!",
+    body: "We read every suggestion and use them to decide what to build next on Our Airdrie.",
+    footer: "No idea is too small."
   }
 };
 
