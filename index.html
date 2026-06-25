@@ -1973,8 +1973,28 @@ function loadMore() {
   doRender(true);
 }
 
+const SEARCH_ALIASES = {
+  "jujitsu": "jiu jitsu", "jiu jitsu": "jiu jitsu", "bjj": "jiu jitsu",
+  "jiujitsu": "jiu jitsu", "martial art": "martial arts",
+  "hairdresser": "hair", "hair dresser": "hair", "barber": "hair",
+  "physio": "physiotherapy", "chiro": "chiropractic",
+  "vet": "veterinary", "dog groomer": "pet", "pet groomer": "pet",
+  "grocery": "food", "supermarket": "food",
+  "accountant": "accounting", "bookkeeper": "accounting",
+  "lawyer": "legal", "solicitor": "legal",
+  "real estate agent": "real estate", "realtor": "real estate",
+};
+
+function normaliseQuery(q) {
+  for (const [alias, canonical] of Object.entries(SEARCH_ALIASES)) {
+    if (q.includes(alias)) return q.replace(alias, canonical);
+  }
+  return q;
+}
+
 function doRender() {
-  const q = document.getElementById("search-input").value.trim().toLowerCase();
+  const raw = document.getElementById("search-input").value.trim().toLowerCase();
+  const q = normaliseQuery(raw);
   const cat = document.getElementById("category-select").value;
 
   if (!q && !cat) {
