@@ -490,6 +490,23 @@
   .upcoming-empty { color: var(--grey); font-size: 13.5px; padding: 8px 0; }
   .upcoming-more { text-align: center; margin-top: 22px; }
   .upcoming-more a { color: var(--prairie-blue); font-weight: 700; font-size: 14px; text-decoration: none; }
+  .canada-day-box { background: linear-gradient(135deg, #b5000c 0%, #cc1a1a 100%); padding: 32px 0 36px; }
+  .cd-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .cd-flag { font-size: 36px; line-height: 1; }
+  .cd-title { color: #fff; font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .cd-sub { color: rgba(255,255,255,0.8); font-size: 14px; margin-top: 3px; }
+  .cd-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .cd-chip { background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4); color: #fff; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 100px; cursor: pointer; transition: background 0.15s; }
+  .cd-chip.active { background: #fff; color: #b5000c; border-color: #fff; }
+  .cd-chip:hover:not(.active) { background: rgba(255,255,255,0.25); }
+  .cd-event-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.15); cursor: pointer; }
+  .cd-event-item:last-child { border-bottom: none; }
+  .cd-badge { background: rgba(255,255,255,0.2); border-radius: 8px; min-width: 42px; text-align: center; padding: 5px 6px; }
+  .cd-badge .um { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+  .cd-badge .ud { font-size: 18px; font-weight: 700; color: #fff; line-height: 1.1; }
+  .cd-name { color: #fff; font-weight: 700; font-size: 15px; }
+  .cd-meta { color: rgba(255,255,255,0.75); font-size: 13px; margin-top: 2px; }
+  .cd-empty { color: rgba(255,255,255,0.7); font-size: 14px; padding: 10px 0; }
   @media (max-width: 720px) { .upcoming-grid { grid-template-columns: 1fr; } }
 
   .faq-block { max-width: 680px; margin: 50px auto 0; border-top: 1px solid var(--border); padding-top: 40px; }
@@ -858,6 +875,19 @@
       </div>
     </div>
     <div class="upcoming-more"><a href="#" onclick="showTab('events');return false;">See full calendar + filter by Kids, Arts, Sports →</a></div>
+  </div>
+</section>
+<section class="canada-day-box" id="canada-day-box" style="display:none">
+  <div class="wrap">
+    <div class="cd-header">
+      <span class="cd-flag">🇨🇦</span>
+      <div>
+        <div class="cd-title">Canada Day in Airdrie</div>
+        <div class="cd-sub">July 1 · What's happening around the city</div>
+      </div>
+    </div>
+    <div class="cd-chips" id="cd-chips"></div>
+    <div id="cd-events"></div>
   </div>
 </section>
 <section class="ask-section" id="ask">
@@ -1588,6 +1618,44 @@ function renderUpcomingHome() {
   document.getElementById("upcoming-next-week").innerHTML = renderUpcomingList(nextWeek.slice(0, 3));
 }
 
+function renderCanadaDay(catFilter) {
+  const now = new Date();
+  const show = now >= new Date("2026-06-29T00:00:00") && now < new Date("2026-07-04T00:00:00");
+  const box = document.getElementById("canada-day-box");
+  if (!show || !box) return;
+  box.style.display = "";
+
+  const cdEvents = EVENTS.filter(e => e.date === "2026-07-01").sort((a,b) => (a.time||"").localeCompare(b.time||""));
+
+  const cats = [
+    { id: null,      label: "All" },
+    { id: "kids",    label: "Kids & Family" },
+    { id: "arts",    label: "Arts & Music" },
+    { id: "sports",  label: "Sports" },
+    { id: "community", label: "Community" },
+    { id: "free",    label: "Free" },
+  ];
+
+  document.getElementById("cd-chips").innerHTML = cats.map(c =>
+    `<button class="cd-chip${catFilter === c.id ? " active" : ""}" onclick="renderCanadaDay(${c.id === null ? "null" : `'${c.id}'`})">${c.label}</button>`
+  ).join("");
+
+  const filtered = catFilter ? cdEvents.filter(e => getCatForEvent(e) === catFilter) : cdEvents;
+
+  if (filtered.length === 0) {
+    document.getElementById("cd-events").innerHTML = `<div class="cd-empty">No events found for this filter — try another category.</div>`;
+    return;
+  }
+
+  document.getElementById("cd-events").innerHTML = filtered.map(e => {
+    const idx = EVENTS.indexOf(e);
+    return `<div class="cd-event-item" onclick="openEventDrawer(${idx})">
+      <div class="cd-badge"><div class="um">Jul</div><div class="ud">1</div></div>
+      <div><div class="cd-name">${escapeHtml(e.name)}</div><div class="cd-meta">${escapeHtml(e.time)}${e.venue ? " · " + escapeHtml(e.venue) : ""}</div></div>
+    </div>`;
+  }).join("");
+}
+
 function renderUpcomingList(list) {
   if (list.length === 0) return '<div class="upcoming-empty">Nothing in our snapshot for this window — check the full calendar.</div>';
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1745,6 +1813,7 @@ async function fetchAllData() {
   doRender();
   renderEventsTab();
   renderUpcomingHome();
+  renderCanadaDay(null);
   renderFunFact();
 }
 
