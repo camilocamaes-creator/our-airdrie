@@ -2218,7 +2218,7 @@ function askQuestion() {
   const closureWords = ["road closure","closure","closed road","construction","detour","main street","24th street"];
   const resourceWords = ["free program","free course","subsidy","subsidies","newcomer","immigrant","settlement","freecycle","free stuff","library program","park","playground","disc golf","fair access","211","business training","entrepreneur","resource","help"];
   const eventWords = ["happening","event","events","weekend","this week","next week","today","tomorrow","tonight","calendar","going on"];
-  const garbageWords = ["garbage","recycling","recycle","trash","bin","cart","pickup","pick up","collection","waste","organics","green cart","blue cart","black cart","disposal","dispose","bbq","bulky","large item","big item","transfer site","appliance","drop off","drop-off","junk","mattress","scrap","renovation","drywall","shingles","yard waste","compost"];
+  const garbageWords = ["garbage","recycling","recycle","trash","bin","cart","pickup","pick up","collection","waste","organics","green cart","blue cart","black cart","disposal","dispose","bbq","bulky","large item","big item","transfer site","transfersite","appliance","drop off","drop-off","junk","mattress","scrap","renovation","drywall","shingles","yard waste","compost","child car seat","freon"];
   const transitWords = ["bus","transit","route","schedule","fare","pass","ticket","hotspot","hello to go","access airdrie","route 1","route 3","route 900","route 901","route 902","downtown calgary","crossiron","cross iron","paratransit","commute"];
 
   if (garbageWords.some(w => q.includes(w))) {
@@ -2243,7 +2243,7 @@ function answerWithGarbage(q, box) {
   logInteraction("ask_garbage", q);
 
   // Detect disposal / big item / transfer site questions
-  const disposalWords = ["disposal","dispose","bbq","bulky","large item","big item","transfer site","appliance","drop off","drop-off","junk","mattress","scrap","renovation","drywall","shingles"];
+  const disposalWords = ["disposal","dispose","bbq","bulky","large item","big item","transfer site","transfersite","appliance","drop off","drop-off","junk","mattress","scrap","renovation","drywall","shingles","child car seat","freon"];
   if (disposalWords.some(w => q.includes(w))) {
     box.innerHTML = `<div class="ask-answer-box">
       <div class="ask-answer-text">Take large items & special waste to the Airdrie Transfer Site</div>
@@ -2789,9 +2789,14 @@ function answerWithEvents(q, box) {
       headingText = "tomorrow";
     } else if (q.includes("weekend")) {
       const day = start.getDay();
-      const daysToSat = (6 - day + 7) % 7;
-      start.setDate(start.getDate() + daysToSat);
-      end.setDate(start.getDate() + 2);
+      if (day === 0) {
+        // It's Sunday — "this weekend" means today; Saturday has already passed
+        end.setDate(end.getDate() + 1);
+      } else {
+        const daysToSat = (6 - day + 7) % 7;
+        start.setDate(start.getDate() + daysToSat);
+        end.setDate(start.getDate() + 2);
+      }
       headingText = "this weekend";
     } else if (q.includes("next week")) {
       start.setDate(start.getDate() + 7);
