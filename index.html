@@ -835,15 +835,29 @@
 <section class="hero">
   <div class="wrap">
     <h1>Your guide to everything Airdrie.</h1>
-    <p class="sub">Local businesses, events, transit schedules, garbage pickup days, free programs, and city updates — all in one place.</p>
+    <p class="sub">Local businesses, events, transit, garbage pickup, and more — all free.</p>
     <div class="hero-stats">
       <div><div class="stat-num" id="stat-businesses">...</div><div class="stat-label">Local Businesses</div></div>
       <div><div class="stat-num" id="stat-events">...</div><div class="stat-label">Upcoming Events</div></div>
-      <div><div class="stat-num" id="stat-categories">...</div><div class="stat-label">Categories</div></div>
       <div><div class="stat-num">44</div><div class="stat-label">Neighbourhoods</div></div>
-      <div><div class="stat-num" id="stat-resources">...</div><div class="stat-label">Free Programs</div></div>
-      <div><div class="stat-num">6</div><div class="stat-label">Transit Routes</div></div>
     </div>
+  </div>
+</section>
+<section class="upcoming-section">
+  <div class="wrap">
+    <h2 class="section-title">Coming up in Airdrie</h2>
+    <p class="section-sub">A quick look at this week and next. <a href="#" onclick="showTab('events');return false;" style="color:var(--prairie-blue);font-weight:600;text-decoration:underline;">See the full calendar</a> to browse by month and filter by Kids &amp; Family, Arts, Sports, and more.</p>
+    <div class="upcoming-grid">
+      <div class="upcoming-col">
+        <h4>This Week</h4>
+        <div id="upcoming-this-week"></div>
+      </div>
+      <div class="upcoming-col">
+        <h4>Next Week</h4>
+        <div id="upcoming-next-week"></div>
+      </div>
+    </div>
+    <div class="upcoming-more"><a href="#" onclick="showTab('events');return false;">See the full calendar →</a></div>
   </div>
 </section>
 <div class="fact-banner" id="fact-banner"></div>
@@ -854,44 +868,6 @@
     <div class="ask-box">
       <input type="text" id="ask-input" placeholder="e.g. I need a plumber, garbage day in Bayview, bus to Calgary..." onkeydown="if(event.key==='Enter') askQuestion()">
       <button class="btn btn-primary" onclick="askQuestion()">Ask</button>
-    </div>
-    <div class="cap-grid">
-      <div class="cap-card">
-        <div class="cap-icon">&#127970;</div>
-        <div class="cap-label">Find a business</div>
-        <div class="cap-chips">
-          <button class="cap-chip" onclick="askExample('I need a plumber')">I need a plumber</button>
-          <button class="cap-chip" onclick="askExample('best dentist in airdrie')">dentist near me</button>
-          <button class="cap-chip" onclick="askExample('restaurants in airdrie')">restaurants</button>
-        </div>
-      </div>
-      <div class="cap-card">
-        <div class="cap-icon">&#128197;</div>
-        <div class="cap-label">Events &amp; activities</div>
-        <div class="cap-chips">
-          <button class="cap-chip" onclick="askExample('whats happening this weekend')">what's on this weekend?</button>
-          <button class="cap-chip" onclick="askExample('events for kids')">events for kids</button>
-          <button class="cap-chip" onclick="askExample('free programs airdrie')">free programs</button>
-        </div>
-      </div>
-      <div class="cap-card">
-        <div class="cap-icon">&#128652;</div>
-        <div class="cap-label">Transit &amp; schedules</div>
-        <div class="cap-chips">
-          <button class="cap-chip" onclick="askExample('bus to downtown calgary')">bus to Calgary?</button>
-          <button class="cap-chip" onclick="askExample('route 900 schedule')">Route 900 schedule</button>
-          <button class="cap-chip" onclick="askExample('transit fares')">transit fares</button>
-        </div>
-      </div>
-      <div class="cap-card">
-        <div class="cap-icon">&#9851;</div>
-        <div class="cap-label">City services</div>
-        <div class="cap-chips">
-          <button class="cap-chip" onclick="askExample('garbage pickup bayview')">garbage day in Bayview?</button>
-          <button class="cap-chip" onclick="askExample('any road closures')">road closures?</button>
-          <button class="cap-chip" onclick="askExample('whats the weather today')">weather today?</button>
-        </div>
-      </div>
     </div>
     <div id="ask-answer"></div>
   </div>
@@ -931,23 +907,6 @@
         <span class="wh-sub">Routes &amp; schedules</span>
       </button>
     </div>
-  </div>
-</section>
-<section class="upcoming-section">
-  <div class="wrap">
-    <h2 class="section-title">Coming up in Airdrie</h2>
-    <p class="section-sub">A quick look at this week and next. <a href="#" onclick="showTab('events');return false;" style="color:var(--prairie-blue);font-weight:600;text-decoration:underline;">See the full calendar</a> to browse by month and filter by Kids &amp; Family, Arts, Sports, and more.</p>
-    <div class="upcoming-grid">
-      <div class="upcoming-col">
-        <h4>This Week</h4>
-        <div id="upcoming-this-week"></div>
-      </div>
-      <div class="upcoming-col">
-        <h4>Next Week</h4>
-        <div id="upcoming-next-week"></div>
-      </div>
-    </div>
-    <div class="upcoming-more"><a href="#" onclick="showTab('events');return false;">See the full calendar →</a></div>
   </div>
 </section>
 <div class="closures-ticker" id="closures-ticker">
