@@ -316,7 +316,9 @@
   @media (max-width: 720px) {
     .signup-cards, .how-grid { grid-template-columns: 1fr; }
     .cat-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 0 60px; }
     .hero h1 { font-size: 34px; }
+    .hero p.sub { font-size: 16px; }
     .hero-stats { gap: 28px; }
     .nav-toggle { display: flex; }
     .nav-links {
@@ -327,6 +329,24 @@
     .nav-links.mobile-open { display: flex; }
     .nav-links a { padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); }
     .lang-select { margin-top: 12px; width: 100%; }
+    /* Reduce section padding on mobile */
+    .signup-section, .categories-section, .events-section,
+    .how-section, .resources-section, .cityinfo-section,
+    .ask-section, .about-section { padding-top: 40px; padding-bottom: 48px; }
+    /* Results list: no nested scroll on mobile */
+    .results-list { max-height: none; overflow-y: visible; }
+    /* Tap targets for ask suggestions */
+    .ask-suggestions button { padding: 11px 16px; font-size: 13px; }
+    /* Ask box button full width when it wraps */
+    .ask-box { flex-direction: column; }
+    .ask-box input { min-width: 0; width: 100%; }
+    .ask-box .btn { width: 100%; }
+    /* Signup form button full width */
+    .signup-form { flex-direction: column; }
+    .signup-form input { min-width: 0; }
+    .signup-form .btn { width: 100%; }
+    /* Tables: horizontal scroll */
+    .fare-table, .sched-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
 
   /* Browse directory */
