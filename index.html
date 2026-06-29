@@ -1372,6 +1372,7 @@
         <form class="signup-form" id="business-form" onsubmit="return handleSignup(event, 'business')">
           <input type="hidden" name="_subject" value="New Our Airdrie business signup">
           <input type="hidden" name="signup_type" value="Business">
+          <input type="hidden" name="claim_type" id="claim-type-field" value="">
           <input type="text" name="business_name" placeholder="Business name" required>
           <input type="email" name="email" placeholder="you@business.com" required>
           <button type="submit" class="btn btn-accent">Add My Business</button>
@@ -2152,6 +2153,8 @@ function claimListing(btn) {
   setTimeout(() => {
     const input = document.querySelector("#business-form input[name=business_name]");
     if (input) input.value = name;
+    const claimField = document.getElementById("claim-type-field");
+    if (claimField) claimField.value = "claim";
     document.getElementById("business-form").scrollIntoView({ behavior: "smooth", block: "center" });
   }, 60);
 }
