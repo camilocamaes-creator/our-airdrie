@@ -843,10 +843,10 @@
     </div>
   </div>
 </section>
+<div class="fact-banner" id="fact-banner"></div>
 <section class="upcoming-section">
   <div class="wrap">
     <h2 class="section-title">Coming up in Airdrie</h2>
-    <p class="section-sub">A quick look at this week and next. <a href="#" onclick="showTab('events');return false;" style="color:var(--prairie-blue);font-weight:600;text-decoration:underline;">See the full calendar</a> to browse by month and filter by Kids &amp; Family, Arts, Sports, and more.</p>
     <div class="upcoming-grid">
       <div class="upcoming-col">
         <h4>This Week</h4>
@@ -857,10 +857,9 @@
         <div id="upcoming-next-week"></div>
       </div>
     </div>
-    <div class="upcoming-more"><a href="#" onclick="showTab('events');return false;">See the full calendar →</a></div>
+    <div class="upcoming-more"><a href="#" onclick="showTab('events');return false;">See full calendar + filter by Kids, Arts, Sports →</a></div>
   </div>
 </section>
-<div class="fact-banner" id="fact-banner"></div>
 <section class="ask-section" id="ask">
   <div class="wrap">
     <h2 class="section-title">Ask anything about Airdrie</h2>
@@ -1585,8 +1584,8 @@ function renderUpcomingHome() {
   const nextWeek = EVENTS.filter(e => { const d = new Date(e.date + "T00:00:00"); return d >= nextStart && d < nextEnd; })
     .sort((a,b) => a.date.localeCompare(b.date));
 
-  document.getElementById("upcoming-this-week").innerHTML = renderUpcomingList(thisWeek);
-  document.getElementById("upcoming-next-week").innerHTML = renderUpcomingList(nextWeek);
+  document.getElementById("upcoming-this-week").innerHTML = renderUpcomingList(thisWeek.slice(0, 3));
+  document.getElementById("upcoming-next-week").innerHTML = renderUpcomingList(nextWeek.slice(0, 3));
 }
 
 function renderUpcomingList(list) {
