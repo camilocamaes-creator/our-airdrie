@@ -880,7 +880,7 @@
 <section class="canada-day-box" id="canada-day-box" style="display:none">
   <div class="wrap">
     <div class="cd-header">
-      <span class="cd-flag">🇨🇦</span>
+      <span class="cd-flag"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 2l2.5 6.5 5-1.5-3 5 6.5 3-5.5 1 1 6-4.5-3-1 5.5-1-5.5-4.5 3 1-6-5.5-1 6.5-3-3-5 5 1.5z" fill="#D52B1E"/><rect x="16.5" y="26" width="3" height="8" fill="#D52B1E"/></svg></span>
       <div>
         <div class="cd-title">Canada Day in Airdrie</div>
         <div class="cd-sub">July 1 · What's happening around the city</div>
@@ -1650,7 +1650,6 @@ function renderCanadaDay(catFilter) {
   document.getElementById("cd-events").innerHTML = filtered.map(e => {
     const idx = EVENTS.indexOf(e);
     return `<div class="cd-event-item" onclick="openEventDrawer(${idx})">
-      <div class="cd-badge"><div class="um">Jul</div><div class="ud">1</div></div>
       <div><div class="cd-name">${escapeHtml(e.name)}</div><div class="cd-meta">${escapeHtml(e.time)}${e.venue ? " · " + escapeHtml(e.venue) : ""}</div></div>
     </div>`;
   }).join("");
