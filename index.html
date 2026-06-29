@@ -526,6 +526,13 @@
   }
   .month-pill.active { background: var(--prairie-blue); color: var(--white); border-color: var(--prairie-blue); }
   .month-pill:hover:not(.active) { border-color: var(--wheat-gold); }
+  .cat-chips { display: flex; gap: 8px; margin: -16px 0 24px; flex-wrap: wrap; }
+  .cat-chip-filter {
+    background: var(--white); border: 1.5px solid var(--border); color: var(--grey);
+    font-weight: 600; font-size: 12px; padding: 6px 14px; border-radius: 100px; cursor: pointer;
+  }
+  .cat-chip-filter.active { background: var(--wheat-gold); color: var(--white); border-color: var(--wheat-gold); }
+  .cat-chip-filter:hover:not(.active) { border-color: var(--wheat-gold); color: var(--prairie-blue); }
   .month-select {
     margin-left: auto; padding: 9px 14px; border: 1.5px solid var(--border); border-radius: 100px;
     font-size: 13.5px; font-family: inherit; color: var(--prairie-blue); background: var(--white); cursor: pointer;
@@ -1002,6 +1009,7 @@
     <h2 class="section-title">What's happening in Airdrie</h2>
     <p class="section-sub">Real, local events only - click any event to see the details.</p>
     <div class="month-pills" id="month-pills"></div>
+    <div id="cat-chips-row"></div>
     <div class="events-month-list" id="events-month-list"></div>
   </div>
 </section>
@@ -2068,8 +2076,26 @@ function monthLabel(key) {
 }
 
 let currentMonthKey = null;
+let currentCategoryFilter = null;
 
-function renderEventsTab(monthKey) {
+const EVENT_CATEGORIES = [
+  { id: "kids",      label: "Kids & Family",  kw: ["kid","family","children","child","youth","junior","teen","toddler","baby","storytime","story time","puppet","preschool","school age","after school","camp"] },
+  { id: "arts",      label: "Arts & Music",   kw: ["concert","music","band","theatre","theater","art","gallery","comedy","dance","choir","festival","perform","live music","play","show","movie","film","open mic","recital","exhibit"] },
+  { id: "sports",    label: "Sports",         kw: ["hockey","soccer","football","basketball","baseball","volleyball","swim","run","race","sport","fitness","yoga","golf","skate","tournament","league","rodeo","cycling","triathlon","5k","10k","marathon","lacrosse","wrestling","boxing","martial art"] },
+  { id: "community", label: "Community",      kw: ["parade","market","fair","farmer","volunteer","fundraiser","gala","cultural","multicultural","stampede","heritage","auction","bbq","barbecue","breakfast","civic","nonprofit","community","clean-up","cleanup","neighbourhood","neighbor","block party"] },
+  { id: "free",      label: "Free",           kw: ["free","no charge","no cost","complimentary","at no cost","free admission","free entry"] },
+];
+
+function getCatForEvent(e) {
+  const text = ((e.name || "") + " " + (e.description || "")).toLowerCase();
+  for (const cat of EVENT_CATEGORIES) {
+    if (cat.kw.some(k => text.includes(k))) return cat.id;
+  }
+  return null;
+}
+
+function renderEventsTab(monthKey, catFilter) {
+  if (catFilter !== undefined) currentCategoryFilter = catFilter;
   const months = getAvailableMonths();
   const now = new Date();
   const thisMonthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
@@ -2083,20 +2109,41 @@ function renderEventsTab(monthKey) {
   const otherMonths = months.filter(k => !primaryMonths.includes(k));
 
   let pillsHtml = primaryMonths.map(k => `
-    <button class="month-pill${k === monthKey ? ' active' : ''}" onclick="renderEventsTab('${k}')">${k === thisMonthKey ? 'This month' : 'Next month'}</button>
+    <button class="month-pill${k === monthKey ? ' active' : ''}" onclick="renderEventsTab('${k}', null)">${k === thisMonthKey ? 'This month' : 'Next month'}</button>
   `).join("");
 
   if (otherMonths.length) {
-    pillsHtml += `<select class="month-select" onchange="renderEventsTab(this.value)">
+    pillsHtml += `<select class="month-select" onchange="renderEventsTab(this.value, null)">
       <option value="" disabled ${!otherMonths.includes(monthKey) ? "selected" : ""}>More months...</option>
       ${otherMonths.map(k => `<option value="${k}" ${k === monthKey ? "selected" : ""}>${monthLabel(k)}</option>`).join("")}
     </select>`;
   }
   document.getElementById("month-pills").innerHTML = pillsHtml;
 
-  const monthEvents = EVENTS.filter(e => getMonthKey(e.date) === monthKey).sort((a,b) => a.date.localeCompare(b.date));
+  // Category chips — only show categories that have at least one event this month
+  const allMonthEvents = EVENTS.filter(e => getMonthKey(e.date) === monthKey);
+  const presentCats = new Set(allMonthEvents.map(e => getCatForEvent(e)).filter(Boolean));
+  if (presentCats.size > 0) {
+    let catHtml = '<div class="cat-chips">';
+    catHtml += `<button class="cat-chip-filter${!currentCategoryFilter ? ' active' : ''}" onclick="renderEventsTab(currentMonthKey, null)">All</button>`;
+    EVENT_CATEGORIES.filter(c => presentCats.has(c.id)).forEach(c => {
+      catHtml += `<button class="cat-chip-filter${currentCategoryFilter === c.id ? ' active' : ''}" onclick="renderEventsTab(currentMonthKey, '${c.id}')">${escapeHtml(c.label)}</button>`;
+    });
+    catHtml += '</div>';
+    document.getElementById("cat-chips-row").innerHTML = catHtml;
+  } else {
+    document.getElementById("cat-chips-row").innerHTML = "";
+  }
+
+  let monthEvents = allMonthEvents;
+  if (currentCategoryFilter) {
+    monthEvents = monthEvents.filter(e => getCatForEvent(e) === currentCategoryFilter);
+  }
+  monthEvents.sort((a,b) => a.date.localeCompare(b.date));
+
   if (monthEvents.length === 0) {
-    document.getElementById("events-month-list").innerHTML = `<div class="events-empty">No events found for ${monthLabel(monthKey)} in our current snapshot.</div>`;
+    const catLabel = EVENT_CATEGORIES.find(c => c.id === currentCategoryFilter)?.label || "";
+    document.getElementById("events-month-list").innerHTML = `<div class="events-empty">No ${catLabel ? catLabel.toLowerCase() + " " : ""}events found for ${monthLabel(monthKey)} in our current snapshot.</div>`;
     return;
   }
 
