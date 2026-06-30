@@ -30,6 +30,12 @@ const TEMPLATES = {
     heading: "Thanks for the suggestion!",
     body: "We read every suggestion and use them to decide what to build next on Our Airdrie.",
     footer: "No idea is too small."
+  },
+  reminder: {
+    subject: "Garbage reminder set for Our Airdrie",
+    heading: "You're on the reminder list!",
+    body: "We'll send you a nudge the night before your neighbourhood's garbage and recycling pickup. No action needed — we'll reach out when collection day is coming up.",
+    footer: "Reply to this email anytime to unsubscribe from reminders."
   }
 };
 
