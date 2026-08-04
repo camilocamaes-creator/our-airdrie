@@ -216,8 +216,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v1 — first-party anonymous interaction tracking */
+/* oa-track-v2 — first-party anonymous interaction tracking */
 (function(){
+  if(location.protocol==="file:")return; /* don't log local-file test opens into production analytics */
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
   var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlaHhxaGdweXB1YmxjcXhvY2d0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MjMwMzgwNSwiZXhwIjoyMDk3ODc5ODA1fQ.jho-ZfwXh6H5umc4W-Q3uYlWEelulpqFjWHMBq2BCMA";
   function sid(){try{var s=localStorage.getItem("oa_sid");if(!s){s=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem("oa_sid",s);}return s;}catch(e){return "anon";}}
@@ -232,18 +233,24 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.addEventListener("click",function(ev){
     try{
       var t=ev.target; if(!t||!t.closest) return;
-      if(t.closest("header")){ var a=t.closest("a,button"); var txt=((a?a.textContent:t.textContent)||"").replace(/\s+/g," ").trim(); if(txt&&txt.length<=24) log("tab_nav",txt); return; }
+      if(t.closest("header")){ var a=t.closest("a,button"); var txt=((a?a.textContent:t.textContent)||"").replace(/s+/g," ").trim(); if(txt&&txt.length<=24) log("tab_nav",txt); return; }
       if(t.closest('[aria-label*="share" i],[title*="share" i]')){ log("share_click",""); return; }
-      var card=t.closest("a"); if(card&&!t.closest("footer")){ var ct=(card.textContent||"").replace(/\s+/g," ").trim(); if(ct.length>=6&&ct.length<=90&&/[a-z]/i.test(ct)&&!/ourairdrie\.ca|sign up|subscribe|full calendar|browse all|read in/i.test(ct)) log("event_open",ct); }
+      var card=t.closest("a"); if(card&&!t.closest("footer")){ var ct=(card.textContent||"").replace(/s+/g," ").trim(); if(ct.length>=6&&ct.length<=90&&/[a-z]/i.test(ct)&&!/ourairdrie.ca|sign up|subscribe|full calendar|browse all|read in/i.test(ct)) log("event_open",ct); }
     }catch(e){}
   },true);
-  var tries=0,iv=setInterval(function(){
+  /* search: catch Enter on ANY search input (directory box + ask box), skip signup/submission form fields */
+  document.addEventListener("keydown",function(e){
     try{
-      var inp=document.querySelector('input[placeholder*="parks" i],input[placeholder*="near me" i]');
-      if(inp&&!inp._oat){ inp._oat=1; inp.addEventListener("keydown",function(e){ if(e.key==="Enter"){ var v=(inp.value||"").trim(); if(v) log("search_events",v); } }); }
-    }catch(e){}
-    if(++tries>20) clearInterval(iv);
-  },500);
+      if(e.key!=="Enter")return;
+      var t=e.target; if(!t||t.tagName!=="INPUT")return;
+      var ty=(t.getAttribute("type")||"text").toLowerCase();
+      if(ty==="email"||ty==="checkbox"||ty==="radio"||ty==="tel"||ty==="number")return;
+      var ph=(t.getAttribute("placeholder")||"").toLowerCase();
+      if(/@|business name|event name|your idea|full name|your name/.test(ph))return;
+      var v=(t.value||"").trim();
+      if(v&&v.length<=120) log("search_events",v);
+    }catch(_){}
+  },true);
 })();
 </script>
 </body>
