@@ -90,6 +90,42 @@ module.exports = async function handler(req, res) {
       html: buildHtml(type)
     });
 
+    // Notify the owner of every submission (never let this break the user's response)
+    try {
+      const OWNER = process.env.OWNER_EMAIL || "camilocamaes@gmail.com";
+      const LABELS = {
+        resident: "Newsletter signup",
+        business: "Business listing request",
+        missing_business: "Missing-business tip",
+        event_submission: "Event submission",
+        suggestion: "Suggestion",
+        reminder: "Garbage reminder signup"
+      };
+      const label = LABELS[type] || type;
+      // Include any extra fields the form sent (name, business_name, etc.), minus the ones we already show
+      const extras = Object.entries(req.body || {})
+        .filter(([k]) => !["email", "type"].includes(k))
+        .map(([k, v]) => `<tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">${k}</td><td style="padding:2px 0;color:#1B3A4B;">${String(v)}</td></tr>`)
+        .join("");
+      await transporter.sendMail({
+        from: '"Our Airdrie" <contact@ourairdrie.ca>',
+        to: OWNER,
+        replyTo: email,
+        subject: `🔔 ${label}: ${email}`,
+        html: `<div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#1B3A4B;">
+          <p style="margin:0 0 12px;"><strong>New ${label.toLowerCase()}</strong> on Our Airdrie:</p>
+          <table style="border-collapse:collapse;font-size:14px;">
+            <tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">type</td><td style="padding:2px 0;color:#1B3A4B;">${type}</td></tr>
+            <tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">email</td><td style="padding:2px 0;color:#1B3A4B;">${email}</td></tr>
+            ${extras}
+          </table>
+          <p style="margin:14px 0 0;color:#6B6B6B;font-size:13px;">Reply to this email to respond directly to them. The subscriber has already been added to the database and sent their confirmation.</p>
+        </div>`
+      });
+    } catch (notifyErr) {
+      // Owner notification is best-effort; the signup itself already succeeded.
+    }
+
     res.status(200).json({ success: true });
   } catch (err) {
     res.status(500).json({ error: "Send failed", message: err.message });
