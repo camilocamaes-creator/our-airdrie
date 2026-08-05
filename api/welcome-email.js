@@ -65,9 +65,10 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { email, type } = req.body || {};
+  const { email, type, notify_only } = req.body || {};
 
-  if (!email || !TEMPLATES[type]) {
+  // notify_only: business/event/suggestion forms ping the owner without a submitter email to confirm
+  if (!notify_only && (!email || !TEMPLATES[type])) {
     res.status(400).json({ error: "Missing or invalid email/type" });
     return;
   }
@@ -83,12 +84,15 @@ module.exports = async function handler(req, res) {
       }
     });
 
-    await transporter.sendMail({
-      from: '"Our Airdrie" <contact@ourairdrie.ca>',
-      to: email,
-      subject: TEMPLATES[type].subject,
-      html: buildHtml(type)
-    });
+    // Submitter confirmation (skipped for notify_only pings, which have no real submitter email)
+    if (!notify_only && email && TEMPLATES[type]) {
+      await transporter.sendMail({
+        from: '"Our Airdrie" <contact@ourairdrie.ca>',
+        to: email,
+        subject: TEMPLATES[type].subject,
+        html: buildHtml(type)
+      });
+    }
 
     // Notify the owner of every submission (never let this break the user's response)
     try {
@@ -101,25 +105,26 @@ module.exports = async function handler(req, res) {
         suggestion: "Suggestion",
         reminder: "Garbage reminder signup"
       };
-      const label = LABELS[type] || type;
-      // Include any extra fields the form sent (name, business_name, etc.), minus the ones we already show
+      const label = LABELS[type] || type || "Form submission";
+      const who = email || "(no email given)";
+      // Include any extra fields the form sent (business name, event, idea, etc.), minus the ones we already show
       const extras = Object.entries(req.body || {})
-        .filter(([k]) => !["email", "type"].includes(k))
+        .filter(([k]) => !["email", "type", "notify_only"].includes(k))
         .map(([k, v]) => `<tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">${k}</td><td style="padding:2px 0;color:#1B3A4B;">${String(v)}</td></tr>`)
         .join("");
       await transporter.sendMail({
         from: '"Our Airdrie" <contact@ourairdrie.ca>',
         to: OWNER,
-        replyTo: email,
-        subject: `🔔 ${label}: ${email}`,
+        replyTo: email || "contact@ourairdrie.ca",
+        subject: `🔔 ${label}: ${who}`,
         html: `<div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#1B3A4B;">
           <p style="margin:0 0 12px;"><strong>New ${label.toLowerCase()}</strong> on Our Airdrie:</p>
           <table style="border-collapse:collapse;font-size:14px;">
-            <tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">type</td><td style="padding:2px 0;color:#1B3A4B;">${type}</td></tr>
-            <tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">email</td><td style="padding:2px 0;color:#1B3A4B;">${email}</td></tr>
+            <tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">type</td><td style="padding:2px 0;color:#1B3A4B;">${type || "-"}</td></tr>
+            <tr><td style="padding:2px 12px 2px 0;color:#6B6B6B;">email</td><td style="padding:2px 0;color:#1B3A4B;">${who}</td></tr>
             ${extras}
           </table>
-          <p style="margin:14px 0 0;color:#6B6B6B;font-size:13px;">Reply to this email to respond directly to them. The subscriber has already been added to the database and sent their confirmation.</p>
+          <p style="margin:14px 0 0;color:#6B6B6B;font-size:13px;">Submitted through a form on ourairdrie.ca.${email ? " Reply to this email to respond to them directly." : ""}</p>
         </div>`
       });
     } catch (notifyErr) {
