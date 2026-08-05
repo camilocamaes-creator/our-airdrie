@@ -214,9 +214,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v2 — first-party anonymous interaction tracking */
+/* oa-track-v3 — first-party anonymous interaction tracking */
 (function(){
-  if(location.protocol==="file:")return; /* don't log local-file test opens into production analytics */
+  if(location.protocol==="file:")return;
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
   var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlaHhxaGdweXB1YmxjcXhvY2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMDM4MDUsImV4cCI6MjA5Nzg3OTgwNX0.sj8mCISeMRHqSP-6nOgMtuzn8segvXiD4BccVDXB8jA";
   function sid(){try{var s=localStorage.getItem("oa_sid");if(!s){s=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem("oa_sid",s);}return s;}catch(e){return "anon";}}
@@ -227,16 +227,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         body:JSON.stringify({interaction_type:type,value:(value==null?null:(""+value).slice(0,200)),result_count:(rc==null?null:rc),session_id:SID})}).catch(function(){});
     }catch(e){}
   }
+  function nearInput(el){
+    var box=el.parentElement,k=0,inp=null;
+    while(box&&k<4){ inp=box.querySelector("input[type=text],input:not([type]),textarea"); if(inp)return inp; box=box.parentElement; k++; }
+    return null;
+  }
+  var NAV=/^(add my business|business directory|events calendar|resources|about|about & faq|transit|garbage|garbage & recycling|weather|weather & closures|contact|contact & sponsorship|privacy|privacy policy|volunteer airdrie|full calendar|browse all|ask|search|home|our airdrie)/i;
+  var lastSearch="",lastSearchT=0;
+  function logSearch(v){ var now=Date.now(); if(v===lastSearch&&now-lastSearchT<1500)return; lastSearch=v; lastSearchT=now; log("search_events",v); }
   log("page_view", location.pathname);
-  document.addEventListener("click",function(ev){
-    try{
-      var t=ev.target; if(!t||!t.closest) return;
-      if(t.closest("header")){ var a=t.closest("a,button"); var txt=((a?a.textContent:t.textContent)||"").replace(/s+/g," ").trim(); if(txt&&txt.length<=24) log("tab_nav",txt); return; }
-      if(t.closest('[aria-label*="share" i],[title*="share" i]')){ log("share_click",""); return; }
-      var card=t.closest("a"); if(card&&!t.closest("footer")){ var ct=(card.textContent||"").replace(/s+/g," ").trim(); if(ct.length>=6&&ct.length<=90&&/[a-z]/i.test(ct)&&!/ourairdrie.ca|sign up|subscribe|full calendar|browse all|read in/i.test(ct)) log("event_open",ct); }
-    }catch(e){}
-  },true);
-  /* search: catch Enter on ANY search input (directory box + ask box), skip signup/submission form fields */
   document.addEventListener("keydown",function(e){
     try{
       if(e.key!=="Enter")return;
@@ -246,8 +245,33 @@ document.addEventListener('DOMContentLoaded', async function() {
       var ph=(t.getAttribute("placeholder")||"").toLowerCase();
       if(/@|business name|event name|your idea|full name|your name/.test(ph))return;
       var v=(t.value||"").trim();
-      if(v&&v.length<=120) log("search_events",v);
+      if(v&&v.length<=120) logSearch(v);
     }catch(_){}
+  },true);
+  document.addEventListener("click",function(ev){
+    try{
+      var t=ev.target; if(!t||!t.closest) return;
+      // 1. search-trigger button (Ask / directory search) — read its nearby input value
+      var sb=t.closest("button,a");
+      if(sb){
+        var inp=nearInput(sb);
+        if(inp){
+          var ph=(inp.getAttribute("placeholder")||"").toLowerCase();
+          var lbl=((sb.textContent||"")+" "+(sb.getAttribute("aria-label")||"")).trim().toLowerCase();
+          var isSearch = lbl==="ask"||lbl==="search"||/search|find|go\b/.test(lbl) || /search|try |parks|plumber|near me|recycling|pickup|transit|what's on/.test(ph);
+          if(isSearch){ var sv=(inp.value||"").trim(); if(sv&&sv.length<=120) logSearch(sv); return; }
+        }
+      }
+      // 2. header tab nav
+      if(t.closest("header")){ var a=t.closest("a,button"); var txt=((a?a.textContent:t.textContent)||"").replace(/\s+/g," ").trim(); if(txt&&txt.length<=24) log("tab_nav",txt); return; }
+      // 3. share
+      if(t.closest('[aria-label*="share" i],[title*="share" i]')){ log("share_click",""); return; }
+      // 4. event_open — only real event cards, exclude nav/menu/UI links
+      var card=t.closest("a"); if(card&&!t.closest("footer")&&!t.closest("nav")){
+        var ct=(card.textContent||"").replace(/\s+/g," ").trim();
+        if(ct.length>=6&&ct.length<=90&&/[a-z]/i.test(ct)&&!/ourairdrie\.ca|sign up|subscribe|read in|local listings/i.test(ct)&&!NAV.test(ct)) log("event_open",ct);
+      }
+    }catch(e){}
   },true);
 })();
 </script>
