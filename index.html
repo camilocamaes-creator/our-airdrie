@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v3 — first-party anonymous interaction tracking */
+/* oa-track-v4 — first-party anonymous interaction tracking */
 (function(){
   if(location.protocol==="file:")return;
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
@@ -251,7 +251,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.addEventListener("click",function(ev){
     try{
       var t=ev.target; if(!t||!t.closest) return;
-      // 1. search-trigger button (Ask / directory search) — read its nearby input value
       var sb=t.closest("button,a");
       if(sb){
         var inp=nearInput(sb);
@@ -262,14 +261,13 @@ document.addEventListener('DOMContentLoaded', async function() {
           if(isSearch){ var sv=(inp.value||"").trim(); if(sv&&sv.length<=120) logSearch(sv); return; }
         }
       }
-      // 2. header tab nav
       if(t.closest("header")){ var a=t.closest("a,button"); var txt=((a?a.textContent:t.textContent)||"").replace(/\s+/g," ").trim(); if(txt&&txt.length<=24) log("tab_nav",txt); return; }
-      // 3. share
       if(t.closest('[aria-label*="share" i],[title*="share" i]')){ log("share_click",""); return; }
-      // 4. event_open — only real event cards, exclude nav/menu/UI links
       var card=t.closest("a"); if(card&&!t.closest("footer")&&!t.closest("nav")){
         var ct=(card.textContent||"").replace(/\s+/g," ").trim();
-        if(ct.length>=6&&ct.length<=90&&/[a-z]/i.test(ct)&&!/ourairdrie\.ca|sign up|subscribe|read in|local listings/i.test(ct)&&!NAV.test(ct)) log("event_open",ct);
+        if(NAV.test(ct)) return;
+        if(/^[A-Za-z][A-Za-z &,'\/-]{2,44}\s\d{1,5}$/.test(ct)){ log("category_click", ct.replace(/\s\d{1,5}$/,"")); return; }
+        if(ct.length>=6&&ct.length<=90&&/[a-z]/i.test(ct)&&!/ourairdrie\.ca|sign up|subscribe|read in|local listings/i.test(ct)) log("event_open",ct);
       }
     }catch(e){}
   },true);
