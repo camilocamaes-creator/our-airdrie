@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v4 — first-party anonymous interaction tracking */
+/* oa-track-v5 — first-party anonymous interaction tracking */
 (function(){
   if(location.protocol==="file:")return;
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.addEventListener("click",function(ev){
     try{
       var t=ev.target; if(!t||!t.closest) return;
-      var sb=t.closest("button,a");
+      var sb=t.closest("button");
       if(sb){
         var inp=nearInput(sb);
         if(inp){
