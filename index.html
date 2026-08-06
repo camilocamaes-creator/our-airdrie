@@ -214,53 +214,51 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v6 — first-party anonymous interaction tracking */
+/* oa-track-v7 — first-party anonymous interaction tracking (search result_count via count=exact) */
 (function(){
   if(location.protocol==="file:")return;
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
+  var BIZ="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/businesses";
   var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlaHhxaGdweXB1YmxjcXhvY2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMDM4MDUsImV4cCI6MjA5Nzg3OTgwNX0.sj8mCISeMRHqSP-6nOgMtuzn8segvXiD4BccVDXB8jA";
   function sid(){try{var s=localStorage.getItem("oa_sid");if(!s){s=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem("oa_sid",s);}return s;}catch(e){return "anon";}}
   var SID=sid();
+  var of=window.fetch;
   function log(type,value,rc){
     try{
-      fetch(URL,{method:"POST",keepalive:true,headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json","Prefer":"return=minimal"},
+      of(URL,{method:"POST",keepalive:true,headers:{"apikey":KEY,"Authorization":"Bearer "+KEY,"Content-Type":"application/json","Prefer":"return=minimal"},
         body:JSON.stringify({interaction_type:type,value:(value==null?null:(""+value).slice(0,200)),result_count:(rc==null?null:rc),session_id:SID})}).catch(function(){});
     }catch(e){}
   }
-  function nearInput(el){
-    var box=el.parentElement,k=0,inp=null;
-    while(box&&k<4){ inp=box.querySelector("input[type=text],input:not([type]),textarea"); if(inp)return inp; box=box.parentElement; k++; }
-    return null;
-  }
   var NAV=/^(add my business|business directory|events calendar|resources|about|about & faq|transit|garbage|garbage & recycling|weather|weather & closures|contact|contact & sponsorship|privacy|privacy policy|volunteer airdrie|full calendar|browse all|ask|search|home|our airdrie)/i;
-  var lastSearch="",lastSearchT=0;
-  function logSearch(v){ var now=Date.now(); if(v===lastSearch&&now-lastSearchT<1500)return; lastSearch=v; lastSearchT=now; log("search_events",v); }
   log("page_view", location.pathname);
-  document.addEventListener("keydown",function(e){
+
+  /* SEARCH: intercept the directory/ask search fetch, then get the TRUE match count via count=exact */
+  var sTimer=null,sTerm=null,sFilter=null,lastLogged="",lastLoggedT=0;
+  function emit(term,rc){var now=Date.now();if(term===lastLogged&&now-lastLoggedT<3000)return;lastLogged=term;lastLoggedT=now;log("search_events",term,rc);}
+  function doCountAndLog(){
+    var term=sTerm,filter=sFilter;
+    if(!term)return;
+    if(!filter){emit(term,null);return;}
+    of(BIZ+"?select=id&"+filter+"&limit=1&_c=1",{headers:{apikey:KEY,Authorization:"Bearer "+KEY,Prefer:"count=exact",Range:"0-0"}})
+      .then(function(res){var cr=res.headers.get("content-range")||"";var m=cr.match(/\/(\d+)$/);emit(term,m?+m[1]:null);})
+      .catch(function(){emit(term,null);});
+  }
+  window.fetch=function(){
     try{
-      if(e.key!=="Enter")return;
-      var t=e.target; if(!t||t.tagName!=="INPUT")return;
-      var ty=(t.getAttribute("type")||"text").toLowerCase();
-      if(ty==="email"||ty==="checkbox"||ty==="radio"||ty==="tel"||ty==="number")return;
-      var ph=(t.getAttribute("placeholder")||"").toLowerCase();
-      if(/@|business name|event name|your idea|full name|your name/.test(ph))return;
-      var v=(t.value||"").trim();
-      if(v&&v.length<=120) logSearch(v);
-    }catch(_){}
-  },true);
+      var u=String(arguments[0]);
+      if(u.indexOf("/rest/v1/businesses")>=0 && /(ilike|or=\()/.test(u) && u.indexOf("_c=1")<0){
+        var tm=u.match(/ilike\.\*?([^*,)&]+)/i);
+        var fm=u.match(/[?&](or=\([^&]*\))/i);
+        if(tm){ sTerm=decodeURIComponent(tm[1].replace(/\+/g,"%20")).trim(); sFilter=fm?fm[1]:null; clearTimeout(sTimer); sTimer=setTimeout(doCountAndLog,700); }
+      }
+    }catch(e){}
+    return of.apply(this,arguments);
+  };
+
+  /* CLICKS: tab_nav, share, category_click, event_open (search handled above via fetch) */
   document.addEventListener("click",function(ev){
     try{
       var t=ev.target; if(!t||!t.closest) return;
-      var sb=t.closest("button");
-      if(sb){
-        var inp=nearInput(sb);
-        if(inp){
-          var ph=(inp.getAttribute("placeholder")||"").toLowerCase();
-          var lbl=((sb.textContent||"")+" "+(sb.getAttribute("aria-label")||"")).trim().toLowerCase();
-          var isSearch = lbl==="ask"||lbl==="search"||/search|find|go\b/.test(lbl) || /search|try |parks|plumber|near me|recycling|pickup|transit|what's on/.test(ph);
-          if(isSearch){ var sv=(inp.value||"").trim(); if(sv&&sv.length<=120) logSearch(sv); return; }
-        }
-      }
       if(t.closest("header")){ var a=t.closest("a,button"); var txt=((a?a.textContent:t.textContent)||"").replace(/\s+/g," ").trim(); if(txt&&txt.length<=24) log("tab_nav",txt); return; }
       if(t.closest('[aria-label*="share" i],[title*="share" i]')){ log("share_click",""); return; }
       var card=t.closest("a"); if(card&&!t.closest("footer")&&!t.closest("nav")){
