@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v7 — first-party anonymous interaction tracking (search result_count via count=exact) */
+/* oa-track-v8 — first-party anonymous interaction tracking (search result_count via body-length) */
 (function(){
   if(location.protocol==="file:")return;
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
@@ -232,21 +232,22 @@ document.addEventListener('DOMContentLoaded', async function() {
   var NAV=/^(add my business|business directory|events calendar|resources|about|about & faq|transit|garbage|garbage & recycling|weather|weather & closures|contact|contact & sponsorship|privacy|privacy policy|volunteer airdrie|full calendar|browse all|ask|search|home|our airdrie)/i;
   log("page_view", location.pathname);
 
-  /* SEARCH: intercept the directory/ask search fetch, then get the TRUE match count via count=exact */
+  /* SEARCH: intercept the directory/ask search fetch, then get the TRUE match count (body length, capped 300) */
   var sTimer=null,sTerm=null,sFilter=null,lastLogged="",lastLoggedT=0;
   function emit(term,rc){var now=Date.now();if(term===lastLogged&&now-lastLoggedT<3000)return;lastLogged=term;lastLoggedT=now;log("search_events",term,rc);}
   function doCountAndLog(){
     var term=sTerm,filter=sFilter;
     if(!term)return;
     if(!filter){emit(term,null);return;}
-    of(BIZ+"?select=id&"+filter+"&limit=1&_c=1",{headers:{apikey:KEY,Authorization:"Bearer "+KEY,Prefer:"count=exact",Range:"0-0"}})
-      .then(function(res){var cr=res.headers.get("content-range")||"";var m=cr.match(/\/(\d+)$/);emit(term,m?+m[1]:null);})
+    of(BIZ+"?select=id&"+filter+"&limit=300",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}})
+      .then(function(res){return res.json();})
+      .then(function(a){emit(term,Array.isArray(a)?a.length:null);})
       .catch(function(){emit(term,null);});
   }
   window.fetch=function(){
     try{
       var u=String(arguments[0]);
-      if(u.indexOf("/rest/v1/businesses")>=0 && /(ilike|or=\()/.test(u) && u.indexOf("_c=1")<0){
+      if(u.indexOf("/rest/v1/businesses")>=0 && /(ilike|or=\()/.test(u) && u.indexOf("select=id")<0){
         var tm=u.match(/ilike\.\*?([^*,)&]+)/i);
         var fm=u.match(/[?&](or=\([^&]*\))/i);
         if(tm){ sTerm=decodeURIComponent(tm[1].replace(/\+/g,"%20")).trim(); sFilter=fm?fm[1]:null; clearTimeout(sTimer); sTimer=setTimeout(doCountAndLog,700); }
