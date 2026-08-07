@@ -279,9 +279,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   var SB="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/form_submissions";
   var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlaHhxaGdweXB1YmxjcXhvY2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMDM4MDUsImV4cCI6MjA5Nzg3OTgwNX0.sj8mCISeMRHqSP-6nOgMtuzn8segvXiD4BccVDXB8jA";
   var FORMS={
-    "add my business":{type:"business_signup",notify:"business",done:"✓ Thanks — we’ll review and add it"},
-    "submit event":{type:"event_submission",notify:"event_submission",done:"✓ Thanks — we’ll review it"},
-    "send suggestion":{type:"suggestion",notify:"suggestion",done:"✓ Thanks for the suggestion!"}
+    "add my business":{type:"business_signup",notify:"business",key:"business_name",done:"✓ Thanks — we’ll review and add it"},
+    "submit event":{type:"event_submission",notify:"event_submission",key:"event_name",done:"✓ Thanks — we’ll review it"},
+    "send suggestion":{type:"suggestion",notify:"suggestion",key:"suggestion",done:"✓ Thanks for the suggestion!"}
   };
   function findInput(btn){
     var box=btn.parentElement,hops=0,inp=null;
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       var orig=btn.textContent;
       btn.textContent="Sending…";
       var email=findEmail(btn);
-      var payload={ submission: val };
+      var payload={}; payload[cfg.key||"submission"]=val;
       if(email)payload.email=email;
       fetch(SB,{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({form_type:cfg.type,payload:payload})})
         .then(function(r){
