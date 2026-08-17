@@ -3,6 +3,90 @@
 <head>
   <meta charset="utf-8">
   <title>Our Airdrie | Free Airdrie Events & Business Directory</title>
+<script>/*oa-subscribe-overlay-v1*/
+(function(){
+  try{
+    window.__oaSubRan=(window.__oaSubRan||0)+1;
+    var sp=new URLSearchParams(location.search);
+    var pg=(sp.get("page")||sp.get("go")||sp.get("view")||"").trim().toLowerCase();
+    var want=(sp.get("subscribe")||sp.get("sub")||"").trim();
+    if(!(want && want!=="0" && want!=="false") && pg!=="subscribe") return;
+    window.__oaSubWanted=1;
+    var SB="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/";
+    var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlaHhxaGdweXB1YmxjcXhvY2d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMDM4MDUsImV4cCI6MjA5Nzg3OTgwNX0.sj8mCISeMRHqSP-6nOgMtuzn8segvXiD4BccVDXB8jA";
+    function sid(){try{var s=localStorage.getItem("oa_sid");if(!s){s=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem("oa_sid",s);}return s;}catch(e){return "anon";}}
+    function log(t,v){try{fetch(SB+"interactions",{method:"POST",keepalive:true,headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({interaction_type:t,value:v,session_id:sid()})}).catch(function(){});}catch(e){}}
+    var closed=false;
+    function build(){
+      if(closed||document.getElementById("oaSubOv"))return;
+      var root=document.documentElement; if(!root||!document.body)return;
+      window.__oaSubBuilt=(window.__oaSubBuilt||0)+1;
+      var ov=document.createElement("div"); ov.id="oaSubOv";
+      ov.style.cssText="position:fixed;inset:0;z-index:2147483000;background:#FBF7F0;display:flex;align-items:center;justify-content:center;padding:22px;font-family:Arial,Helvetica,sans-serif;overflow:auto";
+      ov.innerHTML='<div style="width:100%;max-width:940px;text-align:center">'
+        +'<div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#173445">Our Airdrie</div>'
+        +'<div style="font-size:10.5px;letter-spacing:3px;color:#E07A4F;font-weight:700;margin:2px 0 22px">OURAIRDRIE.CA</div>'
+        +'<div id="oaSubCard" style="position:relative;background:linear-gradient(135deg,#173445,#12303f);border-radius:22px;padding:26px 30px;box-shadow:0 24px 70px rgba(0,0,0,.22);text-align:left">'
+          +'<button id="oaSubX" aria-label="Close" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;line-height:1;color:rgba(255,255,255,.5);cursor:pointer">&times;</button>'
+          +'<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">'
+            +'<div style="display:flex;align-items:center;gap:16px;flex:1 1 340px;min-width:270px">'
+              +'<div style="flex:0 0 auto;width:54px;height:54px;border-radius:14px;background:#E07A4F;display:flex;align-items:center;justify-content:center"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg></div>'
+              +'<div><div style="font-size:24px;font-weight:800;color:#fff;line-height:1.15">Get the weekly Airdrie update</div>'
+                +'<div style="font-size:14px;color:rgba(255,255,255,.72);margin-top:5px">One short, friendly email. Join your Airdrie neighbours.</div></div>'
+            +'</div>'
+            +'<div style="display:flex;gap:10px;flex:1 1 320px;min-width:260px">'
+              +'<input id="oaSubEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" style="flex:1;min-width:0;font-size:16px;padding:13px 16px;border:none;border-radius:11px;outline:none;color:#22302E;background:#fff;box-sizing:border-box">'
+              +'<button id="oaSubGo" style="flex:0 0 auto;font-size:16px;font-weight:700;padding:13px 24px;border:none;border-radius:11px;background:#E07A4F;color:#fff;cursor:pointer">Subscribe</button>'
+            +'</div>'
+          +'</div>'
+          +'<div id="oaSubMsg" style="font-size:13px;color:#FFD9CF;min-height:0;margin-top:11px"></div>'
+        +'</div>'
+        +'<div style="margin-top:16px"><a id="oaSubSkip" href="#" style="font-size:13px;color:#7B847F;text-decoration:underline;cursor:pointer">Continue to ourairdrie.ca &rarr;</a></div>'
+        +'</div>';
+      root.appendChild(ov);
+      var card=document.getElementById("oaSubCard");
+      var inp=document.getElementById("oaSubEmail");
+      var go=document.getElementById("oaSubGo");
+      var msg=document.getElementById("oaSubMsg");
+      function close(){ closed=true; ov.parentNode&&ov.parentNode.removeChild(ov); }
+      document.getElementById("oaSubX").onclick=close;
+      var sk=document.getElementById("oaSubSkip"); if(sk) sk.onclick=function(e){ e.preventDefault(); close(); };
+      setTimeout(function(){ try{inp.focus();}catch(e){} },60);
+      var busy=false;
+      function submit(){
+        if(busy) return;
+        var email=(inp.value||"").trim();
+        if(email.indexOf("@")<1 || email.indexOf(".",email.indexOf("@"))<0){ msg.style.color="#FFD9CF"; msg.textContent="Please enter a valid email address."; return; }
+        busy=true; go.textContent="Adding you..."; go.style.opacity="0.8"; go.style.cursor="default"; msg.textContent="";
+        log("subscribe_submit","subscribe-link");
+        fetch(SB+"form_submissions",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({form_type:"newsletter",payload:{email:email,source:"subscribe-link"}})})
+          .then(function(r){ if(!r.ok) throw new Error("write "+r.status);
+            fetch("/api/welcome-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,type:"resident"})}).catch(function(){});
+            card.innerHTML='<div style="text-align:center;padding:8px 4px">'
+              +'<div style="font-size:44px;line-height:1">&#127881;</div>'
+              +'<div style="font-size:23px;font-weight:800;color:#fff;margin:12px 0 8px">You are in!</div>'
+              +'<p style="font-size:15px;color:rgba(255,255,255,.78);line-height:1.55;margin:0 auto 20px;max-width:440px">Thanks for subscribing. Your first weekly update lands Friday, check your inbox for a quick hello.</p>'
+              +'<button id="oaSubDone" style="font-size:15px;font-weight:700;padding:12px 26px;border:none;border-radius:11px;background:#E07A4F;color:#fff;cursor:pointer">Explore Our Airdrie</button>'
+              +'</div>';
+            document.getElementById("oaSubDone").onclick=function(){ try{history.replaceState(null,"",location.pathname);}catch(e){} close(); };
+          })
+          .catch(function(){ busy=false; go.textContent="Subscribe"; go.style.opacity="1"; go.style.cursor="pointer"; msg.style.color="#FFD9CF"; msg.textContent="Sorry, that did not go through. Please try again."; });
+      }
+      go.onclick=submit;
+      inp.addEventListener("keydown",function(e){ if(e.key==="Enter") submit(); });
+      log("deeplink","page:subscribe");
+    }
+    // Persistent re-mount: the SPA re-renders and can drop our node, so keep
+    // ensuring it exists (until the user closes it). Mounted on <html> so it
+    // sits above the app regardless of body re-renders.
+    var iv=setInterval(function(){ if(closed){clearInterval(iv);return;} build(); },300);
+    if(document.readyState!=="loading") build();
+    document.addEventListener("DOMContentLoaded",build);
+    setTimeout(build,400); setTimeout(build,1200);
+  }catch(e){}
+})();
+</script>
+
   <meta name="description" content="Find local events, 3,700+ Airdrie businesses, and community resources. All free, all in one place. Your guide to what's happening in Airdrie, Alberta.">
   <link rel="canonical" href="https://www.ourairdrie.ca/">
   <meta property="og:type" content="website">
@@ -32,8 +116,7 @@
     <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
       This page requires JavaScript to display.
     </div>
-  </noscript>
-</head>
+  </noscript></head>
 <body>
   <div id="__bundler_thumbnail">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -375,5 +458,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   },true);
 })();
 </script>
+
 </body>
 </html>
