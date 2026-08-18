@@ -34,9 +34,9 @@
               +'<div><div style="font-size:24px;font-weight:800;color:#fff;line-height:1.15">Get the weekly Airdrie update</div>'
                 +'<div style="font-size:14px;color:rgba(255,255,255,.72);margin-top:5px">One short, friendly email. Join your Airdrie neighbours.</div></div>'
             +'</div>'
-            +'<div style="display:flex;gap:10px;flex:1 1 320px;min-width:260px">'
-              +'<input id="oaSubEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" style="flex:1;min-width:0;font-size:16px;padding:13px 16px;border:none;border-radius:11px;outline:none;color:#22302E;background:#fff;box-sizing:border-box">'
-              +'<button id="oaSubGo" style="flex:0 0 auto;font-size:16px;font-weight:700;padding:13px 24px;border:none;border-radius:11px;background:#E07A4F;color:#fff;cursor:pointer">Subscribe</button>'
+            +'<div style="display:flex;gap:10px;flex-wrap:wrap;flex:1 1 320px;min-width:240px">'
+              +'<input id="oaSubEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" style="flex:1 1 190px;min-width:0;font-size:16px;padding:14px 16px;border:none;border-radius:11px;outline:none;color:#22302E;background:#fff;box-sizing:border-box">'
+              +'<button id="oaSubGo" style="flex:1 1 120px;font-size:16px;font-weight:700;padding:14px 24px;border:none;border-radius:11px;background:#E07A4F;color:#fff;cursor:pointer">Subscribe</button>'
             +'</div>'
           +'</div>'
           +'<div id="oaSubMsg" style="font-size:13px;color:#FFD9CF;min-height:0;margin-top:11px"></div>'
@@ -74,8 +74,10 @@
       }
       go.onclick=submit;
       inp.addEventListener("keydown",function(e){ if(e.key==="Enter") submit(); });
-      log("deeplink","page:subscribe");
     }
+    // Log the subscribe arrival ONCE per page load (not inside build(), which
+    // re-runs on every SPA re-mount and was double-counting page:subscribe).
+    log("deeplink","page:subscribe");
     // Persistent re-mount: the SPA re-renders and can drop our node, so keep
     // ensuring it exists (until the user closes it). Mounted on <html> so it
     // sits above the app regardless of body re-renders.
