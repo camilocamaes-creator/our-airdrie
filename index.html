@@ -519,21 +519,29 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
 <script>
-/* oa-hero-showcase-v1 — "See what you can ask" self-demo in the hero right column. Plays once per home render, then rests. Presentation only. */
+/* oa-hero-showcase-v2 — hero right-column self-demo. 9 examples, continuous loop. Presentation only. */
 (function(){
   var DEMOS=[
     {q:"Wondering where to eat tonight?",w:"restaurant",k:"cards",ic:"food",cat:"Restaurants & Food",r:[{n:"525 Restaurant & Patio",a:"525 Woodside Drive NW"},{n:"1861 Local Bar & Restaurant",a:"1861 Meadowbrook Drive SE"},{n:"Adamo Bistro",a:"800 East Lake Boulevard NE"}]},
     {q:"Need a plumber this weekend?",w:"plumber",k:"cards",ic:"trade",cat:"Home & Trade Services",r:[{n:"AA Plumbing and Heating Ltd",a:"507 Bayview Way SW"},{n:"Good Plumbing & Heating Inc",a:"114 Morningside Circle SW"},{n:"Aiken's Plumbing and Heating",a:"592 Baywater Manor SW"}]},
     {q:"Looking for a good coffee?",w:"coffee",k:"cards",ic:"coffee",cat:"Restaurants & Food",r:[{n:"Good Earth Coffee House",a:"35 Mackenzie Way SW"},{n:"Ground Press Café",a:"106 Sierra Springs Drive SE"},{n:"Starbucks Coffee",a:"2100 Market Street SE"}]},
+    {q:"Due for a checkup?",w:"dentist",k:"cards",ic:"tooth",cat:"Health & Wellness",r:[{n:"Airdrie Dental Studio",a:"704 Main Street SE"},{n:"Grace Family Dental",a:"3 Stonegate Drive NW"},{n:"Blunston Dental Group",a:"620 1st Avenue NW"}]},
+    {q:"Getting back into a routine?",w:"gym",k:"cards",ic:"gym",cat:"Gyms & Fitness",r:[{n:"Anytime Fitness",a:"85 Railway Avenue SW"},{n:"GoodLife Fitness",a:"505 Main Street SW"},{n:"Oxygen Yoga & Fitness",a:"403 Mackenzie Way SW"}]},
+    {q:"Need childcare?",w:"daycare",k:"cards",ic:"kid",cat:"Education & Childcare",r:[{n:"Airdrie Daycare (First Avenue)",a:"513 1 Avenue NE"},{n:"Creating Futures Daycare",a:"800 Yankee Valley Boulevard SW"},{n:"Kings Pointe View Daycare",a:"28 Kingsview Road SE"}]},
     {q:"Heading into Calgary?",w:"next bus to Calgary",k:"answer",ic:"bus",tint:"#F7EFDF",col:"#C98A2E",title:"Airdrie Transit",body:"6 routes connect Airdrie locally and to Calgary. The ICE 901 and 902 run express to downtown on weekdays, and Route 900 runs 7 days to CrossIron Mills and the Rundle LRT.",cta:"See routes & schedules"},
-    {q:"Free this weekend?",w:"what's on this weekend",k:"answer",ic:"cal",tint:"#FBEBE2",col:"#E07A4F",title:"What's on in Airdrie",body:"See this weekend's events around the city, from the farmers' market and live music to family activities and free things to do.",cta:"Browse events"}
+    {q:"Free this weekend?",w:"what's on this weekend",k:"answer",ic:"cal",tint:"#FBEBE2",col:"#E07A4F",title:"What's on in Airdrie",body:"See this weekend's events around the city, from the farmers' market and live music to family activities and free things to do.",cta:"Browse events"},
+    {q:"When is my pickup day?",w:"garbage day",k:"answer",ic:"trash",tint:"#E9F3EC",col:"#3F8E6E",title:"Garbage & recycling",body:"Weekly garbage and recycling year-round, plus organics. Pick your neighbourhood to see your exact pickup day.",cta:"Find my pickup day"}
   ];
   var ICON={
     food:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-3 4.5V15Z"></path><path d="M18 15v7"></path></svg>',
     trade:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>',
     coffee:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 0 0 0 8h-1"></path><path d="M6 2v2"></path></svg>',
+    tooth:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5C10 4 8 3.5 6.5 4.2 4.8 5 4 6.8 4 9c0 2 .5 3.5 1 6 .4 2 .6 4.5 2 4.5 1.2 0 1.2-2 1.6-3.6.3-1.2.6-1.9 1.4-1.9s1.1.7 1.4 1.9C12.8 17.5 12.8 19.5 14 19.5c1.4 0 1.6-2.5 2-4.5.5-2.5 1-4 1-6 0-2.2-.8-4-2.5-4.8C13 3.5 11 4 12 5.5Z"></path></svg>',
+    gym:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.5" width="3.5" height="7" rx="1"></rect><rect x="18" y="8.5" width="3.5" height="7" rx="1"></rect><rect x="6" y="10.5" width="12" height="3" rx="1"></rect></svg>',
+    kid:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9h.01"></path><path d="M15 9h.01"></path></svg>',
     bus:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17h16M4 5h16v10H4zM4 9h16M7 15v2M17 15v2"></path></svg>',
     cal:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>',
+    trash:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
     pin:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>'
   };
   var st=document.createElement('style');
@@ -544,8 +552,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   function T(fn,ms){var id=setTimeout(fn,ms);timers.push(id);return id;}
   function clearT(){timers.forEach(clearTimeout);timers=[];}
   function bizCard(r,d){var e=document.createElement('div');
-    e.style.cssText="background:#fff;border:1px solid #EAE2D3;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:13px;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease;";
-    e.innerHTML='<span style="width:46px;height:46px;border-radius:12px;background:#E9F0F5;color:#1E5677;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+ICON[d.ic]+'</span><div style="flex:1;min-width:0;"><div><span style="font-weight:700;font-size:15.5px;color:#173445;">'+r.n+'</span><span style="font-size:11.5px;font-weight:600;color:#1E5677;background:#E5EEF4;padding:2px 8px;border-radius:999px;margin-left:8px;">'+d.cat+'</span></div><div style="margin-top:5px;font-size:13px;color:#7B847F;display:flex;align-items:center;gap:5px;"><span style="color:#9AA6A2;display:flex;">'+ICON.pin+'</span>'+r.a+'</div></div>';return e;}
+    e.style.cssText="background:#fff;border:1px solid #EAE2D3;border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:13px;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease;";
+    e.innerHTML='<span style="width:44px;height:44px;border-radius:12px;background:#E9F0F5;color:#1E5677;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+ICON[d.ic]+'</span><div style="flex:1;min-width:0;"><div><span style="font-weight:700;font-size:15px;color:#173445;">'+r.n+'</span><span style="font-size:11px;font-weight:600;color:#1E5677;background:#E5EEF4;padding:2px 8px;border-radius:999px;margin-left:8px;">'+d.cat+'</span></div><div style="margin-top:4px;font-size:12.5px;color:#7B847F;display:flex;align-items:center;gap:5px;"><span style="color:#9AA6A2;display:flex;">'+ICON.pin+'</span>'+r.a+'</div></div>';return e;}
   function ansCard(d){var e=document.createElement('div');
     e.style.cssText="background:#fff;border:1px solid #E7DECF;border-left:4px solid "+d.col+";border-radius:13px;padding:15px 16px;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease;";
     e.innerHTML='<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;"><span style="width:32px;height:32px;border-radius:9px;background:'+d.tint+';color:'+d.col+';display:flex;align-items:center;justify-content:center;">'+ICON[d.ic]+'</span><span style="font-weight:700;font-size:15px;color:#173445;">'+d.title+'</span></div><p style="margin:0 0 11px;font-size:13.5px;line-height:1.5;color:#52605C;">'+d.body+'</p><span style="display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:#fff;background:#1E5677;padding:9px 15px;border-radius:9px;">'+d.cta+' &#8594;</span>';return e;}
@@ -554,8 +562,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     var q=document.getElementById('oa-sc-q'), text=document.getElementById('oa-sc-text'), car=document.getElementById('oa-sc-car'), results=document.getElementById('oa-sc-results');
     if(!q||!text||!results) return;
     var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function renderResults(d){ results.innerHTML=''; if(d.k==='cards'){ d.r.forEach(function(r,j){ T(function(){ var c=bizCard(r,d); results.appendChild(c); void c.offsetWidth; c.style.opacity='1'; c.style.transform='none'; }, j*95); }); } else { var c=ansCard(d); results.appendChild(c); void c.offsetWidth; c.style.opacity='1'; c.style.transform='none'; } }
-    if(reduce){ var d=DEMOS[DEMOS.length-1]; q.textContent=d.q; q.style.opacity='1'; q.style.transform='none'; text.textContent=d.w; renderResults(d); return; }
+    function renderResults(d){ results.innerHTML=''; if(d.k==='cards'){ d.r.forEach(function(r,j){ T(function(){ var c=bizCard(r,d); results.appendChild(c); void c.offsetWidth; c.style.opacity='1'; c.style.transform='none'; }, j*90); }); } else { var c=ansCard(d); results.appendChild(c); void c.offsetWidth; c.style.opacity='1'; c.style.transform='none'; } }
+    if(reduce){ var d0=DEMOS[0]; q.textContent=d0.q; q.style.opacity='1'; q.style.transform='none'; text.textContent=d0.w; renderResults(d0); return; }
     function play(i){
       var d=DEMOS[i]; q.textContent=d.q; q.style.opacity='0'; q.style.transform='translateY(-6px)';
       T(function(){ q.style.opacity='1'; q.style.transform='none'; },90);
@@ -564,8 +572,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         (function step(){
           if(pos<d.w.length){ text.textContent=d.w.slice(0,++pos); T(step,44+Math.random()*16); }
           else{ if(car){car.className='';car.style.opacity='0';} renderResults(d);
-            var last=i>=DEMOS.length-1;
-            if(!last) T(function(){ out(i); }, d.k==='cards'?1300:1550);
+            T(function(){ out(i); }, d.k==='cards'?1250:1500);
           }
         })();
       },440);
@@ -573,7 +580,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function out(i){
       q.style.opacity='0'; q.style.transform='translateY(-6px)';
       Array.prototype.forEach.call(results.children,function(c){ c.style.opacity='0'; c.style.transform='translateY(-6px)'; });
-      T(function(){ text.textContent=''; results.innerHTML=''; play(i+1); }, 440);
+      T(function(){ text.textContent=''; results.innerHTML=''; play((i+1)%DEMOS.length); }, 420);
     }
     play(0);
   }
