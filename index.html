@@ -612,5 +612,26 @@ document.addEventListener('DOMContentLoaded', async function() {
   attempt();
 })();
 </script>
+<script id="oa-catlink-guard-v1">
+/* Category tiles (and Call/Directions/Website links on business cards) render with an
+   unhydrated {{ ... }} placeholder in their href for a brief moment before the app fills
+   it in. A click in that window navigates to a literal "{{ cat.q }}" and shows an empty
+   search. This guard cancels any click on a link whose href still holds a placeholder;
+   for a category tile it sends the visitor to the directory instead of a dead search.
+   Hydrated links (href no longer contains "{{") pass straight through untouched. */
+(function(){
+  document.addEventListener("click", function(e){
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if(!a) return;
+    var href = a.getAttribute("href") || "";
+    if(href.indexOf("{{") === -1) return;            // fully hydrated: normal navigation
+    e.preventDefault(); e.stopPropagation();
+    if(href.indexOf("find={{") !== -1 || href.indexOf("cat.q") !== -1){
+      location.href = "/?page=directory";            // category tile: safe, useful fallback
+    }
+    // other placeholder links (tel/maps/website) are cancelled only; they hydrate momentarily
+  }, true);
+})();
+</script>
 </body>
 </html>
