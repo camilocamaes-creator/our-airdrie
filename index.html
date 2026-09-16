@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 })();
 </script>
 <script>
-/* oa-track-v17 — first-party anonymous interaction tracking (v16: page_view is prerender-aware + deduped within 2s per path; v17: resource-card clicks [data-oa-res] no longer also log event_open) */
+/* oa-track-v18 — first-party anonymous interaction tracking (v16: page_view is prerender-aware + deduped within 2s per path; v17: resource-card clicks [data-oa-res] no longer also log event_open; v18: homepage "Free Resources" tile excluded from event_open) */
 (function(){
   if(location.protocol==="file:")return;
   var URL="https://qehxqhgpypublcqxocgt.supabase.co/rest/v1/interactions";
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         body:JSON.stringify({interaction_type:type,value:(value==null?null:(""+value).slice(0,200)),result_count:(rc==null?null:rc),session_id:SID})}).catch(function(){});
     }catch(e){}
   }
-  var NAV=/^(add my business|business directory|events calendar|resources|about|about & faq|transit|garbage|garbage & recycling|weather|weather & closures|contact|contact & sponsorship|privacy|privacy policy|volunteer airdrie|full calendar|browse all|ask|search|home|our airdrie)/i;
+  var NAV=/^(add my business|business directory|events calendar|free resources|resources|about|about & faq|transit|garbage|garbage & recycling|weather|weather & closures|contact|contact & sponsorship|privacy|privacy policy|volunteer airdrie|full calendar|browse all|ask|search|home|our airdrie)/i;
   (function(){function firePV(){var p=location.pathname.replace(/\/index\.html?$/i,"/");try{var k="oa_pv_"+p,n=Date.now(),prev=+(localStorage.getItem(k)||0);if(n-prev<2000)return;localStorage.setItem(k,n);}catch(e){}log("page_view",p);}if(document.prerendering){document.addEventListener("prerenderingchange",firePV,{once:true});}else{firePV();}})();
   try{var _dq=new URLSearchParams(location.search);var _dft=(_dq.get("find")||_dq.get("dir")||_dq.get("q")||_dq.get("search")||"").trim();var _dpg=(_dq.get("page")||_dq.get("go")||_dq.get("view")||"").trim();if(_dft)log("deeplink","find:"+_dft.slice(0,60));else if(_dpg)log("deeplink","page:"+_dpg.slice(0,40));}catch(e){}
   /* resource_click: outbound click on a Resources-page card link (added Aug 19 2026, v15) */
